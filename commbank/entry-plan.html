@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsha GV | Senior Security Engineer, CommBank | 90-Day Entry Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF0EE;
+    --paper-raised:#F7F8F6;
+    --ink:#12203A;
+    --ink-soft:#4A5568;
+    --rule:#C7CCC6;
+    --brass:#8C6A2E;
+    --brass-bg:#EFE6D2;
+    --rust:#8B4A3A;
+    --rust-bg:#F3E1DB;
+    --teal:#1F4B43;
+    --teal-bg:#DCE9E4;
+    --amber:#95630B;
+    --amber-bg:#F1E3C6;
+    --brick:#A1341A;
+    --brick-bg:#F5DDD3;
+    --max:920px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    font-size:16px;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px 100px;}
+  header.masthead{
+    border-bottom:3px double var(--ink);
+    padding:44px 0 20px;
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    font-size:2.15rem;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .role-line{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .contact{
+    margin-top:16px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .contact a{color:var(--ink-soft);}
+
+  section{margin-top:56px;}
+  .sec-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+    border-bottom:1px solid var(--rule);
+    padding-bottom:8px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:space-between;
+  }
+  h2{
+    font-family:'Source Serif 4',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  p{margin:0 0 14px;}
+  .lede{font-size:1.05rem;color:var(--ink);}
+
+  /* Day-one thesis block */
+  .thesis{
+    background:var(--paper-raised);
+    border-left:4px solid var(--brass);
+    padding:22px 26px;
+    font-family:'Source Serif 4',serif;
+    font-size:1.15rem;
+    font-weight:500;
+    line-height:1.5;
+  }
+  .thesis .tag{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .jd-quote{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px dashed var(--rule);
+  }
+
+  /* Ledger table */
+  table.ledger{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    background:var(--paper-raised);
+  }
+  table.ledger th{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    text-align:left;
+    color:var(--ink-soft);
+    border-bottom:2px solid var(--ink);
+    padding:10px 12px;
+  }
+  table.ledger td{
+    padding:12px;
+    border-bottom:1px solid var(--rule);
+    vertical-align:top;
+  }
+  table.ledger tr:last-child td{border-bottom:none;}
+  .status{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.05em;
+    padding:3px 8px;
+    border-radius:2px;
+    white-space:nowrap;
+  }
+  .status.verified{background:var(--teal-bg);color:var(--teal);}
+  .status.partial{background:var(--amber-bg);color:var(--amber);}
+  .status.planned{background:var(--rust-bg);color:var(--rust);}
+
+  /* Phased plan */
+  .phases{display:grid;grid-template-columns:1fr;gap:18px;}
+  .phase{
+    background:var(--paper-raised);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:22px 24px;
+    position:relative;
+  }
+  .phase .pnum{
+    font-family:'Source Serif 4',serif;
+    font-size:2.2rem;
+    font-weight:700;
+    color:var(--brass);
+    position:absolute;
+    top:16px;
+    right:22px;
+    opacity:.35;
+  }
+  .phase h3{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin:0 0 4px;
+    color:var(--ink);
+  }
+  .phase .phase-title{
+    font-family:'Source Serif 4',serif;
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:12px;
+  }
+  .phase ul{margin:0;padding-left:20px;}
+  .phase li{margin-bottom:7px;font-size:14.5px;}
+
+  /* Evidence cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .card{
+    background:var(--paper-raised);
+    border:1px solid var(--rule);
+    padding:20px;
+  }
+  .card .co{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:8px;
+  }
+  .card .metric{
+    font-family:'Source Serif 4',serif;
+    font-size:1.7rem;
+    font-weight:700;
+    line-height:1.1;
+    margin-bottom:6px;
+  }
+  .card .desc{font-size:13.5px;color:var(--ink-soft);}
+
+  /* Domain coverage ledger stamps */
+  .stamp-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;
+  }
+  .stamp{
+    border:2px solid var(--rule);
+    padding:16px 16px 14px;
+    position:relative;
+    background:var(--paper-raised);
+  }
+  .stamp .domain{
+    font-family:'IBM Plex Sans',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:8px;
+  }
+  .stamp .mark{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.1em;
+    padding:4px 9px;
+    transform:rotate(-3deg);
+    border:2px solid currentColor;
+    border-radius:3px;
+  }
+  .stamp.deep .mark{color:var(--teal);}
+  .stamp.some .mark{color:var(--amber);}
+  .stamp.ramp .mark{color:var(--brick);}
+  .stamp .note{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
+  .legend{
+    display:flex;gap:22px;margin-top:16px;font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;color:var(--ink-soft);flex-wrap:wrap;
+  }
+  .legend span.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;}
+  .dot.deep{background:var(--teal);}
+  .dot.some{background:var(--amber);}
+  .dot.ramp{background:var(--brick);}
+
+  /* Questions */
+  .qlist{list-style:none;margin:0;padding:0;}
+  .qlist li{
+    padding:16px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .qlist li:first-child{padding-top:0;}
+  .qnum{
+    font-family:'Source Serif 4',serif;
+    font-weight:700;
+    color:var(--brass);
+    margin-right:8px;
+  }
+  .qsrc{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+
+  footer{
+    margin-top:70px;
+    padding-top:22px;
+    border-top:3px double var(--ink);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  @media(max-width:640px){
+    h1{font-size:1.6rem;}
+    .wrap{padding:0 18px 70px;}
+    table.ledger{font-size:12.5px;}
+    footer{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Application Campaign</div>
+    <h1>Senior Security Engineer | 90-Day Domain Entry Plan</h1>
+    <div class="role-line">Prepared for Commonwealth Bank · Security Engineering, embedded within a delivery domain (e.g. Retail Banking)</div>
+    <div class="contact">
+      <span>Harsha GV</span>
+      <a href="mailto:harsha.gv29@gmail.com">harsha.gv29@gmail.com</a>
+      <span>+61 402 697 098</span>
+      <a href="https://au.linkedin.com/in/harshagv">au.linkedin.com/in/harshagv</a>
+      <a href="https://harshagv.me">harshagv.me</a>
+    </div>
+  </header>
+
+  <section id="thesis">
+    <div class="sec-label"><span>Day-One Thesis</span><span>§1</span></div>
+    <div class="thesis">
+      <span class="tag">What I'd actually do first</span>
+      Run a guardrail-coverage pass on the CI/CD pipelines in whichever squad I land in first, not a generic audit, a scored one: which security gates are actually wired in versus assumed, and which STRIDE categories those gates do and don't mitigate. That's the intersection of two lines in this JD, and it's a decision-ready artifact by week two, not a slide by week twelve.
+      <div class="jd-quote">
+        JD: "Embed security into Devsecops and CI/CD pipelines, enabling teams to build and run secure services end-to-end" + "Lead threat modelling, security design reviews, and technical risk assessments."
+      </div>
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="sec-label"><span>Responsibility → Evidence Ledger</span><span>§2</span></div>
+    <p class="lede">Every line below is checked against what's actually verifiable on my resume, not what sounds right for the role. Where the fit is real but partial, it's marked partial, not rounded up.</p>
+    <table class="ledger">
+      <thead>
+        <tr><th style="width:34%">JD Requirement</th><th style="width:46%">Closest Verified Evidence</th><th style="width:20%">Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Security architecture &amp; design guidance across the full SDLC</td>
+          <td>Modern Group: architected NIST CSF-aligned reference architectures with pre-approved secure-by-default patterns for API, container, and secrets management</td>
+          <td><span class="status verified">VERIFIED</span></td>
+        </tr>
+        <tr>
+          <td>Embed security into DevSecOps &amp; CI/CD pipelines end-to-end</td>
+          <td>Current role (NSW Energy Co, Azure) — SAST/SCA/secrets/IaC gates in Azure DevOps pipelines; Modern Group — GenAI-embedded SAST/DAST (40% faster remediation, 5x release frequency)</td>
+          <td><span class="status verified">VERIFIED</span></td>
+        </tr>
+        <tr>
+          <td>Develop &amp; promote reusable security patterns and guardrails to scale across domains</td>
+          <td>OSL Group: CSPM automation lifted CIS/NIST compliance 38%; <em>pipeline-coverage-scanner</em> tool built for this application (see §4 / linked artifact)</td>
+          <td><span class="status verified">VERIFIED</span></td>
+        </tr>
+        <tr>
+          <td>Lead threat modelling &amp; structured security design reviews</td>
+          <td>OSL Group: led continuous security architecture reviews resolving 5 critical vulns. What I can't point to: a named, facilitated STRIDE/PASTA-style workshop practice with cross-functional stakeholders. Close-adjacent, not identical.</td>
+          <td><span class="status partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td>Partner with engineering/architecture/product to uplift security maturity</td>
+          <td>OSL Group: Security Champions program, 15+ engineers mentored into secure SDLC practice</td>
+          <td><span class="status verified">VERIFIED</span></td>
+        </tr>
+        <tr>
+          <td>Align to Group policy, standards &amp; regulatory obligations; control design and effectiveness</td>
+          <td>OSL Group: full SOC 2 Type II control set, zero critical/high findings across two consecutive cycles. Gap: SOC 2 and NIST CSF are verified; APRA CPS 234 specifically is not yet interview-defensible depth.</td>
+          <td><span class="status partial">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td>Deep understanding of AI security</td>
+          <td>Résumé shows GenAI used <em>for</em> DevSecOps (gemini-cli, Jules agent in CI/CD) — that's applying AI to security tooling, not securing AI systems themselves (model/prompt/data risk). Different skill, and the JD doesn't disambiguate which one it means.</td>
+          <td><span class="status planned">PLANNED</span></td>
+        </tr>
+        <tr>
+          <td>Cloud security depth (AWS and/or Azure)</td>
+          <td>AWS Security Specialty + Solutions Architect Professional (Mox Bank, OSL Group); Azure — current role, Defender for Cloud, Key Vault, Policy, RBAC</td>
+          <td><span class="status verified">VERIFIED</span></td>
+        </tr>
+        <tr>
+          <td>Large-scale distributed environments</td>
+          <td>Mox Bank/OSL Group/JPMorgan are meaningful regulated-finance scale, but none approach CBA's ~17M-customer, group-wide footprint. Stated plainly rather than implied.</td>
+          <td><span class="status planned">PLANNED</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="phases">
+    <div class="sec-label"><span>30 / 60 / 90</span><span>§3</span></div>
+    <div class="phases">
+      <div class="phase">
+        <div class="pnum">01</div>
+        <h3>Days 1–30 — Read the actual guardrails, don't assume them</h3>
+        <div class="phase-title">Baseline the domain's real CI/CD and threat-model posture</div>
+        <ul>
+          <li>Run the coverage-and-STRIDE scan (built and tested — §4) across the squads in my assigned domain; turn assumption into a scored baseline in week two, not week ten.</li>
+          <li>Sit in on existing security design reviews as an observer before I run one — learn the Bank's actual review cadence, templates, and sign-off chain rather than importing a generic process.</li>
+          <li>Map who owns the "reusable pattern" catalog today, if one exists, so guardrail work in phase two extends it instead of forking it.</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="pnum">02</div>
+        <h3>Days 31–60: Close the highest-leverage gate gaps</h3>
+        <div class="phase-title">Turn the baseline into prioritised, shipped guardrails</div>
+        <ul>
+          <li>Pick the 2–3 lowest-maturity pipelines from the phase-one scan and close the gaps that cover the most STRIDE ground per engineering-hour — not the easiest wins, the highest-leverage ones.</li>
+          <li>Run my first formally facilitated threat-modelling session on a live service, with the architecture and product owners in the room — this is the practice I flagged as PARTIAL above; phase two is where it becomes real.</li>
+          <li>Draft the first reusable pattern doc (e.g. a secure CI/CD template) so uplift work stops being one-off and starts being scalable, per the JD's own framing.</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="pnum">03</div>
+        <h3>Days 61–90: Prove it scales past one squad</h3>
+        <div class="phase-title">Show the pattern travels, and report it in numbers a non-technical stakeholder can act on</div>
+        <ul>
+          <li>Get the reusable pattern adopted by a second squad outside my original one — the actual test of "scale across domains," not just "worked once."</li>
+          <li>Publish a plain-language risk summary of what changed and why (see the executive one-pager methodology, §7 of the full campaign) so the improvement is legible above engineering.</li>
+          <li>Name, honestly, what's still open — including AI-security depth and APRA CPS 234 fluency — with a concrete plan to close it, rather than letting a 90-day report imply the gaps are gone.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="evidence">
+    <div class="sec-label"><span>Evidence Cards</span><span>§4</span></div>
+    <div class="cards">
+      <div class="card">
+        <div class="co">Mox Bank · Senior Cloud Security Engineer</div>
+        <div class="metric">340 blocked</div>
+        <div class="desc">High/critical vulnerabilities blocked pre-production via Pod Security Standards, admission policies, and Trivy/Snyk image scanning across AWS EKS. Access-related security incidents reduced 50% via PoLP-based IAM/RBAC.</div>
+      </div>
+      <div class="card">
+        <div class="co">OSL Group · Senior Manager, Cybersecurity</div>
+        <div class="metric">0 critical/high</div>
+        <div class="desc">Audit findings across two consecutive SOC 2 Type II certification cycles, with a Security Champions program mentoring 15+ engineers into secure SDLC practice.</div>
+      </div>
+      <div class="card">
+        <div class="co">Modern Group · DevSecOps SME</div>
+        <div class="metric">5x release freq.</div>
+        <div class="desc">GenAI-embedded SAST/DAST in CI/CD cut remediation time 40% and lifted release frequency 5x, with an AI agent (Jules) catching 90% of pre-deployment code defects.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="coverage">
+    <div class="sec-label"><span>Domain Coverage — Stated Plainly</span><span>§5</span></div>
+    <p class="lede">Where I'm genuinely deep, where I have real but partial exposure, and where I'd be ramping from a standing start. This is the same honesty standard the coverage tool in §4 applies to a codebase, applied to me.</p>
+    <div class="stamp-grid">
+      <div class="stamp deep"><div class="domain">Cloud Security (AWS + Azure)</div><span class="mark">DEEP</span><div class="note">AWS Security Specialty + current Azure DevOps/Defender role</div></div>
+      <div class="stamp deep"><div class="domain">CI/CD &amp; DevSecOps pipelines</div><span class="mark">DEEP</span><div class="note">SAST/SCA/secrets/IaC gate design, current + prior roles</div></div>
+      <div class="stamp deep"><div class="domain">IAM / RBAC / PoLP</div><span class="mark">DEEP</span><div class="note">Mox Bank — 50% incident reduction, verified</div></div>
+      <div class="stamp deep"><div class="domain">Container &amp; Kubernetes security</div><span class="mark">DEEP</span><div class="note">CKS/CKA certified, EKS hardening at Mox Bank</div></div>
+      <div class="stamp some"><div class="domain">Security architecture review</div><span class="mark">SOME</span><div class="note">Real (OSL Group) — not yet formal workshop-style threat modelling</div></div>
+      <div class="stamp some"><div class="domain">SOC 2 / NIST CSF governance</div><span class="mark">SOME</span><div class="note">Verified execution; APRA CPS 234 specifically not yet deep</div></div>
+      <div class="stamp ramp"><div class="domain">AI / LLM security</div><span class="mark">RAMP</span><div class="note">Used GenAI as a DevSecOps tool — not the same as securing AI systems</div></div>
+      <div class="stamp ramp"><div class="domain">Enterprise-scale (group-wide, 17M+ customers)</div><span class="mark">RAMP</span><div class="note">No prior role at this institutional scale</div></div>
+      <div class="stamp ramp"><div class="domain">DLP / SSE / EDR administration</div><span class="mark">RAMP</span><div class="note">Tool exposure only, not day-to-day admin depth</div></div>
+    </div>
+    <div class="legend">
+      <span><span class="dot deep"></span>Deep — I'd defend this two questions in</span>
+      <span><span class="dot some"></span>Some — real, but partial</span>
+      <span><span class="dot ramp"></span>Ramp — honest starting point, not yet</span>
+    </div>
+  </section>
+
+  <section id="questions">
+    <div class="sec-label"><span>Questions I'd Ask Them</span><span>§6</span></div>
+    <ul class="qlist">
+      <li><span class="qnum">1.</span>Which delivery domain would this role actually be embedded in — is Retail Banking the confirmed placement or an illustrative example? My 90-day plan above assumes Retail Banking specifically, and I'd rather know now than guess.
+        <span class="qsrc">— re: "operate as a hands-on security practitioner embedded within delivery domains (e.g. Retail Banking)"</span>
+      </li>
+      <li><span class="qnum">2.</span>When the JD says "deep understanding of AI security" — is that about securing GenAI features as they go into production (model, prompt, and data risk), or about applying AI inside the security function itself? They're different disciplines, and I want to prioritise learning correctly from day one rather than assume.
+        <span class="qsrc">— re: "Deep understanding of AI security, Devsecops, CI/CD security, and modern engineering practices"</span>
+      </li>
+      <li><span class="qnum">3.</span>Is there already a central catalog of approved security patterns and guardrails that squads pull from, or would part of this role be standing that catalog up? Those are very different first 90 days.
+        <span class="qsrc">— re: "Develop and promote security patterns, guardrails, and reusable controls to scale security across domains"</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>zero-day-brief / commbank </span>
+  </footer>
+
+</div>
+</body>
+</html>

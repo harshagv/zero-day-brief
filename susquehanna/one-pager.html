@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What this role actually does — plain-language summary — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f8fa; --paper:#ffffff; --ink:#1c2430; --ink-soft:#5b6774; --rule:#e1e5ea;
+    --accent:#2d3a8c; --accent-bg:#eaecf7;
+    --verified:#146b5c; --verified-bg:#e2f2ee;
+    --gap:#a8620d; --gap-bg:#faf1e0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+  .wrap{max-width:760px;margin:0 auto;padding:56px 32px 90px;}
+  .eyebrow{
+    font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);
+    font-weight:600;margin-bottom:14px;
+  }
+  h1{
+    font-family:'Source Serif 4',serif;font-size:32px;font-weight:600;color:var(--ink);
+    margin-bottom:14px;line-height:1.25;
+  }
+  .lede{font-size:16px;color:var(--ink-soft);max-width:600px;}
+  .byline{font-size:13px;color:var(--ink-soft);margin-top:20px;}
+  section{margin-top:48px;}
+  h2{font-family:'Source Serif 4',serif;font-size:21px;font-weight:600;color:var(--ink);margin-bottom:14px;}
+  p{font-size:15.5px;color:var(--ink-soft);margin-bottom:12px;max-width:640px;}
+  .card{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:22px 26px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
+  .phase-card{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;}
+  .phase-card .ph-when{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;}
+  .phase-card p{font-size:13.5px;margin-bottom:0;}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px;}
+  .split-col{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:20px 22px;}
+  .split-col.good{border-top:3px solid var(--verified);}
+  .split-col.gap-col{border-top:3px solid var(--gap);}
+  .split-col h3{font-size:14px;font-weight:600;margin-bottom:10px;}
+  .split-col.good h3{color:var(--verified);}
+  .split-col.gap-col h3{color:var(--gap);}
+  .split-col ul{padding-left:18px;}
+  .split-col li{font-size:13.5px;color:var(--ink-soft);margin-bottom:8px;}
+  .glossary{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--paper);border:1px solid var(--rule);border-radius:6px;overflow:hidden;}
+  .g-item{padding:14px 20px;border-bottom:1px solid var(--rule);}
+  .g-item:nth-child(odd){border-right:1px solid var(--rule);}
+  .g-term{font-weight:600;font-size:13.5px;color:var(--ink);margin-bottom:2px;}
+  .g-def{font-size:13px;color:var(--ink-soft);}
+  .callout{
+    background:var(--accent-bg);border-radius:6px;padding:18px 22px;margin-top:8px;
+    font-size:14.5px;color:#23306e;
+  }
+  .callout strong{color:var(--accent);}
+  footer{border-top:1px solid var(--rule);padding-top:18px;margin-top:56px;font-size:12px;color:var(--ink-soft);}
+  @media (max-width:640px){
+    .grid3, .split{grid-template-columns:1fr;}
+    .glossary{grid-template-columns:1fr;}
+    .g-item:nth-child(odd){border-right:none;}
+    h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">For anyone outside security — no jargon left unexplained</div>
+  <h1>What a Security Engineer at Susquehanna actually does, and why it touches your work</h1>
+  <p class="lede">This is the same 90-day plan security and technical readers see in the entry plan, written
+  for anyone else who might work alongside this role — trading, quant, or business teams who'll interact
+  with security decisions without needing to make them.</p>
+  <div class="byline">Harsha G V — harsha.gv29@gmail.com — au.linkedin.com/in/harshagv</div>
+  <div class="callout" style="margin-top:18px;font-size:13px;">
+    <strong>Why this exists:</strong> the JD doesn't use the phrase "explain risk to non-technical audiences"
+    verbatim — the closest line is "work with other technical and business teams, allowing you to understand
+    the relationship between the solutions you are building... and the business that is leveraging them."
+    This page is that skill demonstrated, not claimed.
+  </div>
+
+  <section>
+    <h2>The job in one paragraph</h2>
+    <div class="card">
+      <p style="margin:0;">Every person, laptop, and piece of software that touches Susquehanna's trading
+      systems has to prove it's allowed to be there, at every step. This role builds and maintains the
+      systems that make that check happen automatically — who gets access to what, how a laptop is kept
+      safe if it's compromised, and how the cloud infrastructure trading runs on stays configured safely as
+      it changes daily. When it's working well, nobody outside security notices. When it isn't, it either
+      slows everyone down with friction, or it fails silently until something goes wrong.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I'd actually do, in plain terms</h2>
+    <div class="grid3">
+      <div class="phase-card">
+        <div class="ph-when">First month</div>
+        <p>Map out exactly how access flows from a laptop to a live trading system today, and where the
+        checkpoints are — before changing anything.</p>
+      </div>
+      <div class="phase-card">
+        <div class="ph-when">Second month</div>
+        <p>Fix the single biggest gap that map turns up, and start learning the parts of the job I'm not
+        yet strong in from people who already own them.</p>
+      </div>
+      <div class="phase-card">
+        <div class="ph-when">Third month</div>
+        <p>Take ownership of one area — most likely the access-control side — and be a reliable point of
+        contact for it, not still ramping up.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where I'm strong, and where I'm honestly still building</h2>
+    <div class="split">
+      <div class="split-col good">
+        <h3>Strong, with numbers to back it</h3>
+        <ul>
+          <li>Designing who-can-access-what systems: cut access-related security incidents by half at a
+          previous bank by tightening how access was granted.</li>
+          <li>Keeping cloud infrastructure configured safely as it changes: improved policy compliance by
+          38% at a prior firm using automated checks.</li>
+          <li>Building small tools that remove manual security work — one I built cut incident response
+          time from 45 minutes to 12.</li>
+        </ul>
+      </div>
+      <div class="split-col gap-col">
+        <h3>Genuinely still building</h3>
+        <ul>
+          <li>Deep networking knowledge — how data actually moves across a company's internal network,
+          and diagnosing connectivity problems in firewalls and proxies.</li>
+          <li>Hands-on laptop/device security administration — I've been a consumer of these tools, not
+          the person configuring their day-to-day policy.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Why say this plainly:</strong> a security hire who overstates their networking depth finds
+      that out under pressure, during an actual incident — which is the worst possible time for either of
+      us to discover it. Naming it now means it's a planned ramp-up, not a surprise later.
+    </div>
+  </section>
+
+  <section>
+    <h2>A few terms this plan uses</h2>
+    <div class="glossary">
+      <div class="g-item"><div class="g-term">IAM / access controls</div><div class="g-def">The system deciding who or what can do what, on which systems.</div></div>
+      <div class="g-item"><div class="g-term">Privileged access (PAM)</div><div class="g-def">Extra checks for the highest-risk kind of access — the accounts that can change or delete things at scale.</div></div>
+      <div class="g-item"><div class="g-term">Endpoint hardening</div><div class="g-def">Locking down laptops and devices so a stolen one is less useful to an attacker.</div></div>
+      <div class="g-item"><div class="g-term">Cloud security posture</div><div class="g-def">Continuously checking that cloud infrastructure is configured safely, since it changes daily.</div></div>
+      <div class="g-item"><div class="g-term">Firewalls / proxies</div><div class="g-def">The checkpoints that control what network traffic is allowed in or out.</div></div>
+      <div class="g-item"><div class="g-term">MFA (multi-factor authentication)</div><div class="g-def">Requiring more than just a password to prove it's really you.</div></div>
+    </div>
+  </section>
+
+  <footer>zero-day-brief / susquehanna / one-pager.html — companion to entry-plan.html and access-path-walkthrough.html</footer>
+</div>
+</body>
+</html>

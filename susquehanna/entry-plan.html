@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Susquehanna — Security Engineer — 30/60/90 Entry Plan — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef1f5;
+    --paper:#ffffff;
+    --ink:#0f1c2b;
+    --ink-soft:#4a5a6b;
+    --ink-faint:#8896a3;
+    --grid:#dbe3ea;
+    --rule:#c3cfd9;
+    --verified:#146b5c;
+    --verified-bg:#e2f2ee;
+    --verified-line:#8fc7ba;
+    --planned:#a8620d;
+    --planned-bg:#faf1e0;
+    --planned-line:#e3bd82;
+    --gap:#8f3d3d;
+    --gap-bg:#f7e9e9;
+    --gap-line:#dcaeae;
+    --accent:#1f4e79;
+    --accent-bg:#e7eef5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .shell{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    min-height:100vh;
+  }
+  /* STATUS RAIL — the signature element */
+  .rail{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    padding:36px 18px 36px 24px;
+    border-right:1px solid var(--rule);
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(2px);
+  }
+  .rail-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:18px;
+  }
+  .rail-item{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin-bottom:16px;
+  }
+  .led{
+    width:10px;height:10px;border-radius:50%;
+    margin-top:4px;flex-shrink:0;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .led.lit{background:var(--verified);}
+  .led.half{background:var(--planned);}
+  .led.off{background:transparent;border:1.5px solid var(--gap);}
+  .rail-label{font-size:11.5px;color:var(--ink-soft);line-height:1.35;}
+  .rail-legend{
+    margin-top:28px;padding-top:16px;border-top:1px solid var(--rule);
+    font-size:10.5px;color:var(--ink-faint);
+  }
+  .rail-legend div{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+  /* MAIN */
+  main{padding:44px 56px 90px;}
+  header.hero{margin-bottom:44px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:10px;
+  }
+  h1{
+    font-size:30px;font-weight:600;letter-spacing:-0.01em;
+    color:var(--ink);margin-bottom:8px;
+  }
+  .subhead{color:var(--ink-soft);font-size:15px;max-width:640px;}
+  .meta-row{
+    display:flex;gap:22px;margin-top:20px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);
+  }
+  section{margin-bottom:52px;}
+  .sec-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;
+  }
+  h2{font-size:20px;font-weight:600;margin-bottom:16px;color:var(--ink);}
+  h3{font-size:14.5px;font-weight:600;margin-bottom:8px;color:var(--ink);}
+  p{color:var(--ink-soft);font-size:14.5px;margin-bottom:10px;}
+  .thesis-card{
+    background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--accent);
+    border-radius:2px;padding:22px 26px;
+  }
+  .thesis-card p{color:var(--ink);font-size:15.5px;line-height:1.6;margin:0;}
+  .thesis-card .jd-ref{
+    margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--accent);
+  }
+  /* Evidence map table */
+  table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--rule);}
+  th{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;
+    text-align:left;padding:10px 14px;background:var(--accent-bg);color:var(--accent);
+    border-bottom:1px solid var(--rule);
+  }
+  td{padding:12px 14px;font-size:13.5px;color:var(--ink-soft);border-bottom:1px solid var(--grid);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;
+    padding:2px 8px;border-radius:3px;letter-spacing:0.03em;
+  }
+  .tag.verified{background:var(--verified-bg);color:var(--verified);border:1px solid var(--verified-line);}
+  .tag.planned{background:var(--planned-bg);color:var(--planned);border:1px solid var(--planned-line);}
+  .tag.gap{background:var(--gap-bg);color:var(--gap);border:1px solid var(--gap-line);}
+  /* Phased plan */
+  .phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .phase{
+    background:var(--paper);border:1px solid var(--rule);padding:18px 20px;position:relative;
+  }
+  .phase-num{
+    font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--accent);
+    opacity:0.35;position:absolute;top:14px;right:16px;
+  }
+  .phase h3{color:var(--accent);margin-bottom:4px;}
+  .phase .phase-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);margin-bottom:12px;}
+  .phase ul{padding-left:18px;}
+  .phase li{font-size:13px;color:var(--ink-soft);margin-bottom:8px;line-height:1.45;}
+  /* Evidence cards */
+  .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .ev-card{background:var(--paper);border:1px solid var(--rule);padding:18px 20px;}
+  .ev-card .ev-num{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--verified);margin-bottom:4px;}
+  .ev-card .ev-what{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}
+  .ev-card .ev-where{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);
+    border-top:1px solid var(--grid);padding-top:8px;
+  }
+  /* Coverage grid */
+  .cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .cov-col{background:var(--paper);border:1px solid var(--rule);padding:18px 20px;}
+  .cov-col.verified-col{border-top:3px solid var(--verified);}
+  .cov-col.gap-col{border-top:3px solid var(--gap);}
+  .cov-col h3{display:flex;align-items:center;gap:8px;}
+  .cov-col ul{padding-left:0;list-style:none;margin-top:10px;}
+  .cov-col li{
+    font-size:13px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--grid);line-height:1.45;
+  }
+  .cov-col li:last-child{border-bottom:none;}
+  .cov-col li strong{color:var(--ink);display:block;font-size:13.5px;margin-bottom:2px;}
+  .flag-banner{
+    background:var(--gap-bg);border:1px solid var(--gap-line);border-left:4px solid var(--gap);
+    padding:16px 20px;margin-bottom:16px;font-size:13.5px;color:#5c2b2b;
+  }
+  .flag-banner strong{color:var(--gap);}
+  /* Questions */
+  .q-list{display:flex;flex-direction:column;gap:14px;}
+  .q-item{background:var(--paper);border:1px solid var(--rule);padding:16px 20px;display:flex;gap:16px;}
+  .q-item .q-num{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--accent);font-size:16px;flex-shrink:0;
+  }
+  .q-item .q-body p{margin-bottom:6px;color:var(--ink);}
+  .q-item .q-ref{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);}
+  footer{
+    border-top:1px solid var(--rule);padding-top:20px;margin-top:60px;
+    display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;
+    font-size:11px;color:var(--ink-faint);flex-wrap:wrap;gap:10px;
+  }
+  @media (max-width:920px){
+    .shell{grid-template-columns:1fr;}
+    .rail{position:relative;height:auto;top:auto;display:flex;flex-wrap:wrap;gap:16px;border-right:none;border-bottom:1px solid var(--rule);}
+    .rail-item{width:auto;}
+    .rail-legend{width:100%;}
+    main{padding:32px 22px 70px;}
+    .phase-grid,.ev-grid,.cov-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div class="rail-title">Control status — this role</div>
+
+    <div class="rail-item"><div class="led lit"></div><div class="rail-label">IAM / PAM design (AWS)</div></div>
+    <div class="rail-item"><div class="led lit"></div><div class="rail-label">Cloud security posture (AWS + Azure)</div></div>
+    <div class="rail-item"><div class="led lit"></div><div class="rail-label">Security automation / scripting</div></div>
+    <div class="rail-item"><div class="led half"></div><div class="rail-label">Endpoint hardening &amp; XDR admin</div></div>
+    <div class="rail-item"><div class="led half"></div><div class="rail-label">Threat prevention control design</div></div>
+    <div class="rail-item"><div class="led half"></div><div class="rail-label">Azure-native PAM tooling</div></div>
+    <div class="rail-item"><div class="led off"></div><div class="rail-label">Network fundamentals / firewall &amp; proxy ops</div></div>
+
+    <div class="rail-legend">
+      <div><span class="led lit" style="margin-top:0"></span> Verified — real, quantified evidence</div>
+      <div><span class="led half" style="margin-top:0"></span> Partial — tool exposure, not admin depth</div>
+      <div><span class="led off" style="margin-top:0"></span> Gap — no evidence to point to</div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <div class="eyebrow">zero-day-brief / susquehanna / entry-plan</div>
+      <h1>30/60/90 entry plan — Security Engineer, Sydney</h1>
+      <p class="subhead">Not a cover letter. A working plan for the identity, endpoint, and network control
+      layer this role owns — built from the JD's own language, scored against what I can actually back up
+      in a second interview, not what sounds best on a first read.</p>
+      <div class="meta-row">
+        <span>Harsha G V</span>
+        <span>harsha.gv29@gmail.com</span>
+        <span>+61 402 697 098</span>
+        <span>au.linkedin.com/in/harshagv</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="sec-num">01 — Day-one thesis</div>
+      <h2>What I'd actually do first</h2>
+      <div class="thesis-card">
+        <p>Before touching a single control, I'd build the map that doesn't exist yet in most security teams
+        this size: every path a credential or session can take from a workstation to a production trading
+        system, with the control that gates each hop named and owned. That map is what turns "harden endpoints,
+        implement PAM, manage cloud posture" from three separate initiatives into one prioritised list — and
+        it's the same artifact I'd use to onboard myself, because I can't harden or triage what I haven't
+        traced first.</p>
+        <div class="jd-ref">↳ re: "Engineer and implement authentication and privileged access controls,
+        harden endpoints and applications, implement threat prevention controls, and design and manage
+        Susquehanna's cloud security posture"</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">02 — Requirement → evidence</div>
+      <h2>JD line, my closest proof, tagged honestly</h2>
+      <table>
+        <tr><th style="width:26%">JD requirement</th><th style="width:16%">Status</th><th>Evidence</th></tr>
+        <tr>
+          <td>Authentication &amp; privileged access controls</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — engineered PoLP-based IAM &amp; RBAC, cross-account access patterns across a cloud
+          environment, reducing access-related security incidents by <strong>50%</strong>.</td>
+        </tr>
+        <tr>
+          <td>Cloud security posture management</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — architected AWS-native CSPM (Security Hub, Config, Lambda remediation),
+          improving CIS/NIST policy compliance by <strong>38%</strong>. Extended in current role on Azure
+          Policy + Defender for Cloud.</td>
+        </tr>
+        <tr>
+          <td>Scripting / automation (Python, PowerShell, Bash)</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — Python framework integrating PagerDuty/Jira/Lambda, cutting alert triage from
+          45 to 12 minutes, automating 85% of ticket classification. Python + Bash confirmed; no PowerShell
+          evidence — flagged below.</td>
+        </tr>
+        <tr>
+          <td>Endpoint hardening</td>
+          <td><span class="tag planned">Partial</span></td>
+          <td>Kubernetes/container hardening at Mox Bank (Pod Security Standards, image scanning, admission
+          policy) is adjacent, not literal workstation/OS endpoint hardening. Wazuh XDR, CrowdStrike,
+          SentinelOne are resume-listed at tool-exposure level, not day-to-day admin depth.</td>
+        </tr>
+        <tr>
+          <td>Threat prevention controls</td>
+          <td><span class="tag planned">Partial</span></td>
+          <td>GuardDuty, Security Hub, Microsoft Sentinel used as consumers of findings, not as a formal
+          threat-prevention or detection-engineering practice. No threat-hunting story to point to.</td>
+        </tr>
+        <tr>
+          <td>Networking fundamentals — TCP/IP, routing, switching; firewall/proxy troubleshooting</td>
+          <td><span class="tag gap">Gap</span></td>
+          <td>No verified evidence. Cloud networking (VPC/VNet, security groups, NSGs) appears across roles,
+          but the JD's specific bar — routing/switching internals, end-to-end troubleshooting of firewalls
+          and proxies as a shared team responsibility — isn't backed by anything on the résumé.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <div class="sec-num">03 — Entry plan</div>
+      <h2>First 90 days</h2>
+      <div class="phase-grid">
+        <div class="phase">
+          <span class="phase-num">01</span>
+          <h3>Days 1–30</h3>
+          <div class="phase-sub">Trace before touching anything</div>
+          <ul>
+            <li>Build the credential-to-production access-path map: identity provider → endpoint →
+            network/proxy → PAM → cloud control plane, naming the control at each hop.</li>
+            <li>Shadow the firewall/proxy triage rotation as an observer — this is the domain with no
+            verified evidence, so it gets the earliest and most deliberate exposure, not the latest.</li>
+            <li>Get read access to existing IAM/RBAC policies and endpoint hardening baselines; run my
+            IAM privilege auditor (below) against what's exportable to build a real, current baseline
+            rather than assume one.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="phase-num">02</span>
+          <h3>Days 31–60</h3>
+          <div class="phase-sub">Ship one real fix, not a plan for one</div>
+          <ul>
+            <li>Close the highest-severity finding the auditor surfaces — a wildcard grant or an
+            unconditioned sensitive action — end to end: identify, scope down, test, deploy.</li>
+            <li>Pair with the network/firewall on-call rotation on two live tickets, specifically to build
+            the TCP/IP-and-routing-level fluency the JD requires and I currently can't evidence.</li>
+            <li>Extend the auditor or an equivalent tool to cover one more control surface based on what
+            the 30-day map actually found gaps in — not what looks good to build.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="phase-num">03</span>
+          <h3>Days 61–90</h3>
+          <div class="phase-sub">Own a control domain independently</div>
+          <ul>
+            <li>Take standing ownership of one control area from the 30-day map — most likely PAM tooling
+            or cloud posture automation, where I have verified depth — including its triage rotation
+            participation.</li>
+            <li>Present the access-path map and the closed findings to the wider security team as a
+            reusable artifact for onboarding future hires.</li>
+            <li>Have a documented, honest answer to "where are you still ramping" for endpoint hardening
+            and networking, with a concrete plan attached — not a vague acknowledgment.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">04 — Evidence cards</div>
+      <h2>Real numbers, not rounded</h2>
+      <div class="ev-grid">
+        <div class="ev-card">
+          <div class="ev-num">50%</div>
+          <div class="ev-what">Fewer access-related security incidents after enforcing PoLP-based IAM/RBAC
+          and cross-account access patterns.</div>
+          <div class="ev-where">Mox Bank — Senior Cloud Security Engineer</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-num">38%</div>
+          <div class="ev-what">Improvement in CIS/NIST policy compliance from AWS-native CSPM
+          (Security Hub, Config, Lambda remediation) and automated finding correlation.</div>
+          <div class="ev-where">OSL Group — Senior Manager, Cybersecurity</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-num">45→12<span style="font-size:13px;">min</span></div>
+          <div class="ev-what">Alert triage time cut by a Python automation framework integrating
+          PagerDuty, Jira, and Lambda; 85% of tickets auto-classified.</div>
+          <div class="ev-where">Mox Bank — Senior Cloud Security Engineer</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">05 — Domain coverage</div>
+      <h2>Where I'm deep, where I'm ramping</h2>
+      <div class="flag-banner">
+        <strong>Read this section before the rest of the plan.</strong> This JD is closer to hands-on
+        IAM/PAM and endpoint/network engineering than to the CI/CD pipeline security work that dominates
+        my most recent role. That's a real mismatch worth naming up front, not smoothing over.
+      </div>
+      <div class="cov-grid">
+        <div class="cov-col verified-col">
+          <h3><span class="led lit" style="position:static;margin:0;"></span>Deep — verified</h3>
+          <ul>
+            <li><strong>IAM / PAM design</strong>PoLP enforcement, RBAC, cross-account access patterns on AWS, with a measured incident reduction.</li>
+            <li><strong>Cloud security posture management</strong>AWS CSPM build-out; Azure Policy and Defender for Cloud in current role.</li>
+            <li><strong>Security automation</strong>Python-first, production automation connecting security tooling to ops workflows.</li>
+          </ul>
+        </div>
+        <div class="cov-col gap-col">
+          <h3><span class="led off" style="position:static;margin:0;"></span>Ramping — honestly</h3>
+          <ul>
+            <li><strong>Networking fundamentals &amp; firewall/proxy troubleshooting</strong>The JD's clearest bar I can't currently clear with evidence. Would need to build this fast, not claim it exists.</li>
+            <li><strong>Endpoint hardening / EDR administration</strong>Tool exposure (CrowdStrike, SentinelOne, Wazuh) on the résumé, not day-to-day admin depth — same standing gap flagged across every role I've prepped for.</li>
+            <li><strong>Formal threat prevention / detection engineering</strong>Consumer of GuardDuty/Sentinel findings, not a builder of detection logic or a threat-hunting practice.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">06 — Questions I'd ask</div>
+      <h2>Traceable to specific JD lines</h2>
+      <div class="q-list">
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <p>Is endpoint hardening here primarily EDR/XDR policy tuning, OS-level hardening baselines,
+            or both? Those are different skill investments and I'd rather calibrate now than assume.</p>
+            <div class="q-ref">— re: "harden endpoints and applications"</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <p>Is firewall/proxy triage owned end-to-end by this security team, or shared with a separate
+            network engineering function? That changes how deep the networking bar actually is on day one.</p>
+            <div class="q-ref">— re: "share responsibility for triaging and resolving connectivity issues
+            (such as firewalls and proxies)"</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <p>Is cloud security posture management single-cloud today, and is there existing tooling in
+            place, or would part of this role be standing that capability up?</p>
+            <div class="q-ref">— re: "design and manage Susquehanna's cloud security posture"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>zero-day-brief / susquehanna / entry-plan.html</span>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

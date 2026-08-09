@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optus — Senior Security Platform Engineer (SRE) — Reliability Entry Plan — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef1f5;
+    --paper:#ffffff;
+    --ink:#0f1c2b;
+    --ink-soft:#4a5a6b;
+    --ink-faint:#8896a3;
+    --grid:#dbe3ea;
+    --rule:#c3cfd9;
+    --verified:#146b5c;
+    --verified-bg:#e2f2ee;
+    --verified-line:#8fc7ba;
+    --planned:#a8620d;
+    --planned-bg:#faf1e0;
+    --planned-line:#e3bd82;
+    --gap:#8f3d3d;
+    --gap-bg:#f7e9e9;
+    --gap-line:#dcaeae;
+    --accent:#1f4e79;
+    --accent-bg:#e7eef5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .shell{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    min-height:100vh;
+  }
+  .rail{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    padding:36px 18px 36px 24px;
+    border-right:1px solid var(--rule);
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(2px);
+  }
+  .rail-title{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:18px;
+  }
+  .rail-item{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    margin-bottom:16px;
+  }
+  .led{
+    width:10px;height:10px;border-radius:50%;
+    margin-top:4px;flex-shrink:0;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .led.lit{background:var(--verified);}
+  .led.half{background:var(--planned);}
+  .led.off{background:transparent;border:1.5px solid var(--gap);}
+  .rail-label{font-size:11.5px;color:var(--ink-soft);line-height:1.35;}
+  .rail-legend{
+    margin-top:28px;padding-top:16px;border-top:1px solid var(--rule);
+    font-size:10.5px;color:var(--ink-faint);
+  }
+  .rail-legend div{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+  main{padding:44px 56px 90px;}
+  header.hero{margin-bottom:44px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:10px;
+  }
+  h1{
+    font-size:29px;font-weight:600;letter-spacing:-0.01em;
+    color:var(--ink);margin-bottom:8px;
+  }
+  .subhead{color:var(--ink-soft);font-size:15px;max-width:660px;}
+  .meta-row{
+    display:flex;gap:22px;margin-top:20px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);
+  }
+  section{margin-bottom:52px;}
+  .sec-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;
+  }
+  h2{font-size:20px;font-weight:600;margin-bottom:16px;color:var(--ink);}
+  h3{font-size:14.5px;font-weight:600;margin-bottom:8px;color:var(--ink);}
+  p{color:var(--ink-soft);font-size:14.5px;margin-bottom:10px;}
+  .thesis-card{
+    background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--accent);
+    border-radius:2px;padding:22px 26px;
+  }
+  .thesis-card p{color:var(--ink);font-size:15.5px;line-height:1.6;margin:0;}
+  .thesis-card .jd-ref{
+    margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--accent);
+  }
+  .slo-block{
+    margin-top:18px;background:var(--paper);border:1px solid var(--rule);padding:18px 22px;
+  }
+  .slo-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--planned);background:var(--planned-bg);border:1px solid var(--planned-line);
+    display:inline-block;padding:2px 8px;border-radius:3px;margin-bottom:12px;
+  }
+  .slo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--grid);}
+  .slo-cell{padding:12px 14px;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);}
+  .slo-cell:nth-child(4n){border-right:none;}
+  .slo-cell .k{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-faint);margin-bottom:4px;}
+  .slo-cell .v{font-size:13px;color:var(--ink);}
+  table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--rule);}
+  th{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;
+    text-align:left;padding:10px 14px;background:var(--accent-bg);color:var(--accent);
+    border-bottom:1px solid var(--rule);
+  }
+  td{padding:12px 14px;font-size:13.5px;color:var(--ink-soft);border-bottom:1px solid var(--grid);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;
+    padding:2px 8px;border-radius:3px;letter-spacing:0.03em;white-space:nowrap;
+  }
+  .tag.verified{background:var(--verified-bg);color:var(--verified);border:1px solid var(--verified-line);}
+  .tag.planned{background:var(--planned-bg);color:var(--planned);border:1px solid var(--planned-line);}
+  .tag.gap{background:var(--gap-bg);color:var(--gap);border:1px solid var(--gap-line);}
+  .phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .phase{
+    background:var(--paper);border:1px solid var(--rule);padding:18px 20px;position:relative;
+  }
+  .phase-num{
+    font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--accent);
+    opacity:0.35;position:absolute;top:14px;right:16px;
+  }
+  .phase h3{color:var(--accent);margin-bottom:4px;}
+  .phase .phase-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);margin-bottom:12px;}
+  .phase ul{padding-left:18px;}
+  .phase li{font-size:13px;color:var(--ink-soft);margin-bottom:8px;line-height:1.45;}
+  .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .ev-card{background:var(--paper);border:1px solid var(--rule);padding:18px 20px;}
+  .ev-card .ev-num{font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--verified);margin-bottom:4px;}
+  .ev-card .ev-what{font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}
+  .ev-card .ev-where{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);
+    border-top:1px solid var(--grid);padding-top:8px;
+  }
+  .cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .cov-col{background:var(--paper);border:1px solid var(--rule);padding:18px 20px;}
+  .cov-col.verified-col{border-top:3px solid var(--verified);}
+  .cov-col.gap-col{border-top:3px solid var(--gap);}
+  .cov-col h3{display:flex;align-items:center;gap:8px;}
+  .cov-col ul{padding-left:0;list-style:none;margin-top:10px;}
+  .cov-col li{
+    font-size:13px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--grid);line-height:1.45;
+  }
+  .cov-col li:last-child{border-bottom:none;}
+  .cov-col li strong{color:var(--ink);display:block;font-size:13.5px;margin-bottom:2px;}
+  .flag-banner{
+    background:var(--gap-bg);border:1px solid var(--gap-line);border-left:4px solid var(--gap);
+    padding:16px 20px;margin-bottom:16px;font-size:13.5px;color:#5c2b2b;
+  }
+  .flag-banner strong{color:var(--gap);}
+  .q-list{display:flex;flex-direction:column;gap:14px;}
+  .q-item{background:var(--paper);border:1px solid var(--rule);padding:16px 20px;display:flex;gap:16px;}
+  .q-item .q-num{
+    font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--accent);font-size:16px;flex-shrink:0;
+  }
+  .q-item .q-body p{margin-bottom:6px;color:var(--ink);}
+  .q-item .q-ref{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);}
+  footer{
+    border-top:1px solid var(--rule);padding-top:20px;margin-top:60px;
+    display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;
+    font-size:11px;color:var(--ink-faint);flex-wrap:wrap;gap:10px;
+  }
+  @media (max-width:920px){
+    .shell{grid-template-columns:1fr;}
+    .rail{position:relative;height:auto;top:auto;display:flex;flex-wrap:wrap;gap:16px;border-right:none;border-bottom:1px solid var(--rule);}
+    .rail-item{width:auto;}
+    .rail-legend{width:100%;}
+    main{padding:32px 22px 70px;}
+    .phase-grid,.ev-grid,.cov-grid{grid-template-columns:1fr;}
+    .slo-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div class="rail-title">Control status — this role</div>
+
+    <div class="rail-item"><div class="led lit"></div><div class="rail-label">Python / IaC / CI/CD automation</div></div>
+    <div class="rail-item"><div class="led lit"></div><div class="rail-label">Alert &amp; ticket automation, toil reduction</div></div>
+    <div class="rail-item"><div class="led half"></div><div class="rail-label">Observability tooling (CloudWatch, ELK, Datadog, Prometheus, Grafana)</div></div>
+    <div class="rail-item"><div class="led half"></div><div class="rail-label">SIEM / EDR / VM platform exposure</div></div>
+    <div class="rail-item"><div class="led off"></div><div class="rail-label">SLO / SLI / error-budget practice</div></div>
+    <div class="rail-item"><div class="led off"></div><div class="rail-label">Major incident command &amp; stakeholder comms</div></div>
+    <div class="rail-item"><div class="led off"></div><div class="rail-label">Capacity planning &amp; growth forecasting</div></div>
+
+    <div class="rail-legend">
+      <div><span class="led lit" style="margin-top:0"></span> Verified — real, quantified evidence</div>
+      <div><span class="led half" style="margin-top:0"></span> Partial — tool exposure, not platform-ownership depth</div>
+      <div><span class="led off" style="margin-top:0"></span> Gap — no evidence to point to</div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <div class="eyebrow">zero-day-brief / optus / entry-plan</div>
+      <h1>Reliability entry plan — Senior Security Platform Engineer (SRE), Sydney</h1>
+      <p class="subhead">A working plan for the reliability layer under Optus's SIEM, EDR, Vulnerability
+      Management, and Exposure Management platforms — built from the JD's own language and scored against
+      evidence that would hold up two questions into an interview, not evidence that reads well on a first
+      pass.</p>
+      <div class="meta-row">
+        <span>Harsha G V</span>
+        <span>harsha.gv29@gmail.com</span>
+        <span>+61 402 697 098</span>
+        <span>au.linkedin.com/in/harshagv</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="sec-num">01 — Day-one thesis</div>
+      <h2>What gets built first, and why</h2>
+      <div class="thesis-card">
+        <p>The first deliverable proposed here is not a dashboard — it is a single, fully worked SLO for
+        one real platform surface, defined end-to-end rather than templated. Standing up SLOs, SLIs, and
+        error budgets across four platforms at once produces four shallow frameworks; standing up one
+        correctly, against real Optus data-flow boundaries once read access exists, produces a pattern the
+        rest can be replicated from. That sequencing — depth before breadth — is the same principle behind
+        the automation-and-toil-reduction work in the evidence below, and it's the right first move here
+        precisely because formal SLO/error-budget practice is this candidate's clearest gap, not a strength
+        to lead with.</p>
+        <div class="jd-ref">↳ re: "Drive platform reliability and performance by defining and monitoring
+        SLOs, SLIs, error budgets, and platform health across core security platforms"</div>
+      </div>
+
+      <div class="slo-block">
+        <span class="slo-label">Illustrative — proposed framework, not a claimed past result</span>
+        <p style="margin-bottom:14px;">A worked example of what that first SLO might look like, using a
+        SIEM log-ingestion pipeline as the stand-in platform surface until the real one is scoped on the
+        ground:</p>
+        <div class="slo-grid">
+          <div class="slo-cell"><div class="k">SLI</div><div class="v">% of log sources delivering events within their expected ingestion window</div></div>
+          <div class="slo-cell"><div class="k">Target</div><div class="v">99.5% of sources within window, rolling 28 days</div></div>
+          <div class="slo-cell"><div class="k">Error budget</div><div class="v">~3.4 hrs/month of degraded ingestion across the source population</div></div>
+          <div class="slo-cell"><div class="k">Alert threshold</div><div class="v">Budget burn rate flags at 2x and 6x expected pace, not on raw breach alone</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">02 — Requirement → evidence</div>
+      <h2>JD line, closest real proof, tagged honestly</h2>
+      <table>
+        <tr><th style="width:28%">JD requirement</th><th style="width:14%">Status</th><th>Evidence</th></tr>
+        <tr>
+          <td>SLO / SLI / error-budget definition &amp; reliability reviews</td>
+          <td><span class="tag gap">Gap</span></td>
+          <td>No formal SRE-discipline evidence anywhere across 11 years. Operational metrics exist
+          (triage time, remediation speed) but were never framed as SLOs or error budgets — that vocabulary
+          and practice would need to be built, not translated from existing work.</td>
+        </tr>
+        <tr>
+          <td>Observability build-out — monitoring, alerting, data-flow integrity</td>
+          <td><span class="tag planned">Partial</span></td>
+          <td>Datadog, Prometheus, Grafana, ELK, and CloudWatch are resume-listed under Observability &amp;
+          Monitoring, but no single achievement ties any of them to a quantified observability outcome —
+          tool exposure, not demonstrated platform-level ownership.</td>
+        </tr>
+        <tr>
+          <td>Monitoring/alerting automation ("observability-as-code")</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — Python automation framework integrating PagerDuty, Jira, and AWS Lambda, cutting
+          alert triage time from <strong>45 to 12 minutes</strong> and automating <strong>85%</strong> of
+          ticket classification. Alerting/ticketing, not SLO tooling, but a real automation-as-code
+          precedent.</td>
+        </tr>
+        <tr>
+          <td>Major incident coordination, stakeholder comms, post-incident review</td>
+          <td><span class="tag gap">Gap</span></td>
+          <td>No verified incident-command story. This is a standing open gap flagged across every prior
+          campaign — no fabricated STAR story substituted here.</td>
+        </tr>
+        <tr>
+          <td>Runbooks, on-call maturity, alert optimisation, change management</td>
+          <td><span class="tag planned">Partial</span></td>
+          <td>SOC 2 Type II continuous compliance monitoring at OSL Group (zero CRITICAL/HIGH findings
+          across two audit cycles) shows operational discipline; no direct evidence of formal on-call
+          rotation ownership or runbook authorship.</td>
+        </tr>
+        <tr>
+          <td>Capacity planning &amp; performance forecasting</td>
+          <td><span class="tag gap">Gap</span></td>
+          <td>One point-in-time cost-optimisation result exists (Acatus/Pactum Azure migration, €200,000
+          saved) — a proxy for cost-conscious platform decisions, not for ongoing utilisation forecasting or
+          capacity-risk modelling, which the JD asks for.</td>
+        </tr>
+        <tr>
+          <td>Python scripting, IaC, CI/CD, everything-as-code</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Terraform and CloudFormation IaC validation, GitHub Actions/Azure DevOps pipeline design, and
+          the Mox Bank Python automation framework. Directly reusable regardless of the SRE-vs-security
+          framing.</td>
+        </tr>
+        <tr>
+          <td>Supporting enterprise SIEM / EDR / Vulnerability Management / SOC platforms</td>
+          <td><span class="tag planned">Partial</span></td>
+          <td>Microsoft Sentinel, CrowdStrike, SentinelOne, Wazuh, Tenable Nessus, and Qualys are resume-listed.
+          This is tool exposure as a consumer of findings, not platform administration or reliability
+          ownership — a sharper version of a gap flagged in prior campaigns, because this JD asks for the
+          latter.</td>
+        </tr>
+        <tr>
+          <td>5+ years SRE, DevOps, or Platform Engineering in large enterprise</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>11+ years across JPMorgan Chase, Nokia, Mox Bank, OSL Group, and current role, all large
+          regulated enterprises. Caveat: every one of those roles was framed around securing a platform,
+          not around its reliability — years-of-tenure is real, years-of-SRE-practice is not.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <div class="sec-num">03 — Entry plan</div>
+      <h2>First 90 days</h2>
+      <div class="phase-grid">
+        <div class="phase">
+          <span class="phase-num">01</span>
+          <h3>Days 1–30</h3>
+          <div class="phase-sub">Map before proposing anything</div>
+          <ul>
+            <li>Build the platform dependency and data-flow map across SIEM, EDR, Vulnerability Management,
+            and Exposure Management — what feeds what, and where the current monitoring blind spots sit.</li>
+            <li>Sit in on the incident and on-call rotation as an observer only — this is the domain with
+            zero verified evidence, so it gets the earliest and most deliberate exposure, not the last.</li>
+            <li>Get read access to existing dashboards, alert configuration, and any capacity or utilisation
+            data already in place, to establish the real current baseline rather than assume one.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="phase-num">02</span>
+          <h3>Days 31–60</h3>
+          <div class="phase-sub">Ship one real SLO, not a proposal for one</div>
+          <ul>
+            <li>Take the highest-incident-volume platform surface identified in the 30-day map and define
+            its first SLO end-to-end: SLI, target, error budget, burn-rate alerting, named owner.</li>
+            <li>Pair on two live on-call or major-incident rotations specifically to build the
+            stakeholder-communication and incident-coordination fluency the JD requires and the resume
+            currently can't evidence.</li>
+            <li>Extend the alert/ticket automation pattern proven at Mox Bank into an observability-as-code
+            artifact for that same platform surface.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="phase-num">03</span>
+          <h3>Days 61–90</h3>
+          <div class="phase-sub">Own one reliability domain independently</div>
+          <ul>
+            <li>Take standing ownership of the automation/alerting layer for one platform, including its
+            on-call rotation, where the deepest verified background already sits.</li>
+            <li>Present a capacity-planning proposal for that platform, translating the cost-optimisation
+            discipline evidenced in the Acatus/Pactum Azure migration into a forecast-driven model rather
+            than a one-time saving.</li>
+            <li>Document, plainly, where SLO/error-budget practice and major-incident-command fluency still
+            sit after 90 days — with a concrete closing plan attached, not a vague acknowledgment.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">04 — Evidence cards</div>
+      <h2>Real numbers, not rounded</h2>
+      <div class="ev-grid">
+        <div class="ev-card">
+          <div class="ev-num">45→12<span style="font-size:13px;">min</span></div>
+          <div class="ev-what">Alert triage time cut by a Python automation framework integrating
+          PagerDuty, Jira, and Lambda; 85% of tickets auto-classified — the closest verified precedent for
+          alert optimisation and toil reduction.</div>
+          <div class="ev-where">Mox Bank — Senior Cloud Security Engineer</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-num">€200k</div>
+          <div class="ev-what">Cloud cost savings from an end-to-end secure-by-design Azure migration —
+          the closest verified precedent for cost-conscious platform investment decisions.</div>
+          <div class="ev-where">Pactum Securities (ex-Acatus) — DevOps Engineer</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-num">5x</div>
+          <div class="ev-what">Release frequency increase with 40% faster remediation from CI/CD pipelines
+          embedding automated SAST/DAST feedback — direct evidence of everything-as-code delivery.</div>
+          <div class="ev-where">Modern Group — DevSecOps SME</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">05 — Domain coverage</div>
+      <h2>Where the depth is, where the ramp is</h2>
+      <div class="flag-banner">
+        <strong>Read this section before the rest of the plan.</strong> This JD is a reliability-engineering
+        role wearing a security badge: the object of the work is platform uptime, alert delivery, and
+        capacity — not the security findings those platforms produce. The candidate's background is security
+        engineering with strong automation depth, not SRE practice for infrastructure reliability. That's a
+        structural mismatch, not a cosmetic one, and it's stated here rather than reframed.
+      </div>
+      <div class="cov-grid">
+        <div class="cov-col verified-col">
+          <h3><span class="led lit" style="position:static;margin:0;"></span>Deep — verified</h3>
+          <ul>
+            <li><strong>Automation &amp; everything-as-code</strong>Python-first automation connecting
+            security tooling to ops workflows, plus Terraform/CloudFormation IaC and CI/CD pipeline design
+            across AWS and Azure.</li>
+            <li><strong>Alert/ticket toil reduction</strong>A quantified, repeatable pattern of cutting
+            manual triage load through automation — directly reusable for alert-optimisation work.</li>
+            <li><strong>Cost-conscious platform decisions</strong>One verified case of architecting a cloud
+            migration with a hard cost outcome — the closest available proxy for capacity/investment
+            thinking.</li>
+          </ul>
+        </div>
+        <div class="cov-col gap-col">
+          <h3><span class="led off" style="position:static;margin:0;"></span>Ramping — honestly</h3>
+          <ul>
+            <li><strong>SLO / SLI / error-budget practice</strong>No evidence of this as a formal discipline
+            anywhere across 11 years, distinct from ad hoc operational metrics.</li>
+            <li><strong>Major incident command &amp; stakeholder comms</strong>No verified story here —
+            flagged as an open gap across every prior campaign and unresolved in this one.</li>
+            <li><strong>Capacity planning &amp; growth forecasting</strong>One point-in-time
+            cost-optimisation result exists; no evidence of ongoing utilisation forecasting or capacity-risk
+            modelling.</li>
+            <li><strong>SIEM / EDR / Vulnerability Management platform administration</strong>Tool-exposure
+            level only — the same standing gap flagged across prior campaigns, sharper here because the ask
+            is platform ownership, not control consumption.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">06 — Questions worth asking</div>
+      <h2>Traceable to specific JD lines</h2>
+      <div class="q-list">
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <p>Are SLOs and error budgets already formalised for these platforms today, or would part of
+            this role be establishing that practice from a standing start?</p>
+            <div class="q-ref">— re: "defining and monitoring SLOs, SLIs, error budgets, and platform
+            health across core security platforms"</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <p>When a SIEM or EDR platform has a major incident, does this role sit in the incident-commander
+            seat, or as a contributor to a security-team-led response?</p>
+            <div class="q-ref">— re: "Lead security platform incident response and recovery, coordinating
+            major incidents, stakeholder communications, and post-incident reviews"</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <p>Is capacity planning today reactive to utilisation alerts or forecast-driven, and what
+            growth/utilisation data already exists to build a model from?</p>
+            <div class="q-ref">— re: "Own capacity planning and performance monitoring across security
+            platforms, forecasting growth, managing utilisation, and ensuring proactive visibility of
+            capacity risks"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>zero-day-brief / optus / entry-plan.html</span>
+      <span>Campaign #2 (live technical artifact) — build pending</span>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rosterfy — What This Role Would Actually Do (Plain-Language Summary) — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbfaf7;
+    --paper-raised:#ffffff;
+    --ink:#232722;
+    --ink-soft:#5c6259;
+    --ink-faint:#8b9186;
+    --accent:#2d5f6f;
+    --accent-bg:#e8f0ee;
+    --rule:#e2ded3;
+    --good:#3a7a52;
+    --good-bg:#e9f3ec;
+    --good-line:#a9d3b8;
+    --watch:#a97324;
+    --watch-bg:#faf0dd;
+    --watch-line:#e0bd82;
+    --risk:#ab4a3d;
+    --risk-bg:#f8ebe8;
+    --risk-line:#dcaba2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+  }
+  .serif{font-family:'Lora',serif;}
+  main{max-width:760px;margin:0 auto;padding:52px 32px 90px;}
+
+  header{margin-bottom:34px;padding-bottom:28px;border-bottom:1px solid var(--rule);}
+  .eyebrow{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:600;}
+  h1{font-family:'Lora',serif;font-weight:600;font-size:27px;color:var(--ink);margin-bottom:12px;line-height:1.3;}
+  .subhead{color:var(--ink-soft);font-size:14.5px;max-width:600px;}
+  .meta-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:12px;color:var(--ink-faint);}
+
+  section{margin:34px 0;}
+  h2{font-family:'Lora',serif;font-weight:600;font-size:18px;color:var(--ink);margin-bottom:12px;}
+  p{color:var(--ink-soft);font-size:14px;margin-bottom:10px;}
+  p.lead{color:var(--ink);font-size:15px;}
+
+  .plain-box{
+    background:var(--accent-bg);border-left:3px solid var(--accent);border-radius:2px;
+    padding:18px 22px;
+  }
+  .plain-box p{color:var(--ink);font-size:14.5px;margin:0;}
+
+  /* readiness grid */
+  .grid-row{
+    display:grid;grid-template-columns:34px 1fr;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--rule);align-items:flex-start;
+  }
+  .grid-row:last-child{border-bottom:none;}
+  .dot{width:14px;height:14px;border-radius:50%;margin-top:4px;}
+  .dot.good{background:var(--good);}
+  .dot.watch{background:var(--watch);}
+  .dot.risk{background:var(--risk);}
+  .grid-row .g-title{font-weight:600;color:var(--ink);font-size:14.5px;margin-bottom:4px;}
+  .grid-row .g-body{color:var(--ink-soft);font-size:13.5px;}
+  .status-tag{
+    display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;
+    padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:middle;
+  }
+  .status-tag.good{background:var(--good-bg);color:var(--good);border:1px solid var(--good-line);}
+  .status-tag.watch{background:var(--watch-bg);color:var(--watch);border:1px solid var(--watch-line);}
+  .status-tag.risk{background:var(--risk-bg);color:var(--risk);border:1px solid var(--risk-line);}
+
+  /* timeline */
+  .timeline{display:flex;flex-direction:column;gap:0;margin-top:8px;}
+  .tl-row{display:grid;grid-template-columns:90px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);}
+  .tl-row:last-child{border-bottom:none;}
+  .tl-when{font-family:'Lora',serif;font-weight:600;color:var(--accent);font-size:14px;}
+  .tl-what{color:var(--ink-soft);font-size:13.5px;}
+  .tl-what strong{color:var(--ink);}
+
+  .gap-box{
+    background:var(--risk-bg);border:1px solid var(--risk-line);border-radius:4px;
+    padding:18px 22px;
+  }
+  .gap-box .gap-title{font-weight:700;color:var(--risk);font-size:13.5px;margin-bottom:8px;}
+  .gap-box ul{padding-left:18px;}
+  .gap-box li{color:var(--ink);font-size:13.5px;margin-bottom:8px;}
+
+  footer{
+    border-top:1px solid var(--rule);padding-top:18px;margin-top:48px;
+    display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-faint);flex-wrap:wrap;gap:10px;
+  }
+
+  @media print{
+    body{background:#fff;}
+  }
+  @media (max-width:600px){
+    main{padding:36px 18px 60px;}
+    .grid-row{grid-template-columns:24px 1fr;}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="eyebrow">zero-day-brief / rosterfy / one-pager</div>
+    <h1>What this role would actually do — in plain terms</h1>
+    <p class="subhead">A non-technical summary of my Senior Platform Engineer — DevSecOps entry plan. No jargon,
+    no acronyms without an explanation. Written for anyone deciding on this hire who isn't an engineer.</p>
+    <div class="meta-row">
+      <span>Harsha G V</span>
+      <span>harsha.gv29@gmail.com</span>
+      <span>+61 402 697 098</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>The one-sentence version</h2>
+    <div class="plain-box">
+      <p>This job is about making sure the systems that run Rosterfy — where volunteer and staff data lives, how
+      the app gets built and shipped, and how the new AI features work — stay safe by default, without slowing
+      engineers down to get there.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where I'm ready today, and where I'd be learning on the job</h2>
+    <p>Color shows how confident I am, honestly, in each area — not how important it is. Everything here matters;
+    this just shows where I'd add value from day one versus where I'd need time to catch up.</p>
+
+    <div class="grid-row">
+      <div class="dot good"></div>
+      <div>
+        <div class="g-title">Building safety checks directly into the software delivery process<span class="status-tag good">Ready now</span></div>
+        <div class="g-body">This is what I already do in my current job — catching security problems automatically
+        before software ships, instead of finding them after.</div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="dot good"></div>
+      <div>
+        <div class="g-title">Controlling who and what can access sensitive systems<span class="status-tag good">Ready now</span></div>
+        <div class="g-body">I've built this kind of access control before and measured a real drop in security
+        incidents as a result.</div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="dot watch"></div>
+      <div>
+        <div class="g-title">Keeping compliance certificates (like SOC 2) backed by real, current proof<span class="status-tag watch">Ready, new tool</span></div>
+        <div class="g-body">I've done this exact work before — just with different software than the specific tool
+        (Vanta) Rosterfy uses today. The skill transfers; the tool is new to me.</div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="dot watch"></div>
+      <div>
+        <div class="g-title">Fixing security problems inside the website's own code, not just the servers it runs on<span class="status-tag watch">Ramping up</span></div>
+        <div class="g-body">My experience so far has been at the infrastructure layer. I haven't worked directly
+        inside this specific type of application code before, so this is a genuine gap I'd close early, not claim
+        I already have.</div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="dot risk"></div>
+      <div>
+        <div class="g-title">Working on Rosterfy's second cloud provider (Google Cloud)<span class="status-tag risk">New to me</span></div>
+        <div class="g-body">All of my cloud experience so far has been on the other two major providers. I have
+        no hands-on experience with this one yet and would say so plainly in an interview.</div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="dot watch"></div>
+      <div>
+        <div class="g-title">Being on call when something breaks<span class="status-tag watch">Ramping up</span></div>
+        <div class="g-body">I don't yet have a track record of handling live incidents end to end. This is new
+        ground for me and I'd want to shadow it early rather than be thrown into it.</div>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="dot risk"></div>
+      <div>
+        <div class="g-title">Making sure the new AI assistant can't mix up one customer's data with another's<span class="status-tag risk">New to me</span></div>
+        <div class="g-body">I've used AI tools to help with security work before — that's a different skill from
+        making an AI feature itself safe to use. I want to be clear about that difference rather than blur it.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What I'd actually do, in order</h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-when">First month</div>
+        <div class="tl-what"><strong>Find out what's actually there.</strong> Right now, a lot of the cloud setup
+        exists only because someone clicked buttons to create it — nothing is written down in a way that's easy to
+        check or rebuild. I'd write all of it down first, before changing anything.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Second month</div>
+        <div class="tl-what"><strong>Fix one real thing, start to finish.</strong> Not a proposal — an actual fix,
+        done properly, that other engineers can copy the pattern from.</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Third month</div>
+        <div class="tl-what"><strong>Take ownership of one area for good,</strong> write down how it all works so
+        the knowledge doesn't live only in my head, and be honest about which of the gaps above still need work.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The gaps, stated plainly</h2>
+    <div class="gap-box">
+      <div class="gap-title">Three things I don't have yet, and won't pretend to:</div>
+      <ul>
+        <li>Hands-on experience with Google Cloud, which runs part of Rosterfy's systems.</li>
+        <li>Direct experience fixing security issues inside the specific programming language (PHP) Rosterfy's
+        website is built in.</li>
+        <li>A track record of handling a live incident from start to finish.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>zero-day-brief / rosterfy / one-pager.html</span>
+    <span>Plain-language companion to Campaign #1</span>
+  </footer>
+
+</main>
+</body>
+</html>

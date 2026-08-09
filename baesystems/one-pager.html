@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Security Engineer, JORN — Plain-Language Summary — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbfbf9;
+    --ink:#181818;
+    --ink-soft:#4d4d4a;
+    --ink-faint:#8a8a84;
+    --line:#e2e0d8;
+    --stripe-red:#b3261e;
+    --stripe-blue:#1f4e79;
+    --green:#2f7a4d;
+    --green-bg:#e5f0e8;
+    --amber:#a3690a;
+    --amber-bg:#f6ecd9;
+    --red:#a3372e;
+    --red-bg:#f5e6e4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;font-size:15.5px;
+  }
+  .stripe{height:6px;display:flex;}
+  .stripe div{flex:1;}
+  .stripe .r{background:var(--stripe-red);}
+  .stripe .b{background:var(--stripe-blue);}
+  .wrap{max-width:760px;margin:0 auto;padding:34px 30px 80px;}
+
+  .eyebrow{
+    font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--stripe-blue);font-weight:600;
+    margin-bottom:10px;
+  }
+  h1{font-size:27px;font-weight:800;letter-spacing:-0.01em;margin-bottom:8px;}
+  .subhead{color:var(--ink-soft);font-size:15px;max-width:600px;margin-bottom:6px;}
+  .meta{font-size:12.5px;color:var(--ink-faint);margin-top:14px;}
+
+  section{margin:34px 0;}
+  h2{font-size:16.5px;font-weight:700;margin-bottom:12px;}
+  p{color:var(--ink-soft);margin-bottom:10px;}
+  p strong{color:var(--ink);}
+
+  .plain-box{
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--stripe-blue);
+    padding:18px 22px;
+  }
+  .plain-box p{color:var(--ink);font-size:15px;margin:0;}
+
+  .grid-readiness{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);}
+  .grid-row{display:flex;border-bottom:1px solid var(--line);}
+  .grid-row:last-child{border-bottom:none;}
+  .grid-row .r-label{flex:1;padding:13px 16px;font-size:14px;color:var(--ink);}
+  .grid-row .r-status{
+    width:120px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;
+  }
+  .r-status.green{background:var(--green-bg);color:var(--green);}
+  .r-status.amber{background:var(--amber-bg);color:var(--amber);}
+  .r-status.red{background:var(--red-bg);color:var(--red);}
+
+  .plan-list{list-style:none;}
+  .plan-list li{
+    padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;
+  }
+  .plan-list li:last-child{border-bottom:none;}
+  .plan-list .p-when{
+    font-weight:700;font-size:13px;color:var(--stripe-blue);flex-shrink:0;width:78px;
+  }
+  .plan-list .p-what{color:var(--ink-soft);font-size:14.5px;}
+
+  .honest-box{
+    background:var(--red-bg);border:1px solid #e0c2be;padding:16px 20px;
+  }
+  .honest-box strong{color:var(--red);display:block;font-size:13.5px;margin-bottom:6px;}
+  .honest-box p{color:#5a2f29;font-size:14px;margin:0;}
+
+  footer{
+    border-top:1px solid var(--line);padding-top:16px;margin-top:44px;
+    font-size:11.5px;color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+</style>
+</head>
+<body>
+<div class="stripe"><div class="r"></div><div class="b"></div></div>
+<div class="wrap">
+
+  <div class="eyebrow">zero-day-brief / bae-systems-jorn / plain-language summary</div>
+  <h1>What this proposal is, in plain terms</h1>
+  <p class="subhead">A non-technical translation of the entry plan for the Product Security (Cyber) Engineer
+  role on JORN — no jargon, no acronyms without an explanation.</p>
+  <p class="meta">Prepared by Harsha G V &nbsp;·&nbsp; harsha.gv29@gmail.com &nbsp;·&nbsp; +61 402 697 098</p>
+
+  <section>
+    <h2>The one-sentence version</h2>
+    <div class="plain-box">
+      <p>Make sure every security rule the program has to follow is actually being followed — with proof — not
+      just written down somewhere and forgotten.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why that's harder than it sounds</h2>
+    <p>A defence program like this has security rules coming from a lot of places at once — customer contracts,
+    government policy, industry standards. Each rule needs someone to (1) assign a specific fix or safeguard for
+    it, (2) prove that fix actually works, and (3) keep that proof up to date as the design changes. When step
+    2 or 3 gets skipped, that's usually what an audit or a security incident finds first — a rule that looked
+    handled on paper but wasn't, in practice.</p>
+    <p>The first useful thing to do in this role isn't to advise on any one design. It's to check whether that
+    three-step chain — <strong>rule → fix → proof</strong> — actually holds together for what's already in
+    place, and fix the links that don't.</p>
+  </section>
+
+  <section>
+    <h2>The first 90 days, in plain terms</h2>
+    <ul class="plan-list">
+      <li><span class="p-when">Days 1–30</span><span class="p-what">Learn how the program currently tracks
+      its security rules, and check one real example against a small checking tool built specifically for
+      this (already working, not just planned).</span></li>
+      <li><span class="p-when">Days 31–60</span><span class="p-what">Fix the first real gap that check finds,
+      start to finish — not just report it. Also sit in on how the team checks the security of parts and
+      components bought from other companies, since that's the one area with no relevant experience yet.</span></li>
+      <li><span class="p-when">Days 61–90</span><span class="p-what">Take ongoing responsibility for one area
+      of this tracking, and have a straight answer — with a real plan attached — for the parts of the role
+      that are still being learned.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Readiness, at a glance</h2>
+    <div class="grid-readiness">
+      <div class="grid-row"><span class="r-label">Keeping track of changes and proving they were checked
+      properly</span><span class="r-status green">Strong</span></div>
+      <div class="grid-row"><span class="r-label">Automating repetitive security checks so they actually get
+      done</span><span class="r-status green">Strong</span></div>
+      <div class="grid-row"><span class="r-label">Explaining risk in plain language to non-technical
+      people</span><span class="r-status green">Strong</span></div>
+      <div class="grid-row"><span class="r-label">Reviewing whether a design meets its security
+      requirements</span><span class="r-status amber">Partial</span></div>
+      <div class="grid-row"><span class="r-label">Checking the security of parts or systems bought from other
+      companies</span><span class="r-status red">Not yet</span></div>
+      <div class="grid-row"><span class="r-label">Australian defence-specific security rules and
+      standards</span><span class="r-status red">Not yet</span></div>
+      <div class="grid-row"><span class="r-label">Physical security and the security of hardware
+      itself</span><span class="r-status red">Not yet</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="honest-box">
+      <strong>Said plainly, not softened</strong>
+      <p>This background is strongest in software and cloud security — proving rules are followed through
+      automation and documentation. It's weakest in the parts of this role specific to physical hardware,
+      supplier checks, and Australian defence standards. That gap is real and would take deliberate, fast
+      learning in the first few months, not something already in place.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>REV A — Initial issue — 10 Aug 2026</span>
+    <span>zero-day-brief / bae-systems-jorn / one-pager.html</span>
+  </footer>
+
+</div>
+</body>
+</html>

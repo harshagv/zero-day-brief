@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAE Systems — Product Security (Cyber) Engineer, JORN — Entry Plan — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@500;600;700;800&family=Space+Mono:wght@400;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e8;
+    --panel:#fbf9f3;
+    --ink:#1b2027;
+    --ink-soft:#4c5560;
+    --ink-faint:#8b8577;
+    --line:#d3cdb9;
+    --line-strong:#a89f88;
+    --amber:#a85a0a;
+    --amber-bg:#f4e4cd;
+    --amber-line:#d9ad74;
+    --slate:#35566b;
+    --slate-bg:#e2ebf0;
+    --slate-line:#9db4c2;
+    --verified:#2f6b4f;
+    --verified-bg:#e1ece5;
+    --verified-line:#9dc2ab;
+    --gap:#9c3b30;
+    --gap-bg:#f3e2df;
+    --gap-line:#d8a89f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Public Sans',sans-serif;
+    line-height:1.6;
+    font-size:15px;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+    background-size:24px 24px;
+  }
+  .mono{font-family:'Space Mono',monospace;}
+  .wrap{max-width:980px;margin:0 auto;padding:34px 28px 90px;}
+
+  /* register / crop marks — the document's signature element */
+  .panel{position:relative;}
+  .reg-mark{position:absolute;width:9px;height:9px;pointer-events:none;}
+  .reg-mark.tl{top:-1px;left:-1px;border-top:1.5px solid var(--line-strong);border-left:1.5px solid var(--line-strong);}
+  .reg-mark.tr{top:-1px;right:-1px;border-top:1.5px solid var(--line-strong);border-right:1.5px solid var(--line-strong);}
+  .reg-mark.bl{bottom:-1px;left:-1px;border-bottom:1.5px solid var(--line-strong);border-left:1.5px solid var(--line-strong);}
+  .reg-mark.br{bottom:-1px;right:-1px;border-bottom:1.5px solid var(--line-strong);border-right:1.5px solid var(--line-strong);}
+
+  /* TITLE BLOCK */
+  .titleblock{
+    background:var(--panel);border:1px solid var(--line-strong);margin-bottom:22px;
+  }
+  .tb-top{
+    display:grid;grid-template-columns:1fr auto;gap:20px;
+    padding:22px 26px;border-bottom:1px solid var(--line);
+  }
+  .tb-eyebrow{
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:10px;
+  }
+  h1{
+    font-family:'Big Shoulders',sans-serif;font-weight:700;font-size:32px;letter-spacing:0.01em;
+    text-transform:uppercase;color:var(--ink);line-height:1.08;margin-bottom:8px;
+  }
+  .tb-sub{color:var(--ink-soft);font-size:14px;max-width:560px;}
+  .tb-fields{
+    font-family:'Space Mono',monospace;font-size:11px;color:var(--ink-soft);
+    display:flex;flex-direction:column;gap:6px;min-width:190px;text-align:right;
+  }
+  .tb-fields .f-label{color:var(--ink-faint);}
+  .tb-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .tb-strip div{
+    padding:11px 18px;border-right:1px solid var(--line);font-family:'Space Mono',monospace;font-size:10.5px;
+  }
+  .tb-strip div:last-child{border-right:none;}
+  .tb-strip .f-label{color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:3px;font-size:9.5px;}
+  .tb-strip .f-val{color:var(--ink);}
+  .tb-disclaimer{
+    padding:10px 26px;border-top:1px solid var(--line);font-family:'Space Mono',monospace;
+    font-size:10.5px;color:var(--ink-faint);background:#f0ede2;
+  }
+
+  /* HOLD POINT */
+  .holdpoint{
+    background:var(--gap-bg);border:1px solid var(--gap-line);margin-bottom:30px;
+    display:flex;align-items:stretch;
+  }
+  .hp-tag{
+    background:var(--gap);color:#fff;font-family:'Space Mono',monospace;font-weight:700;font-size:12px;
+    letter-spacing:0.08em;padding:16px 18px;writing-mode:vertical-rl;text-orientation:mixed;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .hp-body{padding:16px 22px;}
+  .hp-body strong{color:var(--gap);display:block;font-size:13.5px;margin-bottom:4px;}
+  .hp-body p{color:#4a2622;font-size:13.5px;line-height:1.55;}
+
+  section{margin-bottom:46px;}
+  .sec-num{
+    font-family:'Space Mono',monospace;font-size:10.5px;color:var(--slate);
+    letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;
+  }
+  h2{font-family:'Big Shoulders',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;
+    letter-spacing:0.01em;margin-bottom:16px;color:var(--ink);}
+  h3{font-family:'Big Shoulders',sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;
+    letter-spacing:0.01em;margin-bottom:8px;color:var(--ink);}
+  p{color:var(--ink-soft);font-size:14px;margin-bottom:10px;}
+
+  .thesis-card{
+    background:var(--panel);border:1px solid var(--line-strong);border-left:4px solid var(--slate);
+    padding:22px 26px;
+  }
+  .thesis-card p{color:var(--ink);font-size:15px;line-height:1.65;margin:0;}
+  .thesis-card .jd-ref{
+    margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;color:var(--slate);
+  }
+
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line-strong);}
+  th{
+    font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;
+    text-align:left;padding:10px 13px;background:var(--slate-bg);color:var(--slate);
+    border-bottom:1px solid var(--line-strong);
+  }
+  td{padding:11px 13px;font-size:12.8px;color:var(--ink-soft);border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .tag{
+    display:inline-block;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+    padding:2px 7px;white-space:nowrap;letter-spacing:0.02em;
+  }
+  .tag.verified{background:var(--verified-bg);color:var(--verified);border:1px solid var(--verified-line);}
+  .tag.partial{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-line);}
+  .tag.gap{background:var(--gap-bg);color:var(--gap);border:1px solid var(--gap-line);}
+
+  .phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .phase{background:var(--panel);border:1px solid var(--line-strong);padding:18px 20px;}
+  .phase-num{
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--slate);letter-spacing:0.08em;
+    margin-bottom:6px;text-transform:uppercase;
+  }
+  .phase h3{color:var(--ink);margin-bottom:3px;}
+  .phase .phase-sub{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--ink-faint);margin-bottom:12px;}
+  .phase ul{padding-left:16px;}
+  .phase li{font-size:12.8px;color:var(--ink-soft);margin-bottom:9px;line-height:1.5;}
+
+  .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .ev-card{background:var(--panel);border:1px solid var(--line-strong);padding:18px 20px;}
+  .ev-card .ev-num{font-family:'Big Shoulders',sans-serif;font-weight:800;font-size:30px;color:var(--verified);margin-bottom:4px;line-height:1;}
+  .ev-card .ev-what{font-size:12.3px;color:var(--ink-soft);margin-bottom:10px;}
+  .ev-card .ev-where{
+    font-family:'Space Mono',monospace;font-size:10px;color:var(--ink-faint);
+    border-top:1px solid var(--line);padding-top:8px;
+  }
+
+  .cov-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .cov-col{background:var(--panel);border:1px solid var(--line-strong);padding:18px 20px;}
+  .cov-col.deep-col{border-top:3px solid var(--verified);}
+  .cov-col.ramp-col{border-top:3px solid var(--gap);}
+  .cov-col ul{padding-left:0;list-style:none;margin-top:10px;}
+  .cov-col li{font-size:12.8px;color:var(--ink-soft);padding:9px 0;border-bottom:1px solid var(--line);line-height:1.5;}
+  .cov-col li:last-child{border-bottom:none;}
+  .cov-col li strong{color:var(--ink);display:block;font-size:13px;margin-bottom:2px;}
+
+  .q-list{display:flex;flex-direction:column;gap:14px;}
+  .q-item{background:var(--panel);border:1px solid var(--line-strong);padding:16px 20px;display:flex;gap:16px;}
+  .q-item .q-num{
+    font-family:'Space Mono',monospace;font-weight:700;color:var(--slate);font-size:15px;flex-shrink:0;
+  }
+  .q-item .q-body p{margin-bottom:6px;color:var(--ink);}
+  .q-item .q-ref{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--ink-faint);}
+
+  footer{
+    border-top:1px solid var(--line-strong);padding-top:18px;margin-top:56px;
+    font-family:'Space Mono',monospace;font-size:10.5px;color:var(--ink-faint);
+  }
+  .rev-log{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+
+  @media (max-width:860px){
+    .tb-top{grid-template-columns:1fr;}
+    .tb-fields{text-align:left;}
+    .tb-strip{grid-template-columns:1fr 1fr;}
+    .tb-strip div:nth-child(2){border-right:none;}
+    .phase-grid,.ev-grid,.cov-grid{grid-template-columns:1fr;}
+    .holdpoint{flex-direction:column;}
+    .hp-tag{writing-mode:horizontal-tb;}
+    .wrap{padding:24px 16px 70px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="titleblock panel">
+    <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+    <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+    <div class="tb-top">
+      <div>
+        <div class="tb-eyebrow">zero-day-brief / bae-systems-jorn / entry-plan</div>
+        <h1>Product security entry plan</h1>
+        <p class="tb-sub">A first 30/60/90 approach to the Product Security (Cyber) Engineer role, built from the
+        job description's own language and scored against evidence that holds up two questions deep — not a
+        cover letter.</p>
+      </div>
+      <div class="tb-fields">
+        <div><span class="f-label">Prepared for —</span> BAE Systems, JORN</div>
+        <div><span class="f-label">Prepared by —</span> Harsha G V</div>
+        <div><span class="f-label">Contact —</span> harsha.gv29@gmail.com</div>
+        <div><span class="f-label">Contact —</span> +61 402 697 098</div>
+      </div>
+    </div>
+    <div class="tb-strip">
+      <div><span class="f-label">Doc No</span><span class="f-val">ZDB-BAE-JORN-EP-001</span></div>
+      <div><span class="f-label">Rev</span><span class="f-val">A</span></div>
+      <div><span class="f-label">Date</span><span class="f-val">10 Aug 2026</span></div>
+      <div><span class="f-label">Status</span><span class="f-val">For review — submitted with application</span></div>
+    </div>
+    <div class="tb-disclaimer">
+      UNCLASSIFIED. Prepared from publicly advertised job description content only. Contains no BAE Systems
+      proprietary, ITAR-controlled, or JORN system-specific technical information.
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-num">01 — Day-one thesis</div>
+    <h2>Where this starts</h2>
+    <div class="thesis-card panel">
+      <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+      <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+      <p>Before offering technical advice on any specific design, the first task is mapping where security
+      requirements currently live — across specifications, supplier deliverables, and review records — into a
+      single requirement-to-control-to-evidence trace feeding the safety case. That discipline is already
+      practiced in adjacent regulated environments: SOC&nbsp;2 Type&nbsp;II control traceability, CIS/NIST
+      compliance mapping. Applying it here means learning this program's own structure and standards first,
+      not assuming a cloud-security traceability model transfers wholesale onto a defence hardware/software
+      program.</p>
+      <div class="jd-ref">↳ re: "Maintain design integrity and associated documentation in line with relevant
+      configuration management, change management, and traceability protocols"</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-num">02 — Requirement → evidence</div>
+    <h2>JD line, closest proof, tagged honestly</h2>
+    <table>
+      <tr><th style="width:24%">JD requirement</th><th style="width:12%">Status</th><th>Evidence</th></tr>
+      <tr>
+        <td>Configuration / change management &amp; traceability</td>
+        <td><span class="tag verified">Verified</span></td>
+        <td>Terraform IaC validation gates enforced as configuration/change control, blocking <strong>340</strong>
+        high/critical vulnerabilities pre-production (Mox Bank). The discipline transfers directly; the artifact
+        type — cloud infrastructure-as-code — differs from a hardware/mechanical configuration item.</td>
+      </tr>
+      <tr>
+        <td>Stakeholder liaison / requirements support</td>
+        <td><span class="tag verified">Verified</span></td>
+        <td>Security Champions program translating complex security risk into engineering priorities for
+        <strong>15+</strong> engineers (OSL Group) — direct, quantified stakeholder-liaison evidence.</td>
+      </tr>
+      <tr>
+        <td>Design assurance / documentation feeding a safety case</td>
+        <td><span class="tag partial">Partial</span></td>
+        <td>Sustained <strong>zero CRITICAL/HIGH</strong> findings across two consecutive SOC&nbsp;2 Type&nbsp;II
+        audit cycles (OSL Group) — a comparable regulatory assurance discipline. No direct safety-case authorship
+        experience.</td>
+      </tr>
+      <tr>
+        <td>Technical advice to design teams</td>
+        <td><span class="tag partial">Partial</span></td>
+        <td>Technical security advisory delivered across DevSecOps and cloud engagements. Advisory experience is
+        software/cloud-scoped, not hardware or mechanical design review.</td>
+      </tr>
+      <tr>
+        <td>Peer review of product security documentation</td>
+        <td><span class="tag partial">Partial</span></td>
+        <td>Authored and reviewed security reference architectures aligned to NIST CSF for development teams
+        (Modern Group). No experience peer-reviewing hardware/mechanical product security documentation
+        specifically.</td>
+      </tr>
+      <tr>
+        <td>Program status reporting / recovery strategy</td>
+        <td><span class="tag partial">Partial</span></td>
+        <td>Led and architected initiatives across multiple engagements with implied status accountability. No
+        named program-management title or documented recovery-strategy example to point to.</td>
+      </tr>
+      <tr>
+        <td>Procured item / supplier security review</td>
+        <td><span class="tag gap">Gap</span></td>
+        <td>No supplier or vendor security assessment experience evidenced. Closest adjacent work is
+        artifact/dependency scanning (Snyk, JFrog Xray) in a software supply-chain context — not physical
+        component or vendor procurement review.</td>
+      </tr>
+      <tr>
+        <td>Australian/Defence standards — PSPF, DSPF, ISM, RMF, HB167-2006</td>
+        <td><span class="tag gap">Gap</span></td>
+        <td>No exposure on record. Existing standards depth is NIST CSF, OWASP Top 10, CIS Benchmarks, SOC&nbsp;2,
+        PCI-DSS, APRA CPS&nbsp;234 — overlapping only at the general-practice edge (OWASP, CIS).</td>
+      </tr>
+      <tr>
+        <td>CISSP or GSEC, and CISA or CRISC</td>
+        <td><span class="tag gap">Gap</span></td>
+        <td>Not held. Closest credential is ISC² Certified in Cybersecurity (CC) — a foundational-level
+        certification, not a defensible substitute for CISSP-level depth.</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="sec-num">03 — Entry plan</div>
+    <h2>First 90 days</h2>
+    <div class="phase-grid">
+      <div class="phase panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="phase-num">Days 1–30</div>
+        <h3>Learn the trace as it exists</h3>
+        <ul>
+          <li>Get access to existing product security requirement sets, supplier security clauses, and safety
+          case documentation structure; build a single requirement→control→evidence trace for one in-flight
+          work package — learning PSPF/DSPF/ISM/RMF terminology on this program's own terms rather than assuming
+          CIS/NIST fluency carries across.</li>
+          <li>Shadow a supplier security review cycle as an observer. This is the cleanest gap on record, so it
+          gets the earliest and most deliberate exposure, not the latest.</li>
+          <li>Sit in on a peer review cycle of existing product security documentation to learn the program's
+          configuration-management conventions before contributing independently.</li>
+        </ul>
+      </div>
+      <div class="phase panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="phase-num">Days 31–60</div>
+        <h3>Contribute one real trace</h3>
+        <ul>
+          <li>Take ownership of the requirement→control→evidence trace for one component end to end, applying
+          the same "build the tool, not the description of it" discipline evidenced in the IaC automation work
+          at Mox Bank.</li>
+          <li>Participate directly in one supplier security engagement, specifically to close the procurement
+          gap flagged in Section 02 rather than leave it a standing assumption.</li>
+          <li>Contribute to one documentation peer review cycle as a reviewer, not just an observer.</li>
+        </ul>
+      </div>
+      <div class="phase panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="phase-num">Days 61–90</div>
+        <h3>Own a trace domain</h3>
+        <ul>
+          <li>Take standing responsibility for configuration/change-management traceability on one product
+          area, including its program status reporting.</li>
+          <li>Have a documented, honest position on PSPF/DSPF/ISM/RMF fluency and supplier-review depth, with a
+          concrete study or certification plan attached (e.g. a defined path toward CISSP) — not a vague
+          acknowledgment of the gap.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-num">04 — Evidence</div>
+    <h2>Real numbers, not rounded</h2>
+    <div class="ev-grid">
+      <div class="ev-card panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="ev-num">0</div>
+        <div class="ev-what">CRITICAL/HIGH audit findings across two consecutive SOC&nbsp;2 Type&nbsp;II
+        certification cycles — sustained assurance documentation, not a one-off clean pass.</div>
+        <div class="ev-where">OSL Group — Senior Manager, Cybersecurity</div>
+      </div>
+      <div class="ev-card panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="ev-num">38%</div>
+        <div class="ev-what">Improvement in CIS/NIST policy compliance from CSPM automation and remediation
+        playbooks — evidence of turning a standard into a verified, traceable control.</div>
+        <div class="ev-where">OSL Group — Senior Manager, Cybersecurity</div>
+      </div>
+      <div class="ev-card panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="ev-num">340</div>
+        <div class="ev-what">High/critical vulnerabilities blocked pre-production by Terraform IaC validation
+        gates — configuration and change control enforced as code, not policy on paper.</div>
+        <div class="ev-where">Mox Bank — Senior Cloud Security Engineer</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-num">05 — Domain coverage</div>
+    <h2>Where this is deep, where it's ramping</h2>
+    <div class="cov-grid">
+      <div class="cov-col deep-col panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <h3>Deep — verified</h3>
+        <ul>
+          <li><strong>Regulatory audit &amp; assurance documentation</strong>Two consecutive SOC&nbsp;2 Type&nbsp;II
+          cycles with zero CRITICAL/HIGH findings.</li>
+          <li><strong>Configuration/change management as code</strong>IaC validation gates blocking vulnerabilities
+          pre-production.</li>
+          <li><strong>Compliance-to-control traceability</strong>Standards translated into automated, measurable
+          controls (CIS/NIST via CSPM).</li>
+          <li><strong>Technical stakeholder translation</strong>Security Champions program across 15+ engineers.</li>
+        </ul>
+      </div>
+      <div class="cov-col ramp-col panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <h3>Ramping — honestly</h3>
+        <ul>
+          <li><strong>Australian/Defence standards</strong>PSPF, DSPF, ISM, RMF, HB167-2006 — zero exposure on
+          record.</li>
+          <li><strong>Supplier / procured-item security review</strong>No evidence at all — the cleanest gap on
+          this JD.</li>
+          <li><strong>Physical &amp; emissions security, hardware/mechanical systems</strong>Entirely outside a
+          cloud/software career to date.</li>
+          <li><strong>CISSP / GSEC / CISA / CRISC</strong>Not held; ISC² CC is foundational-level only.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-num">06 — Questions</div>
+    <h2>Traceable to specific JD lines</h2>
+    <div class="q-list">
+      <div class="q-item panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="q-num">1</div>
+        <div class="q-body">
+          <p>Is the peer review process gated against a specific standard — RMF, ISM, or a BAE-internal
+          assurance framework — and where does someone entering without prior defence program experience get
+          up to speed on it fastest?</p>
+          <div class="q-ref">— re: "Perform Peer reviews of product security related documentation"</div>
+        </div>
+      </div>
+      <div class="q-item panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="q-num">2</div>
+        <div class="q-body">
+          <p>Is supplier/procured-item security engagement primarily document- and questionnaire-based vendor
+          assurance, or does it extend to technical evaluation of components?</p>
+          <div class="q-ref">— re: "Ensure that product security characteristics of all procured items are
+          understood and acceptable. Engage with suppliers as required."</div>
+        </div>
+      </div>
+      <div class="q-item panel">
+        <span class="reg-mark tl"></span><span class="reg-mark tr"></span>
+        <span class="reg-mark bl"></span><span class="reg-mark br"></span>
+        <div class="q-num">3</div>
+        <div class="q-body">
+          <p>Where "good security industry practice" (OWASP, CIS, NIST-style) and the defence-specific
+          frameworks (PSPF, DSPF, ISM) point in different directions, which takes precedence — and how is that
+          resolved in practice on this program?</p>
+          <div class="q-ref">— re: "applies good security industry practices... (eg. PSPF, DSPF, ISM, ISO
+          270001/2, NIST Special Publications, HB167-20006, RMF, OWASP, CIS)"</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rev-log">
+      <span>REV A — Initial issue — 10 Aug 2026</span>
+      <span>zero-day-brief / bae-systems-jorn / entry-plan.html</span>
+    </div>
+    <div>Campaign #2 (live interview walkthrough) — to be issued separately.</div>
+  </footer>
+
+</div>
+</body>
+</html>

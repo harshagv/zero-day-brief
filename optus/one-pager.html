@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optus — Reliability Plan in Plain Language — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f5f3;
+    --paper:#ffffff;
+    --ink:#1c2b28;
+    --ink-soft:#4d615c;
+    --ink-faint:#8aa19b;
+    --line:#d7e2de;
+    --teal:#2d6e63;
+    --teal-bg:#e2f0ec;
+    --green:#2f7a4d;
+    --green-bg:#e5f3ea;
+    --amber:#a8720d;
+    --amber-bg:#faf1e0;
+    --red:#a13e3e;
+    --red-bg:#f8eaea;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Source Sans 3',sans-serif;
+    line-height:1.65;
+  }
+  .serif{font-family:'Lora',serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:56px 28px 90px;}
+
+  .eyebrow{
+    font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);
+    font-weight:600;margin-bottom:14px;
+  }
+  h1{
+    font-family:'Lora',serif;font-weight:600;font-size:32px;letter-spacing:-0.01em;
+    margin-bottom:14px;color:var(--ink);
+  }
+  .subhead{color:var(--ink-soft);font-size:16px;max-width:600px;margin-bottom:10px;}
+  .who-for{
+    font-size:13px;color:var(--ink-faint);margin-bottom:40px;font-style:italic;
+  }
+
+  .pull{
+    background:var(--paper);border-radius:10px;border:1px solid var(--line);
+    padding:30px 32px;margin-bottom:40px;position:relative;
+  }
+  .pull::before{
+    content:"“";font-family:'Lora',serif;font-size:64px;color:var(--teal-bg);
+    position:absolute;top:6px;left:20px;line-height:1;
+  }
+  .pull p{
+    font-family:'Lora',serif;font-size:19px;line-height:1.5;color:var(--ink);
+    position:relative;z-index:1;padding-left:6px;
+  }
+
+  section{margin-bottom:44px;}
+  h2{
+    font-family:'Lora',serif;font-weight:600;font-size:20px;margin-bottom:14px;color:var(--ink);
+  }
+  p{color:var(--ink-soft);font-size:15px;margin-bottom:12px;}
+  p:last-child{margin-bottom:0;}
+
+  .analogy{
+    background:var(--teal-bg);border-radius:8px;padding:20px 24px;border-left:4px solid var(--teal);
+  }
+  .analogy p{color:var(--ink);}
+
+  table{width:100%;border-collapse:collapse;background:var(--paper);border-radius:8px;overflow:hidden;border:1px solid var(--line);}
+  th{
+    text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:var(--teal);
+    background:var(--teal-bg);padding:10px 16px;font-weight:600;
+  }
+  td{padding:13px 16px;font-size:14px;color:var(--ink-soft);border-top:1px solid var(--line);vertical-align:top;}
+  td.term{color:var(--ink);font-weight:600;font-family:'Lora',serif;font-size:14.5px;white-space:nowrap;}
+
+  .grid{display:flex;flex-direction:column;gap:10px;}
+  .grid-row{
+    display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);
+    border-radius:8px;padding:14px 18px;
+  }
+  .dot{width:13px;height:13px;border-radius:50%;flex-shrink:0;}
+  .dot.green{background:var(--green);}
+  .dot.amber{background:var(--amber);}
+  .dot.red{background:var(--red);}
+  .grid-row .label{font-weight:600;color:var(--ink);font-size:14.5px;flex:1;}
+  .grid-row .status{
+    font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.03em;
+    padding:3px 10px;border-radius:12px;
+  }
+  .status.green{background:var(--green-bg);color:var(--green);}
+  .status.amber{background:var(--amber-bg);color:var(--amber);}
+  .status.red{background:var(--red-bg);color:var(--red);}
+
+  .qlist{display:flex;flex-direction:column;gap:12px;}
+  .qitem{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 20px;}
+  .qitem p{color:var(--ink);font-size:14.5px;}
+
+  footer{
+    border-top:1px solid var(--line);padding-top:18px;margin-top:50px;
+    font-size:12px;color:var(--ink-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  @media (max-width:600px){
+    .wrap{padding:40px 18px 70px;}
+    h1{font-size:26px;}
+    .pull p{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Plain-language briefing</div>
+  <h1>Keeping the security systems themselves reliable</h1>
+  <p class="subhead">A non-technical translation of the entry plan for the Senior Security Platform
+  Engineer – SRE role, for anyone reading it without a security or engineering background.</p>
+  <p class="who-for">For: a non-technical stakeholder deciding whether this plan makes sense · Companion to
+  entry-plan.html</p>
+
+  <div class="pull">
+    <p>This role isn't about catching hackers directly. It's about making sure the systems that catch
+    hackers actually keep working — and keep working fast enough to matter.</p>
+  </div>
+
+  <section>
+    <h2>The plain-English version</h2>
+    <p>Optus runs several specialist security systems: one that watches for suspicious activity across the
+    whole company (like a security camera network), one that protects individual laptops and servers (like
+    a lock on every door), and one that scans for known weaknesses before someone else finds them first.</p>
+    <p>Those systems only help if they're actually running properly, all the time. A camera that's
+    technically switched on but hasn't recorded anything in six hours is worse than no camera, because
+    everyone assumes it's working. This role exists to make sure that never happens quietly — that if a
+    security system starts to fail, the team knows within minutes, not after something's already gone
+    wrong.</p>
+  </section>
+
+  <section>
+    <div class="analogy">
+      <p>Think of it like a hospital's alarm systems team, not the doctors. The doctors respond to patients.
+      This role makes sure every alarm, monitor, and alert in the building is actually working, calibrated
+      correctly, and reaches the right person fast enough — so the doctors' response time isn't quietly
+      degraded by a system nobody was watching.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Jargon, translated</h2>
+    <table>
+      <tr><th style="width:26%">Term</th><th>In plain English</th></tr>
+      <tr><td class="term">SLO</td><td>A promise about how reliable a system should be — "this security camera should be recording 99.5% of the time," made specific enough to measure.</td></tr>
+      <tr><td class="term">Error budget</td><td>The small amount of allowed failure built into that promise — not zero, because chasing perfection everywhere is wasteful, but a clear, agreed limit.</td></tr>
+      <tr><td class="term">Burn rate</td><td>How fast that allowed failure is being used up right now — a slow, steady leak versus a sudden burst, which need different responses.</td></tr>
+      <tr><td class="term">SIEM</td><td>The system that collects and cross-references security signals from across the whole company, looking for patterns a single alert would miss.</td></tr>
+      <tr><td class="term">EDR</td><td>Software running on individual laptops and servers that watches for and can stop malicious activity directly on the device.</td></tr>
+      <tr><td class="term">Observability-as-code</td><td>Building the monitoring and alerting itself the same disciplined way software is built — tested, version-controlled, repeatable — instead of clicking through settings by hand.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Readiness, in plain terms</h2>
+    <div class="grid">
+      <div class="grid-row"><span class="dot green"></span><span class="label">Building automation and repeatable tooling</span><span class="status green">Ready now</span></div>
+      <div class="grid-row"><span class="dot green"></span><span class="label">Reducing manual, repetitive alert work</span><span class="status green">Ready now</span></div>
+      <div class="grid-row"><span class="dot amber"></span><span class="label">Using the monitoring tools themselves</span><span class="status amber">Familiar, not yet deep</span></div>
+      <div class="grid-row"><span class="dot amber"></span><span class="label">Day-to-day running of the security systems in question</span><span class="status amber">Familiar, not yet deep</span></div>
+      <div class="grid-row"><span class="dot red"></span><span class="label">Formally defining reliability promises (SLOs) for a system</span><span class="status red">Would need to build this</span></div>
+      <div class="grid-row"><span class="dot red"></span><span class="label">Leading the response during a major outage</span><span class="status red">Would need to build this</span></div>
+      <div class="grid-row"><span class="dot red"></span><span class="label">Forecasting future capacity needs</span><span class="status red">Would need to build this</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What's honestly still missing</h2>
+    <p>Eleven years of security engineering experience doesn't automatically transfer into this specific
+    discipline. The parts about building automation and cutting manual work are strong and provable. The
+    parts about formally defining reliability targets, leading a major incident, and forecasting capacity
+    are not — those would be genuinely new skills being built on the job, not skills quietly assumed to
+    already be there.</p>
+  </section>
+
+  <section>
+    <h2>Three questions worth asking before day one</h2>
+    <div class="qlist">
+      <div class="qitem"><p>Do these reliability promises already exist for the security systems, or would
+      someone be creating the first ones from scratch?</p></div>
+      <div class="qitem"><p>When one of these systems has a major failure, who's in charge of coordinating
+      the response — this role, or a separate team?</p></div>
+      <div class="qitem"><p>Is there already a way to see how close these systems are to running out of
+      room to grow, or would that need to be built too?</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>zero-day-brief / optus / one-pager.html</span>
+    <span>Companion to entry-plan.html and reliability-walkthrough.html</span>
+  </footer>
+</div>
+</body>
+</html>

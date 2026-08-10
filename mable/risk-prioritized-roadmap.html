@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mable — Security Engineer — Risk-Prioritized Security Roadmap — Harsha G V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f2e9;
+      --paper: #ffffff;
+      --ink: #1c231e;
+      --ink-soft: #565f56;
+      --ink-faint: #8b9186;
+      --rule: #dcd6c4;
+      --accent: #0f5c52;
+      --accent-bg: #e3ede9;
+      --verified: #1c6e4a;
+      --verified-bg: #e5f1e6;
+      --verified-line: #a7cdb1;
+      --partial: #8f6412;
+      --partial-bg: #f6ecd6;
+      --partial-line: #d9bd83;
+      --gap: #a13a3a;
+      --gap-bg: #f7e6e3;
+      --gap-line: #dcabab;
+
+      --critical: #8C2F1B;
+      --critical-bg: #F3E3DB;
+      --critical-line: #D9AE9A;
+
+      --high: #96690D;
+      --high-bg: #F5EAD2;
+      --high-line: #DFC28A;
+
+      --medium: #2E5C56;
+      --medium-bg: #E1EBE8;
+      --medium-line: #A9C7C1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.55;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 52px 28px 100px;
+    }
+
+    header.hero {
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 29px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    .subhead {
+      color: var(--ink-soft);
+      font-size: 15px;
+      max-width: 660px;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--ink-soft);
+    }
+
+    /* Risk summary strip — signature element, replaces sidebar rail */
+    .risk-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-bottom: 48px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .risk-cell {
+      background: var(--paper);
+      padding: 18px 20px;
+    }
+
+    .risk-cell .n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .risk-cell.v .n {
+      color: var(--verified);
+    }
+
+    .risk-cell.p .n {
+      color: var(--partial);
+    }
+
+    .risk-cell.g .n {
+      color: var(--gap);
+    }
+
+    .risk-cell .lbl {
+      font-size: 12px;
+      color: var(--ink-soft);
+      margin-top: 4px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+
+    .sec-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 14.5px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    p {
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      margin-bottom: 10px;
+    }
+
+    .thesis-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--accent);
+      border-radius: 2px;
+      padding: 22px 26px;
+    }
+
+    .thesis-card p {
+      color: var(--ink);
+      font-size: 15.5px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .thesis-card .jd-ref {
+      margin-top: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+    }
+
+    th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--accent-bg);
+      color: var(--accent);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    td {
+      padding: 12px 14px;
+      font-size: 13.3px;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.3px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .tag.verified {
+      background: var(--verified-bg);
+      color: var(--verified);
+      border: 1px solid var(--verified-line);
+    }
+
+    .tag.partial {
+      background: var(--partial-bg);
+      color: var(--partial);
+      border: 1px solid var(--partial-line);
+    }
+
+    .tag.gap {
+      background: var(--gap-bg);
+      color: var(--gap);
+      border: 1px solid var(--gap-line);
+    }
+
+    /* Risk bands — roadmap */
+    .band {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .band.b1 {
+      border-left: 5px solid var(--gap);
+    }
+
+    .band.b2 {
+      border-left: 5px solid var(--partial);
+    }
+
+    .band.b3 {
+      border-left: 5px solid var(--verified);
+    }
+
+    .band-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .band-head h3 {
+      margin: 0;
+    }
+
+    .band-window {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+    }
+
+    .band ul {
+      padding-left: 18px;
+    }
+
+    .band li {
+      font-size: 13.3px;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .ev-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .ev-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 18px 20px;
+      border-radius: 3px;
+    }
+
+    .ev-card .ev-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--verified);
+      margin-bottom: 4px;
+    }
+
+    .ev-card .ev-what {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-bottom: 10px;
+    }
+
+    .ev-card .ev-where {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+      border-top: 1px solid var(--rule);
+      padding-top: 8px;
+    }
+
+    .flag-banner {
+      background: var(--gap-bg);
+      border: 1px solid var(--gap-line);
+      border-left: 4px solid var(--gap);
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      color: #5c2323;
+      border-radius: 2px;
+    }
+
+    .flag-banner strong {
+      color: var(--gap);
+    }
+
+    .cov-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cov-col {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 18px 20px;
+      border-radius: 3px;
+    }
+
+    .cov-col.verified-col {
+      border-top: 3px solid var(--verified);
+    }
+
+    .cov-col.gap-col {
+      border-top: 3px solid var(--gap);
+    }
+
+    .cov-col ul {
+      padding-left: 0;
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .cov-col li {
+      font-size: 13px;
+      color: var(--ink-soft);
+      padding: 9px 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.45;
+    }
+
+    .cov-col li:last-child {
+      border-bottom: none;
+    }
+
+    .cov-col li strong {
+      color: var(--ink);
+      display: block;
+      font-size: 13.5px;
+      margin-bottom: 2px;
+    }
+
+    .q-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .q-item {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 16px 20px;
+      display: flex;
+      gap: 16px;
+      border-radius: 3px;
+    }
+
+    .q-item .q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .q-item .q-body p {
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .q-item .q-ref {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 20px;
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ROADMAP */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .phase {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 20px 22px;
+    }
+
+    .phase-priority {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .phase.p-critical .phase-priority {
+      background: var(--critical-bg);
+      color: var(--critical);
+    }
+
+    .phase.p-high .phase-priority {
+      background: var(--high-bg);
+      color: var(--high);
+    }
+
+    .phase.p-medium .phase-priority {
+      background: var(--medium-bg);
+      color: var(--medium);
+    }
+
+    .phase h3 {
+      margin-bottom: 2px;
+    }
+
+    .phase .phase-days {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
+    }
+
+    .phase ul {
+      padding-left: 18px;
+    }
+
+    .phase li {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-bottom: 9px;
+      line-height: 1.5;
+    }
+
+    @media (max-width:760px) {
+      .risk-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .ev-grid,
+      .cov-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="eyebrow">zero-day-brief / mable / risk-prioritized-roadmap</div>
+      <h1>Risk-prioritized security roadmap — Security Engineer</h1>
+      <p class="subhead">Not a cover letter. A risk-ranked account of what this role would take on first, built from
+        the JD's own accountabilities and scored against evidence that would hold up two questions deep in an interview
+        —
+        not the version that reads best on a first pass.</p>
+      <div class="meta-row">
+        <span>Harsha G V</span>
+        <span>harsha.gv29@gmail.com</span>
+        <span>+61 402 697 098</span>
+        <span>au.linkedin.com/in/harshagv</span>
+      </div>
+    </header>
+
+    <div class="risk-strip">
+      <div class="risk-cell v">
+        <div class="n">10</div>
+        <div class="lbl">Requirements verified with real, mechanism-level evidence</div>
+      </div>
+      <div class="risk-cell p">
+        <div class="n">3</div>
+        <div class="lbl">Requirements partially evidenced — real work, missing depth or a metric</div>
+      </div>
+      <div class="risk-cell g">
+        <div class="n">0</div>
+        <div class="lbl">Requirements with no current evidence</div>
+      </div>
+    </div>
+
+    <section>
+      <div class="sec-num">01 — Day-one thesis</div>
+      <h2>The first artifact this role needs</h2>
+      <div class="thesis-card">
+        <p>Before any new control gets designed, the highest-value first move is a risk-ranked inventory of what's
+          currently unowned across Mable's platform and infrastructure — specifically which systems touch disability
+          and aged-care personal data, which of those lack a named control owner today, and where the
+          highest-consequence
+          exposure actually sits. That inventory is what turns "design controls, lead vulnerability assessment, define
+          standards" from three parallel workstreams competing for the same engineering attention into a single,
+          risk-ordered backlog everyone can see.</p>
+        <div class="jd-ref">↳ re: "Lead vulnerability assessments and coordinate remediation efforts across
+          engineering teams, prioritising based on risk and business impact"</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">02 — Requirement → evidence</div>
+      <h2>JD accountability, closest proof, tagged honestly</h2>
+      <table>
+        <tr>
+          <th style="width:26%">JD requirement</th>
+          <th style="width:13%">Status</th>
+          <th>Evidence</th>
+        </tr>
+        <tr>
+          <td>Vulnerability assessment &amp; risk-prioritized remediation coordination</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — blocked <strong>340</strong> high/critical vulnerabilities pre-production by enforcing Pod
+            Security Standards, admission policies, and Trivy/Snyk image scanning. OSL Group — identified, prioritised
+            and resolved <strong>5</strong> critical enterprise risks via continuous architecture review.</td>
+        </tr>
+        <tr>
+          <td>Access controls (IAM / PoLP / RBAC)</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — engineered PoLP-based IAM &amp; RBAC, cross-account access patterns, reducing access-related
+            security incidents by <strong>50%</strong>.</td>
+        </tr>
+        <tr>
+          <td>Security standards &amp; "sensible defaults" for engineering teams</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Modern Group — architected NIST CSF-aligned reference architectures giving teams pre-approved,
+            secure-by-default patterns for API, container, and secrets workstreams. Transgrid (current) — enforced
+            Zero Trust identity controls and mandatory approval gates across Azure DevOps pipelines.</td>
+        </tr>
+        <tr>
+          <td>Building security literacy across engineering squads</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — founded and ran a Security Champions programme, mentoring <strong>15+</strong> engineers on
+            secure SDLC practice.</td>
+        </tr>
+        <tr>
+          <td>Secure cloud architecture, CI/CD pipeline security, secrets management (infra collaboration)</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Transgrid, Modern Group, Mox Bank — SAST/SCA/secrets/IaC scanning embedded directly into pipelines,
+            backed by Key Vault / Secrets Manager / HashiCorp Vault across roles.</td>
+        </tr>
+        <tr>
+          <td>Threat modelling &amp; security design reviews</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — ran continuous security architecture review across cloud-native workloads, identifying and
+            driving remediation of <strong>5</strong> critical enterprise risks by threat-modelling systems against
+            their trust boundaries (data flows, authentication surfaces, privilege-escalation paths) before build. The
+            same lens was applied to designing custody network segmentation for cold-wallet operations and to
+            redesigning the caching trust model after the edge-cache incident below, and was embedded into 15+
+            engineers' feature-design habits through the Security Champions programme rather than held as a
+            standalone review gate. This reframes already-verified achievements through a trust-boundary lens — not
+            a separate body of evidence.</td>
+        </tr>
+        <tr>
+          <td>SIEM / security tooling assessment &amp; adoption</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td>Mox Bank &amp; OSL Group — assessed and integrated the detection toolchain (GuardDuty, Security Hub,
+            Security Lake, Splunk, Wazuh XDR, CrowdStrike, SentinelOne) on coverage overlap and operational cost rather
+            than feature lists, federating access over OIDC to remove standing SIEM credentials. This is selection and
+            architecture-level integration; it doesn't extend into day-to-day administration ownership of the endpoint
+            layer, which is scored separately below.</td>
+        </tr>
+        <tr>
+          <td>Encryption architecture</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>TLS 1.2+/mTLS for service-to-service traffic; envelope encryption via customer-managed keys in AWS
+            KMS / Azure Key Vault with admin/user role separation, automatic rotation, and full decrypt-operation
+            audit logging; secrets migrated to HashiCorp Vault with short-TTL dynamic database credentials and
+            AppRole/workload-identity auth — across Mox Bank, OSL Group, Pactum/Acatus, and the current role.
+            Verified at mechanism level; no rotation-compliance or time-to-revoke metric attached yet.</td>
+        </tr>
+        <tr>
+          <td>Australian compliance: Privacy Act / Essential Eight / ISO 27001</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td><strong>Essential Eight</strong> — University of Sydney, Master of Cybersecurity group project: applied
+            the ACSC Essential Eight framework to design a security programme against a real-world case study (the MGM
+            Resorts ransomware attack, September 2023), with individual ownership of the "Restrict Administrative
+            Privileges" strategy and two strategies shared team-wide within the group. Coursework-level, not
+            employer-practiced.
+            <strong>Privacy Act</strong> — no evidence to point to. <strong>ISO 27001</strong> — no direct
+            evidence; SOC 2 Type II experience (zero critical/high findings across two certification cycles at OSL
+            Group)
+            is an adjacent control-maturity discipline, not the same standard.
+          </td>
+        </tr>
+        <tr>
+          <td>Network segmentation</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — tiered VPC layout (public ingress / private app / isolated data), security groups scoped
+            per tier, default-deny Kubernetes NetworkPolicies per namespace with explicit east-west allow rules, and
+            private endpoints for managed services — closed a class of lateral-movement pentest findings. OSL Group —
+            isolated a crypto exchange's cold-wallet signing path via a dedicated custody VPC with no inbound
+            internet route, deny-by-default security groups, and PAM-gated jump-host-only admin access, so a
+            hot-environment compromise couldn't reach signing.</td>
+        </tr>
+        <tr>
+          <td>Endpoint protection — design &amp; administration</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td>Mox Bank / OSL Group — authored tiered Zscaler URL/web-content filtering with SSL inspection; wrote
+            custom CrowdStrike IOAs mapped to MITRE ATT&amp;CK (credential dumping, LSASS access, custody-specific
+            wallet-file access and clipboard-hijack address-swap detections at OSL Group, suspicious kubectl/cloud-CLI
+            use), tuned against false positives before promoting from detect to prevent. This is detection-engineering
+            and policy-authoring depth — real and interview-defensible, but not OS-level hardening or EDR
+            platform-administration ownership, which has no current evidence behind it.</td>
+        </tr>
+        <tr>
+          <td>Incident response — investigation, containment, post-incident analysis</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — a live confidentiality incident (CDN edge-cache leak exposing one authenticated user's
+            data to another). Declared Sev-1, ran bridge/scribe/comms roles; diagnosed the fault as edge-cached (not
+            an application session bug) via CF-Cache-Status/Age/Cf-Ray inspection; contained same day via global
+            purge and forced re-authentication; eliminated root cause with corrected cache-control headers and
+            removed Edge TTL override; sized the affected-user population from CDN/SIEM logs for regulatory
+            reporting; converted the fix into a Terraform-enforced CI guardrail plus a blameless PIR and a synthetic
+            cross-identity canary. One confirmed full-lifecycle incident — not yet a high-volume running practice,
+            stated plainly.</td>
+        </tr>
+        <tr>
+          <td>External threat landscape monitoring → practical recommendations</td>
+          <td><span class="tag verified">Verified — scope/scale</span></td>
+          <td>OSL Group — consolidated CloudTrail, VPC Flow, and DNS telemetry across <strong>9 AWS accounts</strong>
+            into a single OCSF-normalised Security Lake surface, enriched with <strong>4 commercial threat-intel
+              feeds</strong> via GuardDuty Custom Entity Lists, and routed correlated findings through Security Hub into
+            Splunk over OIDC — extending searchable log history to <strong>12 months</strong> without proportional
+            SIEM licence spend growth. The ingestion/detection pipeline and its scale are real and quantified; a
+            distinct outcome specific to the analyst-recommendation half of this line — an MTTD or precision
+            improvement from the intel enrichment — hasn't been supplied and isn't claimed here.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <div class="sec-num">03 — Risk-prioritized roadmap</div>
+      <h2>Ranked by consequence, not just elapsed time</h2>
+
+      <div class="band b1">
+        <div class="band-head">
+          <h3>Band 1 — Highest current risk</h3><span class="band-window mono">Weeks 1–2</span>
+        </div>
+        <ul>
+          <li>Build the risk-ranked exposure inventory described in the day-one thesis: which platform and
+            infrastructure components handle disability/aged-care personal data, which currently lack a named control
+            owner, ranked by consequence.</li>
+          <li>Get a precise read on where Mable stands against the Australian Privacy Act, ISO 27001, and Essential
+            Eight — this is the largest unverified accountability in this assessment (coursework-only Essential Eight
+            exposure, no Privacy Act or ISO 27001 evidence), so it gets the earliest, most deliberate attention rather
+            than the latest.</li>
+          <li>Baseline current CI/CD pipeline security-gate coverage (SAST/SCA/secrets/IaC) using existing
+            gap-scanning tooling already built for this purpose, to establish a real current-state map rather than
+            assume one.</li>
+        </ul>
+      </div>
+
+      <div class="band b2">
+        <div class="band-head">
+          <h3>Band 2 — Close a real gap, not a plan for one</h3><span class="band-window mono">Days 30–60</span>
+        </div>
+        <ul>
+          <li>Take the single highest-consequence finding from the Band 1 inventory and close it end to end — scope,
+            fix, test, deploy — rather than only documenting it.</li>
+          <li>Formalise threat modelling as a standing SDLC gate (e.g. a STRIDE-based review) for one high-consequence
+            workflow — support-worker/participant identity verification or payment handling — converting a
+            review-practice history into a repeatable, named methodology.</li>
+          <li>Pair on endpoint policy work specifically to build OS-level hardening and EDR platform-administration
+            depth on top of the existing detection-engineering experience (custom CrowdStrike IOAs, Zscaler policy),
+            closing the gap between authoring detections and owning the platform.</li>
+        </ul>
+      </div>
+
+      <div class="band b3">
+        <div class="band-head">
+          <h3>Band 3 — Own a domain independently</h3><span class="band-window mono">Days 60–90</span>
+        </div>
+        <ul>
+          <li>Take standing ownership of vulnerability assessment &amp; remediation coordination — the area with the
+            deepest verified track record — including its cross-team prioritisation cadence.</li>
+          <li>Launch a security-literacy initiative for engineering squads modelled on the OSL Group Security
+            Champions programme, adapted to Mable's squad structure.</li>
+          <li>Produce a gap-map against Essential Eight, ISO 27001, and the Privacy Act using the Essential Eight
+            coursework grounding as a starting scaffold — explicitly framed as a baseline to build from, not existing
+            expertise being claimed.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="sec-num">04 — 90-day plan, risk-ranked</div>
+      <h2>Ordered by the register above, not the calendar</h2>
+      <div class="phase-grid">
+        <div class="phase p-critical">
+          <span class="phase-priority">Critical priority</span>
+          <h3>Days 1–30</h3>
+          <div class="phase-days">Validate the boundary-integrity hypothesis</div>
+          <ul>
+            <li>Get read access to session management, cache/CDN configuration, and authorization
+              boundary code paths — specifically checking for the OSL failure pattern: over-broad edge
+              caching combined with insufficiently scoped cache rules.</li>
+            <li>Replace the outside-in risk register above with one built from real system access; confirm,
+              re-rank, or discard each row.</li>
+            <li>Run an initial risk-prioritised vulnerability assessment across the platform to establish a
+              current baseline.</li>
+          </ul>
+        </div>
+        <div class="phase p-high">
+          <span class="phase-priority">High priority</span>
+          <h3>Days 31–60</h3>
+          <div class="phase-days">Close the endpoint and pipeline gaps</div>
+          <ul>
+            <li>Audit CI/CD pipeline gate coverage; extend SAST/SCA/secrets/IaC scanning to any workflow
+              lacking it, using the pattern already running at Transgrid and Modern Group.</li>
+            <li>Begin a structured endpoint protection review for the contractor-facing surface — moving
+              this row from Partial toward a defensible, admin-level practice.</li>
+            <li>Start formalising threat modelling as a standing SDLC step rather than an ad hoc
+              review.</li>
+          </ul>
+        </div>
+        <div class="phase p-medium">
+          <span class="phase-priority">Medium priority</span>
+          <h3>Days 61–90</h3>
+          <div class="phase-days">Close the compliance and literacy loop</div>
+          <ul>
+            <li>Turn the closed findings and the security standards work into engineering-facing
+              guidelines and sensible defaults.</li>
+            <li>Extend Security-Champions-style engagement into Mable's squads, using the proven OSL
+              pattern.</li>
+            <li>Deliver a documented gap-closure plan against Privacy Act, Essential Eight, and ISO 27001 —
+              a roadmap, not a claim of completion.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">05 — Evidence cards</div>
+      <h2>Real numbers, not rounded</h2>
+      <div class="ev-grid">
+        <div class="ev-card">
+          <div class="ev-num">340</div>
+          <div class="ev-what">High- and critical-severity vulnerabilities blocked pre-production by enforcing Pod
+            Security Standards, admission control policies, and Trivy/Snyk image scanning across Kubernetes
+            environments.</div>
+          <div class="ev-where">Mox Bank — Senior Platform Security Engineer</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-num">50%</div>
+          <div class="ev-what">Fewer access-related security incidents after engineering PoLP-based IAM/RBAC and
+            cross-account access patterns across the cloud environment.</div>
+          <div class="ev-where">Mox Bank — Senior Platform Security Engineer</div>
+        </div>
+        <div class="ev-card">
+          <div class="ev-num">Same-day</div>
+          <div class="ev-what">Containment of a live confidentiality incident (CDN edge-cache leak exposing one
+            authenticated user's data to another), with root cause eliminated and recurrence blocked by a
+            Terraform-enforced CI guardrail.</div>
+          <div class="ev-where">OSL Group — Senior Manager, Cybersecurity</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">06 — Domain coverage</div>
+      <h2>Where the depth is, where it isn't</h2>
+      <div class="flag-banner">
+        <strong>Sector mismatch, named up front.</strong> All prior experience sits in digital banking, cryptocurrency
+        exchange, investment banking, and telecom — not healthtech or the disability/aged-care support sector. Security
+        engineering fundamentals transfer directly; sector-specific context (participant/support-worker data handling,
+        NDIS-adjacent obligations) would need to be built on the job, not assumed.
+      </div>
+      <div class="cov-grid">
+        <div class="cov-col verified-col">
+          <h3>Deep — verified</h3>
+          <ul>
+            <li><strong>Vulnerability assessment &amp; remediation coordination</strong>Blocked 340 high/critical
+              vulnerabilities pre-production; resolved 5 critical enterprise risks via prioritised remediation planning.
+            </li>
+            <li><strong>Access control engineering</strong>PoLP-based IAM/RBAC design with a measured 50% incident
+              reduction.</li>
+            <li><strong>Network segmentation</strong>Cloud-fabric and Kubernetes-namespace level, including a brokered
+              custody-signing isolation design.</li>
+            <li><strong>Encryption &amp; secrets management</strong>TLS/mTLS, envelope encryption, Vault-based dynamic
+              secrets — across four employers, mechanism-level but unquantified.</li>
+            <li><strong>Incident response</strong>One full-lifecycle Sev-1 — declared, contained same day, root-caused,
+              and hardened into a CI guardrail. Real and defensible; not yet a high-volume running practice.</li>
+            <li><strong>Security standards &amp; developer enablement</strong>Reference architectures, secure-by-default
+              patterns, and a Security Champions programme reaching 15+ engineers.</li>
+            <li><strong>Threat modelling &amp; design reviews</strong>Trust-boundary analysis that surfaced 5 critical
+              risks pre-build, applied again to custody segmentation and the edge-cache redesign, and embedded into the
+              Security Champions programme rather than run as a one-off review.</li>
+            <li><strong>External threat-intelligence pipeline</strong>9 AWS accounts consolidated into one
+              OCSF-normalised Security Lake surface, 4 commercial intel feeds integrated, 12-month searchable retention
+              without proportional SIEM cost growth — real and quantified at the pipeline/scope level.</li>
+          </ul>
+        </div>
+        <div class="cov-col gap-col">
+          <h3>Ramping — honestly</h3>
+          <ul>
+            <li><strong>Endpoint hardening / EDR administration</strong>Detection-engineering depth is real (custom
+              CrowdStrike IOAs, Zscaler policy authoring); OS-level hardening and platform-administration ownership
+              isn't.</li>
+            <li><strong>SIEM/tooling adoption ownership</strong>Toolchain selection and architecture-level
+              integration is real; leading a formal SIEM evaluation or replacement decision as sole owner isn't yet
+              evidenced.</li>
+            <li><strong>Analyst-facing threat recommendations</strong>The ingestion/detection pipeline itself is
+              verified at real scale; translating that signal into business-facing recommendations, plus a quantified
+              MTTD or precision outcome, aren't yet evidenced.</li>
+            <li><strong>AU compliance frameworks</strong>Essential Eight has real coursework grounding, with the
+              individually-owned strategy now identified (Restrict Administrative Privileges); Privacy Act and ISO
+              27001 currently have none. SOC 2 experience is adjacent, not equivalent.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-num">07 — Questions</div>
+      <h2>Traceable to specific JD lines</h2>
+      <div class="q-list">
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-body">
+            <p>Is there an existing incident-response runbook and on-call rotation this role would join immediately,
+              or is part of the scope building that practice from scratch?</p>
+            <div class="q-ref">— re: "support incident response including investigation, containment, and post-incident
+              analysis"</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-body">
+            <p>What does the current SIEM and security-tooling stack look like, and does "assessment and adoption"
+              mean evaluating replacements or filling coverage gaps in what's already in place?</p>
+            <div class="q-ref">— re: "Contribute to the assessment and adoption of security tooling — including SIEM,
+              vulnerability scanning, secrets management, and intrusion detection"</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-body">
+            <p>Is there an existing compliance programme or roadmap against ISO 27001 and Essential Eight already
+              under way, or would establishing that baseline be part of this role's early scope?</p>
+            <div class="q-ref">— re: "Support compliance and risk management obligations relevant to Mable's operating
+              environment (e.g. Australian Privacy Act, ISO 27001 alignment, Essential Eight)"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>zero-day-brief / mable / risk-prioritized-roadmap.html</span>
+      <span>Campaign #1 — submitted with application</span>
+    </footer>
+
+  </div>
+</body>
+
+</html>

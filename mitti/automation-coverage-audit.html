@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mitti — Senior Security Engineer — Security Automation Coverage Audit — Harsha G V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=DM+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ash: #E8E9E4;
+      --card: #FDFDFC;
+      --ink: #17191A;
+      --ink-soft: #55595B;
+      --ink-faint: #8A8F8E;
+      --rule: #D2D4CD;
+      --hairline: #E3E4DF;
+
+      --auto: #3A3A8C;
+      --auto-bg: #E7E7F2;
+      --auto-line: #ADADD4;
+
+      --semi: #A8721A;
+      --semi-bg: #F5ECDB;
+      --semi-line: #DCC08C;
+
+      --manual: #9A3A34;
+      --manual-bg: #F4E3E1;
+      --manual-line: #D9AEA9;
+
+      --none: #6E7370;
+      --none-bg: #E6E7E3;
+      --none-line: #C6C8C2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--ash);
+      color: var(--ink);
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: 'DM Mono', ui-monospace, monospace;
+    }
+
+    /* ---------- Header band ---------- */
+    .band {
+      background: var(--ink);
+      color: var(--card);
+      padding: 46px 0 40px;
+    }
+
+    .inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9FA3C9;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 33px;
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      max-width: 20ch;
+      margin-bottom: 14px;
+    }
+
+    .band .subhead {
+      color: #B9BDBB;
+      font-size: 15px;
+      max-width: 62ch;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid #33373A;
+      font-family: 'DM Mono', monospace;
+      font-size: 11.5px;
+      color: #9A9F9D;
+    }
+
+    /* ---------- Basis note ---------- */
+    .basis {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--ink);
+      padding: 20px 24px;
+      margin: -22px auto 46px;
+      max-width: 980px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .basis h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .basis p {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      margin-bottom: 7px;
+    }
+
+    .basis p:last-child {
+      margin-bottom: 0;
+    }
+
+    .basis strong {
+      color: var(--ink);
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 30px 100px;
+    }
+
+    section {
+      margin-bottom: 54px;
+    }
+
+    .sec-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--auto);
+      margin-bottom: 7px;
+    }
+
+    h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .sec-sub {
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 20px;
+      max-width: 74ch;
+    }
+
+    h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: var(--ink-soft);
+      margin-bottom: 10px;
+    }
+
+    /* ---------- SIGNATURE: coverage ledger ---------- */
+    .ledger {
+      background: var(--card);
+      border: 1px solid var(--rule);
+    }
+
+    .ledger-head,
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 1fr 200px 108px;
+      gap: 18px;
+      align-items: center;
+      padding: 13px 22px;
+    }
+
+    .ledger-head {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      border-bottom: 1px solid var(--rule);
+      padding-top: 15px;
+      padding-bottom: 11px;
+    }
+
+    .ledger-row {
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .ledger-row:last-child {
+      border-bottom: none;
+    }
+
+    .ldg-name {
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .ldg-name span {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-faint);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      height: 9px;
+    }
+
+    .seg {
+      background: #EDEEEA;
+      border-radius: 1px;
+    }
+
+    .track.t-auto .seg {
+      background: var(--auto);
+    }
+
+    .track.t-semi .seg:nth-child(-n+2) {
+      background: var(--semi);
+    }
+
+    .track.t-manual .seg:nth-child(1) {
+      background: var(--manual);
+    }
+
+    .track-cap {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .track.t-auto+.track-cap,
+    .cap-auto {
+      color: var(--auto);
+    }
+
+    .cap-semi {
+      color: var(--semi);
+    }
+
+    .cap-manual {
+      color: var(--manual);
+    }
+
+    .cap-none {
+      color: var(--none);
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 2px;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .tag.verified {
+      background: var(--auto-bg);
+      color: var(--auto);
+      border: 1px solid var(--auto-line);
+    }
+
+    .tag.partial {
+      background: var(--semi-bg);
+      color: var(--semi);
+      border: 1px solid var(--semi-line);
+    }
+
+    .tag.gap {
+      background: var(--manual-bg);
+      color: var(--manual);
+      border: 1px solid var(--manual-line);
+    }
+
+    .tag.byDesign {
+      background: var(--none-bg);
+      color: var(--none);
+      border: 1px solid var(--none-line);
+    }
+
+    .legend {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 22px;
+      height: 6px;
+      border-radius: 1px;
+      margin-right: 7px;
+      vertical-align: middle;
+    }
+
+    /* ---------- Thesis ---------- */
+    .thesis {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-left: 5px solid var(--auto);
+      padding: 24px 28px;
+    }
+
+    .thesis p {
+      color: var(--ink);
+      font-size: 15.5px;
+      margin-bottom: 12px;
+    }
+
+    .thesis p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .jd-ref {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--hairline);
+      font-family: 'DM Mono', monospace;
+      font-size: 11.5px;
+      color: var(--auto);
+      line-height: 1.5;
+    }
+
+    /* ---------- Evidence table ---------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--rule);
+    }
+
+    th {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-align: left;
+      color: var(--ink-faint);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    td {
+      padding: 13px 16px;
+      font-size: 13.4px;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    td strong {
+      color: var(--ink);
+    }
+
+    td.req {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.92em;
+      background: #F1F1EE;
+      border: 1px solid var(--hairline);
+      border-radius: 2px;
+      padding: 0 4px;
+      color: var(--ink);
+    }
+
+    /* ---------- Plan lanes ---------- */
+    .lane {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-bottom: none;
+    }
+
+    .lane:last-of-type {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .lane-gutter {
+      border-right: 1px solid var(--hairline);
+      padding: 20px 16px 20px 22px;
+      background: #F6F6F3;
+    }
+
+    .lane-gutter .win {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .lane-gutter .lev {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      line-height: 1.4;
+    }
+
+    .lane-body {
+      padding: 20px 24px;
+    }
+
+    .lane-body h3 {
+      margin-bottom: 10px;
+    }
+
+    .lane-body ul {
+      padding-left: 17px;
+    }
+
+    .lane-body li {
+      font-size: 13.4px;
+      color: var(--ink-soft);
+      margin-bottom: 9px;
+      line-height: 1.5;
+    }
+
+    .lane-body li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---------- Evidence cards ---------- */
+    .ev {
+      background: var(--card);
+      border: 1px solid var(--rule);
+    }
+
+    .ev-row {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 24px;
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .ev-row:last-child {
+      border-bottom: none;
+    }
+
+    .ev-fig {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--auto);
+      line-height: 1.05;
+    }
+
+    .ev-fig em {
+      font-style: normal;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .ev-body p {
+      color: var(--ink);
+      font-size: 13.8px;
+      margin-bottom: 8px;
+    }
+
+    .ev-src {
+      font-family: 'DM Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+    }
+
+    /* ---------- Flag + coverage ---------- */
+    .flag {
+      background: var(--manual-bg);
+      border: 1px solid var(--manual-line);
+      border-left: 5px solid var(--manual);
+      padding: 18px 22px;
+      margin-bottom: 18px;
+    }
+
+    .flag h3 {
+      color: var(--manual);
+      margin-bottom: 6px;
+    }
+
+    .flag p {
+      color: #5F2E2A;
+      font-size: 13.6px;
+      margin-bottom: 8px;
+    }
+
+    .flag p:last-child {
+      margin-bottom: 0;
+    }
+
+    .cov {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cov-col {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      padding: 20px 22px;
+    }
+
+    .cov-col.deep {
+      border-top: 3px solid var(--auto);
+    }
+
+    .cov-col.ramp {
+      border-top: 3px solid var(--manual);
+    }
+
+    .cov-col ul {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .cov-col li {
+      font-size: 13.2px;
+      color: var(--ink-soft);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--hairline);
+      line-height: 1.5;
+    }
+
+    .cov-col li:last-child {
+      border-bottom: none;
+    }
+
+    .cov-col li strong {
+      display: block;
+      color: var(--ink);
+      font-size: 13.6px;
+      margin-bottom: 2px;
+    }
+
+    /* ---------- Questions ---------- */
+    .q {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      padding: 18px 22px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 14px;
+    }
+
+    .q-n {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      color: var(--auto);
+      font-weight: 500;
+    }
+
+    .q p {
+      color: var(--ink);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .q .jd-ref {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+      color: var(--ink-faint);
+      font-size: 11px;
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+    }
+
+    /* ---------- Motion ---------- */
+    .track .seg {
+      transform-origin: left center;
+      animation: fill 460ms cubic-bezier(.2, .8, .3, 1) both;
+    }
+
+    .track .seg:nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    .track .seg:nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    @keyframes fill {
+      from {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+
+    a {
+      color: var(--auto);
+    }
+
+    a:focus-visible,
+    :focus-visible {
+      outline: 2px solid var(--auto);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      .track .seg {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 800px) {
+
+      .ledger-head,
+      .ledger-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .ledger-head {
+        display: none;
+      }
+
+      .lane,
+      .ev-row,
+      .cov {
+        grid-template-columns: 1fr;
+      }
+
+      .lane-gutter {
+        border-right: none;
+        border-bottom: 1px solid var(--hairline);
+        padding: 14px 22px;
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+      }
+
+      .lane-gutter .win {
+        margin-bottom: 0;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .basis {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="band">
+    <div class="inner">
+      <div class="eyebrow">zero-day-brief / mitti / automation-coverage-audit</div>
+      <h1>Security automation coverage audit</h1>
+      <p class="subhead">Not a cover letter. This job description asks for security that runs itself. So this document
+        audits the candidate against that axis directly: for every control domain the role names, has this work
+        previously been delivered as a manual practice, a semi-automated one, or a self-enforcing control and is
+        there evidence behind the answer, or isn't there.</p>
+      <div class="meta-row">
+        <span>Harsha G V</span>
+        <span>Senior Security Engineer — Sydney</span>
+        <span>harsha.gv29@gmail.com</span>
+        <span>+61 402 697 098</span>
+        <span>au.linkedin.com/in/harshagv</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="basis">
+    <h4>Basis of this document — read first</h4>
+    <p><strong>No non-public information was used.</strong> Every statement about the hiring organisation is drawn from
+      the published job description and public careers material. Nothing here models, infers, or asserts anything about
+      the organisation's actual internal architecture, accounts, tooling, or security posture. Where this document
+      describes a first-90-days sequence, it describes what the candidate would do to <em>find out</em> — not what is
+      assumed to already be true.</p>
+    <p><strong>Stated assumptions.</strong> (1) "Mitti" and "SafetyCulture" are treated as the same organisation, per
+      the job description's own framing; this has not been independently verified. (2) The requirement "system
+      hardening" is not scoped in the job description — it could mean OS and host baselines or workload and container
+      hardening. It is scored against <em>both</em> readings below rather than against whichever one is easier to
+      answer. (3) "Lead assessments of networks, systems, and applications" is read as assessment leadership and
+      remediation ownership, not as hands-on offensive testing; if the intent is the latter, the score below changes
+      and that is stated in section 05.</p>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ============ LEDGER ============ -->
+    <section>
+      <div class="sec-label">Coverage ledger</div>
+      <h2>Manual, semi-automated, or self-enforcing</h2>
+      <p class="sec-sub">One row per control domain named in the job description. The bar records how the candidate has
+        previously delivered that domain. The tag records whether there is evidence to back it. Where the evidence
+        exists but not at production scale, the row says so rather than borrowing the credibility of the rows above
+        it — and the one domain that scores zero on both axes sits in the same table as everything else rather than in
+        a footnote.</p>
+
+      <div class="ledger">
+        <div class="ledger-head">
+          <div>Control domain</div>
+          <div>Delivery mode in prior roles</div>
+          <div>Evidence</div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">AWS misconfiguration detection &amp; correction<span>Multi-account posture
+              management</span></div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Vulnerability management<span>Pre-production blocking, not post-hoc ticketing</span>
+          </div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Security automation &amp; response tooling<span>Python; triage and classification
+              pipelines</span></div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Logging, observability &amp; detection<span>Telemetry consolidation and
+              enrichment</span></div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">CI/CD and infrastructure-as-code guardrails<span>Policy enforced in the pipeline</span>
+          </div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Mentoring &amp; security partnership across squads<span>Deliberately human — automation
+              is the wrong tool here</span></div>
+          <div>
+            <div class="track t-manual" role="img" aria-label="Manual by design"><i class="seg"></i><i
+                class="seg"></i><i class="seg"></i></div><span class="track-cap cap-manual mono">Manual by design</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Assessment leadership → measurable posture uplift<span>Findings coordinated; technical
+              assessment not owned</span></div>
+          <div>
+            <div class="track t-semi" role="img" aria-label="Semi-automated"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-semi mono">Semi-automated</span>
+          </div>
+          <div><span class="tag partial">Partial</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">System hardening — OS / host baselines<span>CIS baseline enforced at image build, not
+              applied to running hosts</span></div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">File integrity monitoring<span>Named explicitly in the job description's control
+              list</span></div>
+          <div>
+            <div class="track t-auto" role="img" aria-label="Self-enforcing"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-auto mono">Self-enforcing</span>
+          </div>
+          <div><span class="tag verified">Verified</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Endpoint platform administration (CrowdStrike)<span>Agent deployment and detection
+              authoring; not console or policy ownership</span></div>
+          <div>
+            <div class="track t-semi" role="img" aria-label="Semi-automated"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-semi mono">Semi-automated</span>
+          </div>
+          <div><span class="tag partial">Partial</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Deception technology — honeypots<span>Built end to end — academic project, never a
+              production estate</span></div>
+          <div>
+            <div class="track t-manual" role="img" aria-label="Manual"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-manual mono">Manual — single instance</span>
+          </div>
+          <div><span class="tag partial">Partial</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">Corporate IT security — Okta, GSuite, Kandji<span>Listed as nice-to-have; no substitute
+              is claimed</span></div>
+          <div>
+            <div class="track" role="img" aria-label="Not delivered"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-none mono">Not delivered</span>
+          </div>
+          <div><span class="tag gap">Gap</span></div>
+        </div>
+
+        <div class="ledger-row">
+          <div class="ldg-name">System administration &amp; network engineering<span>Host administration delivered as
+              image automation; routing and switching not evidenced</span></div>
+          <div>
+            <div class="track t-semi" role="img" aria-label="Semi-automated"><i class="seg"></i><i class="seg"></i><i
+                class="seg"></i></div><span class="track-cap cap-semi mono">Split — see row detail</span>
+          </div>
+          <div><span class="tag partial">Partial</span></div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><i style="background:var(--auto)"></i>Self-enforcing — the control runs without a human in the loop</span>
+        <span><i style="background:var(--semi)"></i>Semi-automated — tooling assists, decisions stay manual</span>
+        <span><i style="background:var(--manual)"></i>Manual — by design or by limitation, stated per row</span>
+        <span><i style="background:#EDEEEA;border:1px solid var(--rule)"></i>Not delivered — no evidence exists</span>
+      </div>
+    </section>
+
+    <!-- ============ 01 THESIS ============ -->
+    <section>
+      <div class="sec-label">01 — Day-one thesis</div>
+      <h2>The first artifact this role needs</h2>
+      <div class="thesis">
+        <p>The job description asks this role to <em>correct</em> misconfigurations, not review them. That single verb
+          sets the first deliverable: a per-finding-class ledger across every AWS account that answers one question for
+          each class of misconfiguration — <strong>does a human currently have to touch this, and how often does it come
+            back?</strong> Recurrence multiplied by manual touch is the automation backlog, ranked. Nothing else
+          produces a defensible order of work, because a severity-only ranking optimises for the scariest finding rather
+          than the one costing the most engineering attention every week.</p>
+        <p>That ledger is also the honest onboarding instrument. It requires reading the existing detection surface
+          before proposing anything, and it produces a baseline the posture uplift can later be measured against —
+          which the job description asks for explicitly, and which cannot be claimed retroactively without one.</p>
+        <div class="jd-ref">↳ re: "Identify and correct security misconfigurations across AWS accounts through
+          automation and architecture improvements" · "turning findings into action and measurable posture uplift"</div>
+      </div>
+    </section>
+
+    <!-- ============ 02 EVIDENCE MAP ============ -->
+    <section>
+      <div class="sec-label">02 — Requirement → evidence</div>
+      <h2>Every job description line, scored against real proof</h2>
+      <p class="sec-sub">Where the evidence is partial or absent, that is stated in the same column and the same
+        typeface as the evidence that is strong.</p>
+      <table>
+        <tr>
+          <th style="width:25%">Requirement</th>
+          <th style="width:12%">Status</th>
+          <th>Closest verified proof</th>
+        </tr>
+
+        <tr>
+          <td class="req">Correct AWS misconfigurations through automation and architecture</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — architected and operationalised AWS-native posture management (Security Hub, Config,
+            Lambda-based remediation) with automated finding correlation and remediation playbooks, improving CIS and
+            NIST CSF policy compliance by <strong>38%</strong>. This is the closest line-for-line match between this
+            background and this role.</td>
+        </tr>
+
+        <tr>
+          <td class="req">"Across AWS accounts" — multi-account scale</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — consolidated CloudTrail, VPC Flow, and DNS telemetry across <strong>9 AWS accounts</strong>
+            into a single OCSF-normalised Security Lake surface. Multi-account is the operating assumption of that work,
+            not an extrapolation from a single-account environment.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Embed security into CI/CD, developer tooling, IaC</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank, Modern Group, and current role — SAST, SCA, secrets scanning, and IaC validation embedded as
+            pipeline gates rather than review steps; Terraform-enforced CI guardrails used to make a specific
+            post-incident fix non-reversible.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Vulnerability management</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — blocked <strong>340</strong> high- and critical-severity vulnerabilities pre-production and
+            reduced container configuration drift by <strong>73%</strong> across EKS clusters, via Pod Security
+            Standards, admission control policy, and Trivy/Snyk image scanning.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Build automated security controls, monitoring, and reporting systems</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — Python automation framework integrating PagerDuty, Jira, and AWS Lambda, reducing alert triage
+            from <strong>45 to 12 minutes</strong> and automating <strong>85%</strong> of security ticket
+            classification. The job description names four things in this sentence — vulnerability management, logging,
+            integrity, and honeypots. The first three are evidenced at production scale in their own rows. Honeypots
+            are evidenced only at academic scale, scored separately below.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Improve observability and detection across environments</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — <strong>4</strong> commercial threat-intel feeds integrated via GuardDuty Custom Entity
+            Lists, correlated through Security Hub into Splunk over OIDC, extending searchable log history to
+            <strong>12 months</strong> without proportional SIEM licence spend growth. Mox Bank — host and session
+            telemetry from member accounts streamed to central CloudWatch log groups and encrypted S3 in a dedicated
+            security and log-archive account, ingested by an organisation-level Splunk integration via SQS
+            notification rather than fragmented per-account forwarders, with Security Hub aggregating GuardDuty,
+            Inspector, and Config findings into the same stream.
+          </td>
+        </tr>
+
+        <tr>
+          <td class="req">Mentor engineers; act as trusted security partner across squads</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — founded and ran a company-wide Security Champions programme, mentoring <strong>15+</strong>
+            engineers on secure SDLC practice and translating security risk into engineering priorities.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Influence design and implementation decisions</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>OSL Group — continuous security architecture review across AWS cloud-native workloads, resolving
+            <strong>5</strong> critical enterprise risks by threat-modelling systems against their trust boundaries
+            before build rather than after.
+          </td>
+        </tr>
+
+        <tr>
+          <td class="req">Strong coding — Golang, NodeJS, <em>or</em> Python</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td><strong>Python is the only defensible answer.</strong> The evidence above is Python and Bash. Go appears
+            on the résumé; there is no shipped Go work behind it, and against a job description that names Golang
+            first, that entry is a liability rather than an asset — flagged here rather than left for an interviewer to
+            find. NodeJS: no evidence, not claimed. The requirement is disjunctive, so Python satisfies it — but the
+            depth is one production framework, not a decade of shipped services.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Lead assessments of networks, systems, and applications</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td>Verified as assessment leadership and remediation ownership — 5 critical risks resolved, 340
+            vulnerabilities blocked, findings prioritised across engineering teams. <strong>Not verified as conducting
+              hands-on technical or offensive assessment.</strong> Prior involvement with penetration test findings was
+            as the party who closed them, not the party who produced them.</td>
+        </tr>
+
+        <tr>
+          <td class="req">System hardening — OS and host baselines</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — golden AMIs built with HashiCorp Packer on Amazon Linux 2 and RHEL, with a CIS Benchmark
+            baseline enforced at image build rather than applied to running hosts: separate partitions for
+            <code>/var</code>, <code>/var/log</code>, <code>/var/log/audit</code>, <code>/tmp</code> and
+            <code>/home</code> against disk-exhaustion denial of service; password complexity and account lockout via
+            <code>pam_pwquality</code> and <code>login.defs</code>; <code>PermitRootLogin no</code>; sysctl hardening
+            (IP forwarding and source routing disabled, TCP SYN cookies enabled, ICMP redirects ignored); legacy
+            packages, production-node compilers, and telnet/rsync/tftp purged. <strong>Interactive SSH was disabled
+              outright and replaced by SSM Session Manager</strong>, with every administrative shell session logged to
+            CloudWatch and S3 and StartSession/TerminateSession recorded in CloudTrail. Stated limit: no quantified
+            outcome exists for this work — no CIS score, fleet size, or drift figure is claimed, because none was
+            measured.
+          </td>
+        </tr>
+
+        <tr>
+          <td class="req">System hardening — workload and container</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — Pod Security Standards, admission control policy, RBAC, and Trivy/Snyk image scanning on EKS.
+            Both readings of "system hardening" in the job description are therefore covered; the Packer row above is
+            the host-level answer, this is the workload-level one.</td>
+        </tr>
+
+        <tr>
+          <td class="req">"Integrity" — named in the controls-to-build list</td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Mox Bank — Qualys File Integrity Monitoring baked into the AMI at build time, tracking unauthorised
+            change to critical system files, binaries, and configuration paths for banking audit trail requirements.
+            Qualys Cloud Agent (VMDR and Policy Compliance) was baked alongside it with activation tokens scoped via
+            SSM Parameter Store on first boot, making continuous vulnerability assessment a property of the image
+            rather than a post-deployment task.</td>
+        </tr>
+
+        <tr>
+          <td class="req">CrowdStrike suite <em>(nice to have)</em></td>
+          <td><span class="tag partial">Partial</span></td>
+          <td>Two real strands. <strong>Detection engineering:</strong> custom Indicators of Attack mapped to MITRE
+            ATT&amp;CK — credential dumping, LSASS access, suspicious kubectl and cloud-CLI use — tuned against false
+            positives before promotion from detect to prevent. <strong>Deployment:</strong> Falcon baked into the
+            golden AMI with silent-install parameters so hosts entered active protection at instance initialisation.
+            <strong>Neither is console or policy platform administration</strong>, which remains unevidenced and is not
+            claimed.
+          </td>
+        </tr>
+
+        <tr>
+          <td class="req">Terraform / CloudFormation <em>(nice to have)</em></td>
+          <td><span class="tag verified">Verified</span></td>
+          <td>Both used across roles for infrastructure definition and for encoding security policy as enforced
+            configuration.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Present security insights and outcomes to engineering and leadership</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td>Senior Manager scope at OSL Group and two consecutive SOC 2 Type II cycles with zero critical or high
+            findings imply audience exposure at that level. <strong>No specific, verifiable instance of presenting
+              security outcomes to a combined engineering-and-leadership audience is being claimed here</strong>, and
+            none has been invented for this document.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Honeypots / deception technology</td>
+          <td><span class="tag partial">Partial</span></td>
+          <td><strong>Academic project — University of Sydney, Master of Cybersecurity. Not employer work, and that
+              attribution is not blurred anywhere in this document.</strong> Built end to end: a dedicated VPC isolated
+            from any production environment; an Ubuntu EC2 instance with the full port range deliberately exposed to
+            maximise attack surface, paired with egress blocked to everything except the logging server so the
+            honeypot could not be turned into an attack platform; T-Pot, Cowrie, and Dionaea evaluated before
+            selecting an open-source framework deployed on Docker; real administrative SSH moved off port 22 so it
+            would not collide with the listener; decoy credentials, config files, and dummy databases planted as
+            deception content; CloudWatch agent streaming auth failures and system logs, container logs forwarded to
+            Splunk, and SNS alerting on high-severity interaction. <strong>Limits stated:</strong> one instance, no
+            production deployment, no scale, and no captured-attack or dwell-time metrics — none were recorded and
+            none are invented here. What it demonstrates is the isolation, egress-containment, and detection-routing
+            judgement the control requires, not operating experience.</td>
+        </tr>
+
+        <tr>
+          <td class="req">Okta, GSuite, Kandji <em>(nice to have)</em></td>
+          <td><span class="tag gap">Gap</span></td>
+          <td>No evidence for any of the three. Azure Active Directory, AWS IAM, and Duo MFA are identity experience but
+            are not Okta, and are not offered as equivalents. Jamf MDM is Kandji's direct competitor — an adjacency
+            worth naming, not a claim of transferable proficiency.</td>
+        </tr>
+
+        <tr>
+          <td class="req">System administration / network engineering <em>(nice to have)</em></td>
+          <td><span class="tag partial">Partial</span></td>
+          <td>This line splits cleanly and is scored in halves rather than averaged. <strong>System administration —
+              evidenced.</strong> The Mox Bank image pipeline is sysadmin substance expressed as immutable
+            infrastructure: kernel parameter tuning, PAM and login policy, filesystem partitioning, package removal,
+            agent installation, and SSH disablement. It is not interactive host administration, and that difference
+            should be tested rather than assumed away. <strong>Network engineering — not evidenced.</strong> Cloud
+            network design is verified and deep (tiered VPC layout, default-deny per-namespace Kubernetes
+            NetworkPolicies, FQDN-allowlisted egress, isolated custody network path), but routing, switching, and
+            firewall or proxy troubleshooting are not, and cloud segmentation is not offered as a substitute for
+            them.</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- ============ 03 PLAN ============ -->
+    <section>
+      <div class="sec-label">03 — Prioritised plan</div>
+      <h2>Ranked by automation leverage, not by calendar</h2>
+      <p class="sec-sub">Ordering rule: the work that removes the most recurring human touches per unit of engineering
+        effort goes first. The two weakest rows in the ledger get deliberate early attention rather than being deferred
+        to the end where they would be least visible.</p>
+
+      <div class="lane">
+        <div class="lane-gutter">
+          <div class="win">Weeks 1–4</div>
+          <div class="lev">Leverage:<br>baseline first</div>
+        </div>
+        <div class="lane-body">
+          <h3>Build the ledger before building anything else</h3>
+          <ul>
+            <li>Produce the per-finding-class inventory from the day-one thesis across all AWS accounts: for each
+              class, whether detection exists, whether correction is automated, how often it recurs, and who currently
+              touches it.</li>
+            <li>Baseline existing CI/CD security-gate coverage — SAST, SCA, secrets, IaC — per pipeline, using tooling
+              already built for this purpose rather than starting from a blank page.</li>
+            <li>Re-establish current AWS working depth deliberately. The strongest AWS evidence in this document is
+              from roles ending January 2025; the two most recent roles are Azure-stack. That recency gap is real and
+              is addressed by doing the work in week one, not by asserting it away.</li>
+            <li>Resolve the two scoping ambiguities named in the basis note — what "system hardening" and "lead
+              assessments" mean in practice here — with the hiring manager rather than guessing.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-gutter">
+          <div class="win">Weeks 5–8</div>
+          <div class="lev">Leverage:<br>highest recurrence</div>
+        </div>
+        <div class="lane-body">
+          <h3>Convert the top recurring finding class from detect to correct</h3>
+          <ul>
+            <li>Take the single highest recurrence-times-manual-touch finding class from the week-four ledger and ship
+              its auto-remediation end to end — detection, guardrail, correction, rollback path, and the metric that
+              proves it stopped recurring.</li>
+            <li>Close the language question honestly: if the existing security automation codebase is Go, that becomes
+              the ramp target in this window and is treated as a real learning cost, not a formality. If it is Python,
+              this is immediately productive ground.</li>
+            <li>Push at least one correction upstream into an IaC guardrail so the misconfiguration cannot be
+              reintroduced — the pattern that produced the Terraform-enforced CI guardrail after the OSL Group edge-cache
+              incident.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-gutter">
+          <div class="win">Weeks 9–13</div>
+          <div class="lev">Leverage:<br>own a domain</div>
+        </div>
+        <div class="lane-body">
+          <h3>Take standing ownership, and start on the gaps that can't be shortcut</h3>
+          <ul>
+            <li>Assume standing ownership of AWS posture automation and vulnerability management — the two domains with
+              the deepest verified evidence — including their cross-squad prioritisation cadence.</li>
+            <li>Take the honeypot design from academic scale to production scale with whoever owns detection today —
+              the isolation, egress-containment, and log-routing pattern already exists and works; what it has never
+              had is a real adversary, a real blast radius, or an on-call rotation attached to its alerts. Prior work
+              also includes a synthetic cross-identity canary built after a live incident, which is the same instinct
+              applied to a production system.</li>
+            <li>Report the posture delta against the week-four baseline to engineering and to leadership — the two
+              audiences the job description names — which is also the fastest way to convert the weakest row in this
+              document into evidence.</li>
+            <li>Take on endpoint platform administration deliberately — console and policy ownership, not agent
+              deployment — to close the one remaining distance between authoring detections and owning the platform
+              they run on.</li>
+            <li>Apply the golden-image pattern to whatever the current base image story is: hardening enforced at
+              build, agents baked in, drift impossible rather than detected. This is the strongest transferable
+              mechanism in this background and the fastest route to a measurable posture number.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 EVIDENCE CARDS ============ -->
+    <section>
+      <div class="sec-label">04 — Evidence</div>
+      <h2>Exact figures, as recorded</h2>
+      <p class="sec-sub">Three, chosen because each maps to a different named responsibility in this job description.
+        No figure here has been rounded, restated, or extrapolated.</p>
+      <div class="ev">
+        <div class="ev-row">
+          <div class="ev-fig">38%<em>compliance improvement</em></div>
+          <div class="ev-body">
+            <p>Improvement in CIS and NIST CSF policy compliance from AWS-native cloud security posture management —
+              Security Hub, Config, and Lambda-based remediation — with automated finding correlation and remediation
+              playbooks. Detection and correction in one system rather than a detection feed handed to a human queue.
+            </p>
+            <div class="ev-src">OSL Group — Senior Manager, Cybersecurity · maps to: identify and correct
+              misconfigurations across AWS accounts</div>
+          </div>
+        </div>
+
+        <div class="ev-row">
+          <div class="ev-fig">45 → 12<em>minutes to triage</em></div>
+          <div class="ev-body">
+            <p>Alert triage time cut by a Python automation framework integrating PagerDuty, Jira, and AWS Lambda, with
+              <strong>85%</strong> of security ticket classification automated. The clearest evidence available for the
+              coding requirement and for the "build automated security controls, monitoring, and reporting systems"
+              line.
+            </p>
+            <div class="ev-src">Mox Bank — Senior Cloud Security Engineer · maps to: security automation, reporting
+              systems, strong coding experience</div>
+          </div>
+        </div>
+
+        <div class="ev-row">
+          <div class="ev-fig">9 / 4 / 12<em>accounts · feeds · months</em></div>
+          <div class="ev-body">
+            <p>CloudTrail, VPC Flow, and DNS telemetry from 9 AWS accounts consolidated into one OCSF-normalised
+              Security Lake surface, enriched with 4 commercial threat-intel feeds via GuardDuty Custom Entity Lists,
+              routed through Security Hub into Splunk over OIDC — extending searchable log history to 12 months without
+              proportional SIEM licence spend growth. Stated limit: the pipeline and its scale are quantified; no
+              mean-time-to-detect improvement is claimed, because none was measured.</p>
+            <div class="ev-src">OSL Group — Senior Manager, Cybersecurity · maps to: improve observability and detection
+              across environments</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 COVERAGE ============ -->
+    <section>
+      <div class="sec-label">05 — Domain coverage</div>
+      <h2>Where the depth is, and where it isn't</h2>
+
+      <div class="flag">
+        <h3>The recency problem, named before anyone else has to raise it</h3>
+        <p>This job description is AWS-only. It does not mention Azure once. The AWS evidence in this document is real,
+          quantified, and multi-account — and it comes from roles that ended in <strong>August 2023 and January
+            2025</strong>. The two most recent roles are Azure-stack: Azure DevOps, Azure Policy, Defender for Cloud,
+          Key Vault. That is roughly <strong>nineteen months since AWS was the primary daily environment</strong>.</p>
+        <p>The underlying skills — multi-account posture, identity design, detection pipelines, pipeline guardrails —
+          transfer directly and the mental model is intact. But an interviewer reading the résumé top-down will see
+          Azure first and has every reason to test how current the AWS is. That is a fair test, not an unfair one, and
+          it is better named here than discovered in the room.</p>
+      </div>
+
+      <div class="cov">
+        <div class="cov-col deep">
+          <h3>Deep — verified</h3>
+          <ul>
+            <li><strong>AWS posture automation</strong>Detection plus automated correction across a multi-account
+              estate, with a measured 38% compliance improvement.</li>
+            <li><strong>Vulnerability management as a pipeline gate</strong>340 high and critical vulnerabilities
+              blocked before production; 73% reduction in container configuration drift.</li>
+            <li><strong>Security automation in Python</strong>Production tooling connecting security signal to
+              engineering workflow, with a measured throughput outcome.</li>
+            <li><strong>Detection and logging architecture</strong>Multi-account telemetry consolidation, threat-intel
+              enrichment, and retention economics — at real scale.</li>
+            <li><strong>OS and host hardening as immutable infrastructure</strong>CIS-baselined golden AMIs built with
+              Packer on Amazon Linux 2 and RHEL, agents baked at build time, interactive SSH disabled outright in
+              favour of fully logged SSM Session Manager access. Unquantified — no outcome metric was captured.</li>
+            <li><strong>Cloud network segmentation</strong>Tiered VPC design, default-deny Kubernetes NetworkPolicies,
+              isolated high-consequence network paths.</li>
+            <li><strong>Engineering partnership and mentoring</strong>A Security Champions programme reaching 15+
+              engineers; architecture review that resolved 5 critical risks pre-build.</li>
+          </ul>
+        </div>
+        <div class="cov-col ramp">
+          <h3>Ramping — stated plainly</h3>
+          <ul>
+            <li><strong>Golang</strong>On the résumé, not in the evidence. Against a job description that names Golang
+              first, this is the single most exposed claim in the application and is withdrawn rather than defended.</li>
+            <li><strong>Deception at production scale</strong>A full honeypot was designed, isolated, tuned, and wired
+              to CloudWatch, Splunk, and SNS alerting — as an academic project, on one instance, with no adversary
+              traffic worth the name. The design judgement transfers; the operating experience does not.</li>
+            <li><strong>Network engineering</strong>Cloud network design is deep and verified. Routing, switching, and
+              firewall or proxy troubleshooting are not evidenced, and cloud segmentation is not offered as a stand-in
+              for them.</li>
+            <li><strong>Endpoint platform administration</strong>Detection authoring and agent deployment are
+              verified; owning the EDR console — policy sets, exclusions, sensor fleet health, response workflows — is
+              not. The narrower remainder of what used to be a broader endpoint gap.</li>
+            <li><strong>Hands-on technical assessment</strong>Assessment leadership and remediation ownership are
+              verified. Producing the findings — offensive testing — is not.</li>
+            <li><strong>Corporate IT identity stack</strong>Okta, GSuite, and Kandji have no evidence behind them.
+              Adjacent identity and MDM experience exists but is not the same tooling.</li>
+            <li><strong>AWS currency</strong>See the flag above. The knowledge is real; the last nineteen months of
+              daily practice are not on AWS.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 QUESTIONS ============ -->
+    <section>
+      <div class="sec-label">06 — Questions</div>
+      <h2>Each traceable to a specific line</h2>
+
+      <div class="q">
+        <div class="q-n">1</div>
+        <div>
+          <p>What language is the existing security automation actually written in? The job description treats Golang,
+            NodeJS, and Python as interchangeable, but a codebase is not — inheriting a Go automation estate is a
+            materially different first quarter than extending a Python one, and it changes what the first shipped
+            control should be.</p>
+          <div class="jd-ref">— re: "strong coding experience in Golang, NodeJS, or Python"</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-n">2</div>
+        <div>
+          <p>Is there deception tooling in the estate today, and what is it expected to catch — opportunistic internet
+            scanning, or lateral movement by something already inside? Those need different placement, different decoy
+            content, and different alert thresholds. The honeypot work behind this document was built for the first
+            case; production deception in an environment serving millions of users is usually built for the second.</p>
+          <div class="jd-ref">— re: "Build automated security controls, monitoring, and reporting systems (vulnerability
+            management, logging, integrity, honeypots, etc.)"</div>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-n">3</div>
+        <div>
+          <p>Does this role's hardening and detection scope stop at the production AWS estate, or does it extend to the
+            corporate fleet — identity, laptops, SaaS? The two are listed in different sections of the job
+            description, which usually means different owners. The production side is where the evidence in this
+            document sits; the corporate identity stack is where it doesn't.</p>
+          <div class="jd-ref">— re: "Experience securing corporate IT systems such as Okta, GSuite, Kandji &amp;
+            InTune" · "from vulnerability management and system hardening to security automation and architecture"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>zero-day-brief / mitti / automation-coverage-audit.html</span>
+      <span>Campaign #1 — submitted with application</span>
+    </footer>
+
+  </div>
+</body>
+
+</html>

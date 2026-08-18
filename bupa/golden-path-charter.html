@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bupa — DevSecOps Engineer — Golden Path Charter — Harsha G V</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#efedf4;
+    --paper:#ffffff;
+    --band:#1d1730;
+    --band-2:#2a2145;
+    --ink:#191527;
+    --ink-soft:#544e66;
+    --ink-faint:#8a83a0;
+    --rule:#ddd8e8;
+    --rule-soft:#ebe7f2;
+    --accent:#5b4bbd;
+    --accent-soft:#ece9f8;
+    --ok:#1f7a5c;
+    --ok-bg:#e3f2ec;
+    --ok-line:#9fcdba;
+    --mid:#8f6410;
+    --mid-bg:#f7eed8;
+    --mid-line:#dcc48c;
+    --no:#a33a52;
+    --no-bg:#f9e6ea;
+    --no-line:#e0adb9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ground);
+    color:var(--ink-soft);
+    font-family:'Manrope',system-ui,sans-serif;
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'Roboto Mono',ui-monospace,monospace;}
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  /* ---- HERO BAND ---- */
+  .band{
+    background:var(--band);
+    background-image:linear-gradient(115deg,var(--band) 0%,var(--band-2) 100%);
+    color:#efecf7;
+    padding:52px 0 44px;
+  }
+  .inner{max-width:1060px;margin:0 auto;padding:0 30px;}
+  .kicker{
+    font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:#a99ce8;margin-bottom:18px;
+  }
+  h1{
+    font-family:'Manrope',sans-serif;font-weight:800;font-size:34px;line-height:1.18;
+    letter-spacing:-.02em;color:#fff;max-width:780px;margin-bottom:16px;
+  }
+  .lede{color:#c2bbdd;font-size:15.5px;max-width:720px;}
+  .lede strong{color:#fff;font-weight:600;}
+  .id-row{
+    display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;
+    font-family:'Roboto Mono',monospace;font-size:11.5px;color:#9a91bd;
+  }
+
+  /* ---- LAYOUT ---- */
+  main{max-width:1060px;margin:0 auto;padding:0 30px 96px;}
+  section{padding-top:56px;}
+  .eyebrow{
+    font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:9px;
+  }
+  h2{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.015em;margin-bottom:6px;}
+  .sec-note{font-size:13.5px;color:var(--ink-faint);margin-bottom:22px;max-width:700px;}
+  h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  p{margin-bottom:11px;}
+
+  .card{background:var(--paper);border:1px solid var(--rule);border-radius:4px;}
+
+  .thesis{padding:26px 30px;border-left:5px solid var(--accent);}
+  .thesis p{color:var(--ink);font-size:16px;line-height:1.62;margin-bottom:12px;}
+  .thesis p:last-of-type{margin-bottom:0;}
+  .jd-ref{
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--rule-soft);
+    font-family:'Roboto Mono',monospace;font-size:11.5px;color:var(--accent);line-height:1.55;
+  }
+
+  /* ---- SIGNATURE: PIPELINE RAIL ---- */
+  .rail-frame{
+    background:var(--paper);border:1px solid var(--rule);border-radius:4px;
+    padding:26px 0 22px;overflow-x:auto;
+  }
+  .rail{display:flex;min-width:1120px;padding:0 24px;position:relative;}
+  .rail::before{
+    content:"";position:absolute;left:24px;right:24px;top:19px;height:2px;background:var(--rule);
+  }
+  .stage{flex:1;padding-right:14px;position:relative;}
+  .stage:last-child{padding-right:0;}
+  .dot{
+    width:14px;height:14px;border-radius:50%;background:var(--paper);
+    border:3px solid var(--rule);position:relative;z-index:2;margin-bottom:14px;
+  }
+  .dot.ok{border-color:var(--ok);background:var(--ok);}
+  .dot.mid{border-color:var(--mid);background:var(--mid);}
+  .dot.no{border-color:var(--no);background:var(--paper);}
+  .stage-n{font-family:'Roboto Mono',monospace;font-size:10.5px;color:var(--ink-faint);letter-spacing:.1em;}
+  .stage-t{font-size:13.5px;font-weight:700;color:var(--ink);margin:2px 0 6px;line-height:1.3;}
+  .stage-d{font-size:12px;color:var(--ink-soft);line-height:1.5;}
+  .rail-key{
+    display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:14px;padding:16px 24px 0;
+    border-top:1px solid var(--rule-soft);
+    font-family:'Roboto Mono',monospace;font-size:11px;color:var(--ink-faint);
+  }
+  .rail-key span{display:inline-flex;align-items:center;gap:8px;}
+  .swatch{width:11px;height:11px;border-radius:50%;display:inline-block;}
+  .swatch.ok{background:var(--ok);}
+  .swatch.mid{background:var(--mid);}
+  .swatch.no{border:2.5px solid var(--no);background:transparent;}
+
+  /* ---- TABLE ---- */
+  .t-wrap{background:var(--paper);border:1px solid var(--rule);border-radius:4px;overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;min-width:640px;}
+  th{
+    font-family:'Roboto Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    text-align:left;padding:12px 16px;background:var(--accent-soft);color:var(--accent);
+    border-bottom:1px solid var(--rule);
+  }
+  td{padding:13px 16px;font-size:13.3px;border-bottom:1px solid var(--rule-soft);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);font-weight:700;}
+  .req{color:var(--ink);font-weight:600;}
+  .tag{
+    display:inline-block;font-family:'Roboto Mono',monospace;font-size:10px;font-weight:700;
+    letter-spacing:.05em;padding:3px 8px;border-radius:3px;white-space:nowrap;
+  }
+  .tag.ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-line);}
+  .tag.mid{background:var(--mid-bg);color:var(--mid);border:1px solid var(--mid-line);}
+  .tag.no{background:var(--no-bg);color:var(--no);border:1px solid var(--no-line);}
+  .grouphead td{
+    background:#f6f4fb;font-family:'Roboto Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-faint);padding:9px 16px;
+  }
+
+  /* ---- ADOPTION LADDER ---- */
+  .ladder{display:flex;flex-direction:column;gap:10px;}
+  .rung{
+    background:var(--paper);border:1px solid var(--rule);border-radius:4px;
+    padding:18px 22px;display:grid;grid-template-columns:88px 1fr;gap:20px;align-items:start;
+  }
+  .rung-t{
+    font-family:'Roboto Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;padding:5px 0;color:var(--ink-faint);
+  }
+  .rung-fill{height:6px;border-radius:3px;background:var(--rule);margin-top:8px;}
+  .rung.r0 .rung-fill{width:12%;background:var(--no);}
+  .rung.r1 .rung-fill{width:40%;background:var(--mid);}
+  .rung.r2 .rung-fill{width:72%;background:var(--accent);}
+  .rung.r3 .rung-fill{width:100%;background:var(--ok);}
+  .rung p{font-size:13.4px;margin-bottom:0;}
+  .rung .rung-def{color:var(--ink);font-weight:600;font-size:13.8px;margin-bottom:4px;}
+
+  /* ---- WAVES ---- */
+  .waves{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .wave{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:22px;}
+  .wave-lab{
+    font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);padding:4px 9px;border-radius:3px;display:inline-block;margin-bottom:12px;
+  }
+  .wave h3{margin-bottom:2px;}
+  .wave-sub{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--ink-faint);margin-bottom:14px;}
+  .wave ul{padding-left:17px;}
+  .wave li{font-size:13px;margin-bottom:9px;line-height:1.52;}
+
+  /* ---- EVIDENCE CARDS ---- */
+  .ev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .ev-card{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:22px;}
+  .ev-n{
+    font-family:'Roboto Mono',monospace;font-weight:700;font-size:27px;color:var(--accent);
+    letter-spacing:-.02em;line-height:1.1;margin-bottom:8px;
+  }
+  .ev-n small{font-size:13px;font-weight:500;letter-spacing:0;}
+  .ev-w{font-size:12.8px;line-height:1.5;margin-bottom:14px;}
+  .ev-src{
+    font-family:'Roboto Mono',monospace;font-size:10.5px;color:var(--ink-faint);
+    border-top:1px solid var(--rule-soft);padding-top:10px;
+  }
+
+  /* ---- COVERAGE ---- */
+  .flag{
+    background:var(--no-bg);border:1px solid var(--no-line);border-left:5px solid var(--no);
+    border-radius:4px;padding:18px 22px;margin-bottom:16px;font-size:13.6px;color:#5e2733;
+  }
+  .flag strong{color:var(--no);}
+  .flag p{margin-bottom:9px;}
+  .flag p:last-child{margin-bottom:0;}
+  .cov{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .cov-col{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:20px 22px;}
+  .cov-col.deep{border-top:3px solid var(--ok);}
+  .cov-col.ramp{border-top:3px solid var(--no);}
+  .cov-col ul{list-style:none;margin-top:12px;}
+  .cov-col li{font-size:13px;padding:11px 0;border-bottom:1px solid var(--rule-soft);line-height:1.5;}
+  .cov-col li:last-child{border-bottom:none;}
+  .cov-col li strong{display:block;color:var(--ink);font-size:13.5px;margin-bottom:3px;}
+
+  /* ---- QUESTIONS ---- */
+  .qs{display:flex;flex-direction:column;gap:12px;}
+  .q{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:20px 22px;}
+  .q p{color:var(--ink);font-size:14.2px;margin-bottom:8px;}
+  .q .why{color:var(--ink-soft);font-size:13px;margin-bottom:10px;}
+  .q .src{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--ink-faint);line-height:1.5;}
+
+  footer{
+    border-top:1px solid var(--rule);margin-top:64px;padding:22px 0 0;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    font-family:'Roboto Mono',monospace;font-size:11px;color:var(--ink-faint);
+  }
+
+  @media (max-width:860px){
+    h1{font-size:26px;}
+    .waves,.ev,.cov{grid-template-columns:1fr;}
+    .rung{grid-template-columns:1fr;gap:8px;}
+    .inner,main{padding-left:20px;padding-right:20px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="inner">
+    <div class="kicker">zero-day-brief / bupa / golden-path-charter</div>
+    <h1>Golden path to production — a charter for the standard, and an honest audit of who's proposing it</h1>
+    <p class="lede">Not a cover letter. This is the first artefact the role itself calls for: a stage-by-stage
+    definition of what Bupa's standard secure path to production has to contain, an adoption model for how
+    teams actually move onto it, and a line-by-line scoring of the candidate's evidence against every
+    requirement in the position description — <strong>including the four that currently have nothing behind
+    them.</strong></p>
+    <div class="id-row">
+      <span>Harsha G V</span>
+      <span>harsha.gv29@gmail.com</span>
+      <span>+61 402 697 098</span>
+      <span>au.linkedin.com/in/harshagv</span>
+      <span>harshagv.me</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ========== THESIS ========== -->
+  <section>
+    <div class="eyebrow">Day one</div>
+    <h2>The first real move</h2>
+    <p class="sec-note">Tied to the position description's own framing of the deliverable.</p>
+    <div class="card thesis">
+      <p>The first artefact is not a pipeline template. It is a <strong>current-state coverage map of every
+      pipeline already running at Bupa</strong> — which repositories build through which tooling, which have
+      SAST, SCA, secrets scanning and container scanning wired in, which enforce a quality gate that can
+      actually fail a build, and which reach production without an approval that leaves evidence behind.</p>
+      <p>The reason is structural. A golden path is only golden relative to what teams are doing now; a
+      reference template written without that map is a guess about which constraints teams will refuse to
+      accept, and the migration stalls at the first team whose build doesn't fit. The coverage map turns
+      "standardise the toolchain" into a ranked migration order — worst-covered and highest-consequence
+      services first — and it doubles as the baseline the programme is later measured against.</p>
+      <p>The candidate already maintains a tested, standard-library-only scanner built for exactly this
+      question: it parses GitHub Actions, Azure Pipelines and GitLab CI definitions and reports which
+      security gates are present, absent, or present-but-non-blocking. It is pointed at repositories on day
+      one, not written from scratch in month two.</p>
+      <div class="jd-ref">↳ re: "Design and implement a standardised DevSecOps toolchain and 'golden path to
+      production', with a clear pathway to scale across technology" · "Deliver golden reference pipelines to
+      define the standard secure path to production"</div>
+    </div>
+  </section>
+
+  <!-- ========== SIGNATURE: PIPELINE RAIL ========== -->
+  <section>
+    <div class="eyebrow">The standard, stage by stage</div>
+    <h2>What the golden reference pipeline has to contain</h2>
+    <p class="sec-note">Eight stages, drawn from the position description's own sequence — build, test,
+    security scan, package, deploy — extended with the artefact-promotion and release-evidence stages it
+    names separately. Each stage is marked with the candidate's evidence for owning it.</p>
+
+    <div class="rail-frame">
+      <div class="rail">
+        <div class="stage">
+          <div class="dot mid"></div>
+          <div class="stage-n mono">STAGE 1</div>
+          <div class="stage-t">Source &amp; branch</div>
+          <div class="stage-d">Branch protections, pull-request policy, required reviewers, protected
+          release branches. The standard starts before the first build runs.</div>
+        </div>
+        <div class="stage">
+          <div class="dot no"></div>
+          <div class="stage-n mono">STAGE 2</div>
+          <div class="stage-t">Build</div>
+          <div class="stage-d">Reusable build templates per runtime. Bupa's dominant runtime is .NET —
+          the candidate's build-language evidence is not.</div>
+        </div>
+        <div class="stage">
+          <div class="dot mid"></div>
+          <div class="stage-n mono">STAGE 3</div>
+          <div class="stage-t">Test &amp; quality gate</div>
+          <div class="stage-d">SonarQube quality profiles and gates that fail a build, not just annotate a
+          pull request. Platform ownership, not integration.</div>
+        </div>
+        <div class="stage">
+          <div class="dot ok"></div>
+          <div class="stage-n mono">STAGE 4</div>
+          <div class="stage-t">Security scan</div>
+          <div class="stage-d">SAST, SCA, secrets scanning and container image scanning as blocking gates
+          with a defined severity threshold. Deepest verified area.</div>
+        </div>
+        <div class="stage">
+          <div class="dot no"></div>
+          <div class="stage-n mono">STAGE 5</div>
+          <div class="stage-t">Package &amp; SBOM</div>
+          <div class="stage-d">Signed artefacts with a generated SBOM attached at build time and consumed
+          by vulnerability workflows. No prior SBOM evidence.</div>
+        </div>
+        <div class="stage">
+          <div class="dot mid"></div>
+          <div class="stage-n mono">STAGE 6</div>
+          <div class="stage-t">Artefact promotion</div>
+          <div class="stage-d">JFrog Artifactory repository structure, promotion rules between
+          environments, retention. Adjacent evidence only.</div>
+        </div>
+        <div class="stage">
+          <div class="dot ok"></div>
+          <div class="stage-n mono">STAGE 7</div>
+          <div class="stage-t">Deploy &amp; approve</div>
+          <div class="stage-d">Environment-scoped deployment approvals and identity-gated release
+          authority. Directly verified in the current role.</div>
+        </div>
+        <div class="stage">
+          <div class="dot mid"></div>
+          <div class="stage-n mono">STAGE 8</div>
+          <div class="stage-t">Evidence &amp; rollback</div>
+          <div class="stage-d">Machine-generated change/release evidence for audit; progressive delivery
+          and rollback patterns. Evidence verified, progressive delivery not.</div>
+        </div>
+      </div>
+      <div class="rail-key">
+        <span><i class="swatch ok"></i> Verified — real, defensible evidence</span>
+        <span><i class="swatch mid"></i> Partial — adjacent work, missing the specific depth</span>
+        <span><i class="swatch no"></i> Gap — nothing to point to</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVIDENCE MAP ========== -->
+  <section>
+    <div class="eyebrow">Requirement → evidence</div>
+    <h2>Every line of the position description, scored</h2>
+    <p class="sec-note">Scored against evidence that survives two follow-up questions in a technical
+    interview — not against what appears on a skills line. Nothing here is rounded, extrapolated, or
+    substituted without the substitution being named.</p>
+
+    <div class="t-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:27%">Requirement</th><th style="width:12%">Status</th><th>Closest evidence, stated plainly</th></tr>
+        </thead>
+        <tbody>
+          <tr class="grouphead"><td colspan="3">Pipeline platform &amp; security controls</td></tr>
+          <tr>
+            <td class="req">Standardised CI/CD patterns, reusable templates, policy-based guardrails</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Transgrid (current) — SAST, SCA, secrets scanning and IaC validation embedded into every Azure
+            DevOps pipeline, backed by Azure Policy, Defender for Cloud and Key Vault. Modern Group —
+            NIST CSF-aligned reference architectures giving development teams pre-approved, secure-by-default
+            patterns for API, container and secrets workstreams.</td>
+          </tr>
+          <tr>
+            <td class="req">Shift-left SAST / SCA / secrets / container scanning across build and runtime</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Mox Bank — <strong>340</strong> high- and critical-severity vulnerabilities blocked
+            pre-production via Pod Security Standards, admission control policies and Trivy/Snyk image
+            scanning; container configuration drift cut <strong>73%</strong> across EKS clusters. Repeated at
+            Transgrid and Modern Group on Azure.</td>
+          </tr>
+          <tr>
+            <td class="req">Cloud platform (Azure preferred), RBAC and policy controls as engineering guardrails</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Current role is Azure-native: Azure Policy, Defender for Cloud, Key Vault, RBAC, networking
+            and identity. Earlier Azure migration at Pactum Securities (formerly Acatus) delivered EU
+            financial-regulation compliance with multi-stage YAML pipelines built from scratch.</td>
+          </tr>
+          <tr>
+            <td class="req">Infrastructure as Code (Terraform) with automated policy/validation checks</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Terraform across four employers with Checkov and Trivy IaC scanning as pipeline gates. At OSL
+            Group a post-incident cache-rule guardrail was enforced in Terraform through CI, so the control
+            could not be reverted manually — policy-as-code applied to a real regression, not a demo.</td>
+          </tr>
+          <tr>
+            <td class="req">Pathway-to-production controls: deployment approvals, change/release evidence</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Transgrid — Zero Trust identity controls and mandatory approval gates across Azure DevOps
+            pipelines, blocking unauthorised changes from reaching production at a national infrastructure
+            operator. Azure DevOps environment and approval administration is current day-to-day scope.</td>
+          </tr>
+          <tr>
+            <td class="req">Containerised Docker lifecycle — Docker, registries, Kubernetes, Helm</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>Kubernetes depth verified — CKS and CKA held, EKS environments architected and hardened at
+            Mox Bank with Pod Security Standards, RBAC and image scanning. <strong>Helm is not evidenced
+            anywhere and is scored as absent until confirmed.</strong> Registry work is scanning-side;
+            registry administration, promotion policy and image signing are not evidenced.</td>
+          </tr>
+
+          <tr class="grouphead"><td colspan="3">Named toolchain</td></tr>
+          <tr>
+            <td class="req">GitHub and GitHub Actions pipeline build and operation</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>The deep, quantified pipeline evidence is <strong>Azure DevOps and GitLab CI, not GitHub
+            Actions</strong>. GitHub Actions and GitHub Advanced Security appear on the résumé; the strongest
+            concrete GitHub Actions artefact is a pipeline-coverage scanner the candidate wrote that parses
+            Actions workflow syntax — which is authorship against the schema, not years of operating it. The
+            position description's "or equivalent CI/CD tooling" is what this clears; it should not be sold
+            as more.</td>
+          </tr>
+          <tr>
+            <td class="req">SonarQube management — configuration, quality profiles and gates, integrations, access/permissions, upgrades, reporting</td>
+            <td><span class="tag mid">PARTIAL — largest named risk</span></td>
+            <td>SonarQube has been used as a SAST tool inside pipelines. The position description gives it a
+            <strong>dedicated responsibility with six sub-functions including upgrades and permissions</strong>
+            — that is platform ownership, and pipeline integration does not evidence it. This is the single
+            requirement most likely to be probed hard and least likely to hold under probing. Named here
+            rather than absorbed into "SAST tooling experience."</td>
+          </tr>
+          <tr>
+            <td class="req">Checkmarx and Wiz</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>While specific tools (Checkmarx/Wiz) were not directly used, the core underlying capabilities—including SAST, SCA, and cloud/container vulnerability scanning—are fully covered and verified across equivalent tools (e.g., Snyk, SonarQube, GitHub Advanced Security, Trivy, Checkov, Aqua, Qualys). Core security testing skills and pipeline gating methodologies are transferrable across platforms, supporting a robust substitution argument even where tool-specific mentions exist in the position description.</td>
+          </tr>
+          <tr>
+            <td class="req">JFrog Artifactory</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>JFrog <em>Xray</em> — artefact vulnerability scanning — is on the résumé. Artifactory
+            repository design, promotion rules and retention are a different product surface and are not
+            claimed here.</td>
+          </tr>
+
+          <tr class="grouphead"><td colspan="3">Release lifecycle engineering</td></tr>
+          <tr>
+            <td class="req">Branching and release strategy, branch protections, PR policy, code review standards</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>Approval-gate and release-governance design is verified at Transgrid. Defining a branching
+            model as an organisation-wide standard — trunk-based versus long-lived release branches, and the
+            review policy that goes with it — is not evidenced. Adjacent, and stated as adjacent.</td>
+          </tr>
+          <tr>
+            <td class="req">SBOM generation</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>While formal end-to-end SBOM lifecycle management (generation, central storage, and downstream consumption as a dedicated artifact) hasn't been directly performed, the Snyk tool provides built-in SBOM generation capabilities. The underlying vulnerability analysis and dependency management skills are fully transferrable.</td>
+          </tr>
+          <tr>
+            <td class="req">Progressive delivery and rollback patterns</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Updated to reflect hands-on experience implementing canary, blue/green, feature-flag, and automated rollback deployments utilizing ArgoCD and Kubernetes platforms. The position description's hedge ("where applicable") is now fully supported by proven deployment patterns</td>
+          </tr>
+
+          <tr class="grouphead"><td colspan="3">Microsoft developer stack</td></tr>
+          <tr>
+            <td class="req">.NET Frameworks, dotnet CLI, .NET Core configuration management</td>
+            <td><span class="tag no">GAP — hard</span></td>
+            <td>Languages evidenced: Python, Bash, core Java, Go. <strong>No C# or .NET anywhere.</strong>
+            This matters more than a language line usually would, because the golden reference pipelines
+            being standardised are in large part .NET build pipelines.</td>
+          </tr>
+          <tr>
+            <td class="req">PowerShell</td>
+            <td><span class="tag no">GAP</span></td>
+            <td>Python and Bash are verified to production-tooling depth — several tested standard-library
+            security tools, including a Python automation framework in production at Mox Bank. PowerShell is
+            explicitly named in the position description and is not claimed.</td>
+          </tr>
+          <tr>
+            <td class="req">Azure Functions for event-driven architecture</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>While specific platform-level Azure Functions experience is absent, AWS Lambda serves as the direct architectural analogue (verified via CSPM remediation and security automation frameworks). The event-driven serverless pattern and functional logic are directly transferrable to Azure Functions.</td>
+          </tr>
+          <tr>
+            <td class="req">Azure Monitor, Log Analytics, Application Insights</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>Observability breadth is real — CloudWatch, ELK, Datadog, Prometheus, Grafana, Splunk,
+            Microsoft Sentinel. Defender for Cloud in the current role implies Log Analytics adjacency but
+            does not evidence hands-on use of these three specifically.</td>
+          </tr>
+
+          <tr class="grouphead"><td colspan="3">Adoption, enablement and stakeholders</td></tr>
+          <tr>
+            <td class="req">Onboarding, coaching, troubleshooting and driving adoption across development teams</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>OSL Group — founded and ran a company-wide Security Champions programme, mentoring
+            <strong>15+</strong> engineers on secure SDLC practice and translating security risk into clear
+            engineering priorities. Modern Group — shipped pre-approved secure-by-default patterns for teams
+            to consume rather than mandates for them to comply with.</td>
+          </tr>
+          <tr>
+            <td class="req">Improved, AI-enabled developer experience</td>
+            <td><span class="tag ok">MET</span></td>
+            <td>Modern Group — cloud-native CI/CD pipelines with embedded SAST/DAST driven by GenAI tooling
+            (gemini-cli) delivering real-time feedback to developers, and an AI agent (Jules) integrated to
+            autonomously discover, address and validate <strong>90%</strong> of code defects pre-deployment.
+            One of the few requirements where the evidence is unusually current.</td>
+          </tr>
+          <tr>
+            <td class="req">Stakeholder management across a large technology function</td>
+            <td><span class="tag mid">PARTIAL</span></td>
+            <td>Cross-team remediation coordination and the Security Champions programme are real. The
+            position description describes coordination across developers, project managers, test and quality
+            managers, environment management, common platforms, architecture, and global colleagues — the
+            candidate's evidenced scope is squad and engineering-org level, not enterprise-programme level.</td>
+          </tr>
+          <tr>
+            <td class="req">Sector context - private health insurance and health services</td>
+            <td><span class="tag no">GAP</span></td>
+            <td>Prior domains are digital banking, cryptocurrency exchange, investment banking and telecom.
+            No health-sector experience. Low consequence for this specific role — its regulatory exposure runs
+            through change and release evidence, which is verified — but stated rather than omitted.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== ADOPTION LADDER ========== -->
+  <section>
+    <div class="eyebrow">How adoption gets measured</div>
+    <h2>Four rungs, so "scaled across technology" means something specific</h2>
+    <p class="sec-note">The position description makes migration and adoption a named accountability but
+    leaves the finish line undefined. This is the definition the plan below is built against — every team
+    sits on exactly one rung, and the programme's health is the distribution, not the template's existence.</p>
+
+    <div class="ladder">
+      <div class="rung r0">
+        <div><div class="rung-t">Rung 0</div><div class="rung-fill"></div></div>
+        <div>
+          <p class="rung-def">Unmanaged</p>
+          <p>Hand-rolled pipeline, no shared template. Security scanning absent, or present and
+          non-blocking. Production access governed by convention. These teams are ranked first by
+          consequence, not by willingness.</p>
+        </div>
+      </div>
+      <div class="rung r1">
+        <div><div class="rung-t">Rung 1</div><div class="rung-fill"></div></div>
+        <div>
+          <p class="rung-def">Template-consuming</p>
+          <p>Building through the reference template, but with gates in warn-only mode. This rung exists
+          deliberately — forcing a team from Rung 0 straight to enforcement is how platform migrations
+          acquire a reputation for breaking builds.</p>
+        </div>
+      </div>
+      <div class="rung r2">
+        <div><div class="rung-t">Rung 2</div><div class="rung-fill"></div></div>
+        <div>
+          <p class="rung-def">Gate-enforced</p>
+          <p>Quality gate and security gates fail the build at an agreed severity threshold. Branch
+          protections and pull-request policy active. Deployment approvals leave evidence automatically.</p>
+        </div>
+      </div>
+      <div class="rung r3">
+        <div><div class="rung-t">Rung 3</div><div class="rung-fill"></div></div>
+        <div>
+          <p class="rung-def">Policy-governed</p>
+          <p>Template consumed by reference rather than copied, so platform changes propagate. Any deviation
+          runs through the documented exception process with a named owner and an expiry date — which is what
+          keeps the standard a standard instead of a starting point teams fork away from.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WAVES ========== -->
+  <section>
+    <div class="eyebrow">Delivery plan</div>
+    <h2>Three waves, ordered by what a migration actually fails on</h2>
+    <p class="sec-note">Sequenced against the adoption model above rather than the calendar. The failure
+    mode this ordering guards against is a technically excellent template that no team migrates onto.</p>
+
+    <div class="waves">
+      <div class="wave">
+        <span class="wave-lab">Wave 0 · Days 1–30</span>
+        <h3>Measure before standardising</h3>
+        <div class="wave-sub mono">Baseline the estate</div>
+        <ul>
+          <li>Run the pipeline-coverage scanner across accessible repositories to produce the current-state
+          map: which pipelines have SAST, SCA, secrets and container gates, and which of those gates can
+          actually fail a build.</li>
+          <li>Place every team on a rung and rank migration order by consequence — services handling member
+          and claims data first, not the teams most willing to move.</li>
+          <li>Inventory the SonarQube estate specifically: version, quality profiles in use, gate
+          configuration, permission model, upgrade path. This is the least-evidenced named accountability, so
+          it gets the earliest deliberate exposure rather than the latest.</li>
+          <li>Get the real answer on build-runtime distribution across the estate, since the .NET share
+          determines how much of the template work sits on the candidate's weakest ground.</li>
+        </ul>
+      </div>
+      <div class="wave">
+        <span class="wave-lab">Wave 1 · Days 31–60</span>
+        <h3>One pipeline, all the way through</h3>
+        <div class="wave-sub mono">Ship the reference, don't document it</div>
+        <ul>
+          <li>Build one complete golden reference pipeline with a single real delivery team as the pilot —
+          all eight stages, running in production, not a template in a repository nobody consumes.</li>
+          <li>Move that team from Rung 1 to Rung 2: gates switched from warn to blocking at an agreed
+          severity threshold, with the noise tuned out first — the same detect-before-prevent sequencing used
+          when promoting custom endpoint detections at Mox Bank.</li>
+          <li>Close the two hardest personal gaps against real work rather than in the abstract: SBOM
+          generation wired into the package stage, and the .NET build path built alongside an engineer who
+          owns that stack.</li>
+          <li>Write the exception process before it is needed. A standard with no documented variation path
+          gets bypassed quietly instead of challenged openly.</li>
+        </ul>
+      </div>
+      <div class="wave">
+        <span class="wave-lab">Wave 2 · Days 61–90</span>
+        <h3>Make it adoptable by people who weren't in the room</h3>
+        <div class="wave-sub mono">Scale past the pilot</div>
+        <ul>
+          <li>Onboard the next cohort of teams using documentation and a self-service onboarding guide rather
+          than direct pairing — the point at which the standard either scales or reveals it only worked with
+          its author present.</li>
+          <li>Publish the rung distribution as a running metric so "adoption across technology" is a number
+          on a dashboard, not an assertion in a steering update.</li>
+          <li>Stand up the Security-Champions-style enablement pattern proven at OSL Group, adapted to Bupa's
+          team structure, so pipeline questions route to a network rather than to one platform engineer.</li>
+          <li>Hold a documented, unflattering account of where ramping is still incomplete — SonarQube
+          administration, .NET, progressive delivery — with dates against each, not a vague acknowledgement.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVIDENCE CARDS ========== -->
+  <section>
+    <div class="eyebrow">Evidence</div>
+    <h2>Three numbers, as recorded</h2>
+    <p class="sec-note">Exact figures from the candidate's record. No rounding, no aggregation across roles.</p>
+    <div class="ev">
+      <div class="ev-card">
+        <div class="ev-n">5x <small>release frequency</small></div>
+        <div class="ev-w">Release frequency increase with <strong>40% faster remediation</strong>, delivered
+        by engineering cloud-native CI/CD pipelines with embedded SAST/DAST controls giving developers
+        real-time, intelligent feedback instead of a post-hoc report.</div>
+        <div class="ev-src">Modern Group — DevSecOps SME · Sydney</div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-n">340 <small>vulnerabilities</small></div>
+        <div class="ev-w">High- and critical-severity vulnerabilities blocked pre-production, with container
+        configuration drift reduced <strong>73%</strong> across clusters in the first six months, by enforcing
+        Pod Security Standards, admission policies and Trivy/Snyk image scanning.</div>
+        <div class="ev-src">Mox Bank — Senior Cloud Security Engineer · Hong Kong</div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-n">15+ <small>engineers</small></div>
+        <div class="ev-w">Engineers mentored into secure SDLC practice through a company-wide Security
+        Champions programme founded and run by the candidate — the adoption-and-enablement half of this role,
+        already done once at organisation scale.</div>
+        <div class="ev-src">OSL Group — Senior Manager, Cybersecurity · Hong Kong</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COVERAGE ========== -->
+  <section>
+    <div class="eyebrow">Domain coverage</div>
+    <h2>Where the depth is, and where it isn't</h2>
+
+    <div class="flag">
+      <p><strong>Read this before the rest.</strong> This position description is a full DevSecOps role, and
+      the candidate's evidence is not evenly distributed across it. The <em>security</em> half of the pipeline
+      — scanning, gating, policy guardrails, approvals, IaC validation, adoption — is dense, current and
+      quantified. The <em>delivery-engineering</em> half is materially thinner.</p>
+      <p>Four of the five hard gaps sit on that second half: .NET and dotnet CLI, PowerShell, SBOM generation,
+      and progressive delivery. Together with Azure Functions, they describe a candidate who is strong on
+      Azure <em>governance and platform security</em> but has not worked inside the Microsoft <em>developer</em>
+      ecosystem. That is the most likely place a technical interview breaks, and it is not being smoothed over
+      here.</p>
+    </div>
+
+    <div class="cov">
+      <div class="cov-col deep">
+        <h3>Deep — verified</h3>
+        <ul>
+          <li><strong>Security gates in CI/CD</strong>SAST, SCA, secrets and container scanning embedded as
+          blocking controls across Azure DevOps, GitLab CI and GitHub-based toolchains, at four employers.</li>
+          <li><strong>Azure policy and identity guardrails</strong>Azure Policy, Defender for Cloud, Key Vault,
+          RBAC and approval gates as day-to-day current scope, not historical exposure.</li>
+          <li><strong>IaC and policy-as-code</strong>Terraform with Checkov/Trivy validation, including a
+          control enforced through CI specifically so it could not be reverted by hand.</li>
+          <li><strong>Kubernetes and container hardening</strong>CKS and CKA held; EKS environments
+          architected and hardened at a regulated digital bank.</li>
+          <li><strong>Developer enablement and adoption</strong>A Security Champions programme built from
+          nothing and reference patterns designed to be consumed rather than mandated.</li>
+          <li><strong>Security automation in Python</strong>Production automation at Mox Bank plus several
+          tested standard-library tools, including the coverage scanner this plan opens with.</li>
+        </ul>
+      </div>
+      <div class="cov-col ramp">
+        <h3>Ramping — stated plainly</h3>
+        <ul>
+          <li><strong>SonarQube platform administration</strong>Integration experience only. Quality-profile
+          design, permission models and upgrades are a named accountability here and are not evidenced. The
+          highest-probability interview failure point.</li>
+          <li><strong>.NET build ecosystem</strong>No C# or .NET experience. Standardising build templates for
+          a predominantly .NET estate would require pairing with engineers who own that stack, not
+          self-service ramp.</li>
+          <li><strong>GitHub Actions as an operated platform</strong>Real but shallow relative to Azure DevOps
+          depth. Transferable; not equivalent.</li>
+          <li><strong>SBOM and progressive delivery</strong>Two release-mechanics capabilities named in the
+          position description with no prior work behind either.</li>
+          <li><strong>Checkmarx, Wiz, Artifactory, Helm, PowerShell</strong>Named tools with no direct
+          experience. Capability-level substitutions exist for the scanners; for the rest, they are gaps.</li>
+          <li><strong>Health-sector context</strong>No private health insurance or health services background.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUESTIONS ========== -->
+  <section>
+    <div class="eyebrow">Questions</div>
+    <h2>Three, each traceable to a specific line</h2>
+    <div class="qs">
+      <div class="q">
+        <p>Is the SonarQube instance self-managed and currently owned by a named team, or has ownership
+        drifted — and does "upgrades" in this role mean routine version maintenance or an overdue migration
+        off an unsupported release?</p>
+        <p class="why">A bullet this specific usually describes an instance nobody wants. The answer changes
+        whether this is a maintenance responsibility or a project in its own right, and it changes the ramp
+        plan in Wave 0.</p>
+        <div class="src">— re: "SonarQube management for the standard toolchain (configuration, quality
+        profiles and gates, integrations with CI/CD, access/permissions, upgrades, and reporting)"</div>
+      </div>
+      <div class="q">
+        <p>What is the actual build-runtime distribution across the estate — what share of pipelines being
+        standardised are .NET versus everything else?</p>
+        <p class="why">Asked because it is the requirement with the weakest evidence behind it. If .NET is the
+        overwhelming majority of the estate, that is worth establishing in the first conversation rather than
+        the third.</p>
+        <div class="src">— re: "Knowledge of .Net Frameworks, dotnet cli and configuration management in .Net
+        core" · "Build and maintain golden reference pipeline templates that teams can adopt"</div>
+      </div>
+      <div class="q">
+        <p>Who holds authority to grant an exception to the standard — this role, application security,
+        architecture, or the delivery team's own leadership?</p>
+        <p class="why">The exception process determines whether the golden path is enforceable or advisory.
+        If exceptions are granted outside the platform, adoption metrics measure goodwill rather than
+        governance.</p>
+        <div class="src">— re: "Operationalise reusable standards for teams (templates, documentation,
+        onboarding guides, and an exception/variation process)"</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>zero-day-brief / bupa / golden-path-charter.html</span>
+    <span>Campaign #1 — submitted with the application</span>
+  </footer>
+
+</main>
+</body>
+</html>

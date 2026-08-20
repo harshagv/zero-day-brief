@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharon AI — Security Engineer — Control Build-Out Plan — Harsha G V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e6e9ee;
+      --paper: #ffffff;
+      --ink: #131920;
+      --ink-soft: #4d5765;
+      --ink-faint: #88919e;
+      --rule: #c8cfd9;
+      --hair: #e0e5eb;
+      --rail: #262d38;
+      --rail-hole: #4a5462;
+      --accent: #443c9c;
+      --accent-bg: #ecebf8;
+      --met: #1c6647;
+      --met-bg: #e5f0ea;
+      --met-line: #9cc5b1;
+      --partial: #8a5a10;
+      --partial-bg: #f6eeda;
+      --partial-line: #ddc088;
+      --gap: #9c2e3e;
+      --gap-bg: #f7e6e9;
+      --gap-line: #dcaab3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Archivo', system-ui, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 264px 1fr;
+      gap: 0;
+    }
+
+    /* ================= SIGNATURE: RACK ELEVATION ================= */
+    .rack-col {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 34px 20px 34px 24px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .rack-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+
+    .rack-sub {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 9.5px;
+      color: var(--ink-faint);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .rack {
+      background: var(--rail);
+      border-radius: 3px;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .u {
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      align-items: stretch;
+      gap: 4px;
+    }
+
+    .u-holes {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .u-holes span {
+      width: 3px;
+      height: 3px;
+      background: var(--rail-hole);
+      border-radius: 1px;
+    }
+
+    .u-body {
+      background: #f1f3f6;
+      border-radius: 1.5px;
+      padding: 5px 7px 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .u-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 9.2px;
+      line-height: 1.3;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .u-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .u.met .u-fill {
+      background: var(--met-line);
+    }
+
+    .u.partial .u-fill {
+      background: var(--partial-line);
+    }
+
+    .u.gap .u-fill {
+      background: var(--gap-line);
+    }
+
+    .u-code {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .u.met .u-code {
+      color: var(--met);
+    }
+
+    .u.partial .u-code {
+      color: var(--partial);
+    }
+
+    .u.gap .u-code {
+      color: var(--gap);
+    }
+
+    .rack-legend {
+      margin-top: 18px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 9.5px;
+      color: var(--ink-faint);
+    }
+
+    .rack-legend div {
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      line-height: 1.45;
+    }
+
+    .chip {
+      width: 9px;
+      height: 9px;
+      border-radius: 1.5px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .chip.met {
+      background: var(--met-line);
+    }
+
+    .chip.partial {
+      background: var(--partial-line);
+    }
+
+    .chip.gap {
+      background: var(--gap-line);
+    }
+
+    /* ================= MAIN ================= */
+    main {
+      padding: 44px 54px 96px;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 33px;
+      font-weight: 700;
+      letter-spacing: -0.022em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      max-width: 740px;
+    }
+
+    .subhead {
+      color: var(--ink-soft);
+      font-size: 15px;
+      max-width: 660px;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+
+    section {
+      margin-top: 52px;
+    }
+
+    .sec-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 7px;
+    }
+
+    h2 {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 14.5px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    p {
+      color: var(--ink-soft);
+      font-size: 14.3px;
+      margin-bottom: 10px;
+    }
+
+    strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .basis {
+      background: var(--accent-bg);
+      border: 1px solid #cfcbee;
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 2px;
+    }
+
+    .basis h3 {
+      color: var(--accent);
+    }
+
+    .basis ul {
+      padding-left: 17px;
+      margin-top: 8px;
+    }
+
+    .basis li {
+      font-size: 13.2px;
+      color: var(--ink-soft);
+      margin-bottom: 7px;
+      line-height: 1.5;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .col {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 18px 20px;
+    }
+
+    .col>.col-head {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 11px;
+    }
+
+    .col ol {
+      padding-left: 19px;
+    }
+
+    .col li {
+      font-size: 13.2px;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .col li b {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .thesis {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--accent);
+      border-radius: 2px;
+      padding: 22px 26px;
+    }
+
+    .thesis p {
+      color: var(--ink);
+      font-size: 15.3px;
+      line-height: 1.62;
+      margin-bottom: 12px;
+    }
+
+    .thesis p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .jd-ref {
+      margin-top: 14px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      line-height: 1.5;
+      padding-top: 12px;
+      border-top: 1px solid var(--hair);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+    }
+
+    th {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 9.8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: left;
+      padding: 10px 13px;
+      background: #f2f4f7;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    td {
+      padding: 12px 13px;
+      font-size: 13.1px;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--hair);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    td.req {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 9.8px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .tag.met {
+      background: var(--met-bg);
+      color: var(--met);
+      border: 1px solid var(--met-line);
+    }
+
+    .tag.partial {
+      background: var(--partial-bg);
+      color: var(--partial);
+      border: 1px solid var(--partial-line);
+    }
+
+    .tag.gap {
+      background: var(--gap-bg);
+      color: var(--gap);
+      border: 1px solid var(--gap-line);
+    }
+
+    /* Build bands */
+    .band {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 20px 24px;
+      margin-bottom: 13px;
+    }
+
+    .band.b1 {
+      border-left: 5px solid var(--gap);
+    }
+
+    .band.b2 {
+      border-left: 5px solid var(--partial);
+    }
+
+    .band.b3 {
+      border-left: 5px solid var(--met);
+    }
+
+    .band-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .band-head h3 {
+      margin: 0;
+    }
+
+    .band-win {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+    }
+
+    .band-why {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+      margin-bottom: 12px;
+    }
+
+    .band ul {
+      padding-left: 18px;
+    }
+
+    .band li {
+      font-size: 13.2px;
+      color: var(--ink-soft);
+      margin-bottom: 9px;
+      line-height: 1.5;
+    }
+
+    /* Evidence cards */
+    .ev-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .ev {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--met);
+      padding: 18px 20px;
+      border-radius: 2px;
+    }
+
+    .ev .n {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--met);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .ev .n small {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .ev .what {
+      font-size: 12.4px;
+      color: var(--ink-soft);
+      margin-bottom: 11px;
+      line-height: 1.5;
+    }
+
+    .ev .where {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      color: var(--ink-faint);
+      border-top: 1px solid var(--hair);
+      padding-top: 8px;
+      line-height: 1.4;
+    }
+
+    .flag {
+      background: var(--gap-bg);
+      border: 1px solid var(--gap-line);
+      border-left: 4px solid var(--gap);
+      padding: 16px 20px;
+      margin-bottom: 15px;
+      font-size: 13.4px;
+      color: #5f2530;
+      border-radius: 2px;
+      line-height: 1.55;
+    }
+
+    .flag strong {
+      color: var(--gap);
+    }
+
+    .cov-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cov {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 18px 20px;
+      border-radius: 2px;
+    }
+
+    .cov.deep {
+      border-top: 3px solid var(--met);
+    }
+
+    .cov.ramp {
+      border-top: 3px solid var(--gap);
+    }
+
+    .cov ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .cov li {
+      font-size: 12.9px;
+      color: var(--ink-soft);
+      padding: 9px 0;
+      border-bottom: 1px solid var(--hair);
+      line-height: 1.5;
+    }
+
+    .cov li:last-child {
+      border-bottom: none;
+    }
+
+    .cov li b {
+      display: block;
+      color: var(--ink);
+      font-size: 13.3px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .q {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 16px 20px;
+      display: flex;
+      gap: 15px;
+      border-radius: 2px;
+      margin-bottom: 13px;
+    }
+
+    .q .qn {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .q p {
+      color: var(--ink);
+      margin-bottom: 7px;
+      font-size: 13.8px;
+    }
+
+    .q .qr {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+      line-height: 1.5;
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 18px;
+      margin-top: 56px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-faint);
+    }
+
+    @media (max-width:940px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .rack-col {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 28px 22px;
+      }
+
+      main {
+        padding: 32px 22px 72px;
+      }
+
+      .split,
+      .ev-grid,
+      .cov-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <!-- ============ SIGNATURE ELEMENT: CONTROL RACK ============ -->
+    <aside class="rack-col">
+      <div class="rack-title">Control rack — elevation</div>
+      <div class="rack-sub">Each unit is one control domain named in the job description. Fill depth = evidence depth at
+        application stage.</div>
+
+      <div class="rack">
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">CI/CD &amp; container hardening</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">Vulnerability management</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">IAM design — PoLP / RBAC</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">SOC 2 controls &amp; audit evidence</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">Security automation at scale</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">Threat modelling / design review</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u met">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:100%"></div>
+            <div class="u-label">Cloud posture — AWS + Azure</div><span class="u-code">Met</span>
+          </div>
+        </div>
+        <div class="u partial">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:55%"></div>
+            <div class="u-label">Incident response</div><span class="u-code">Partial — one full lifecycle</span>
+          </div>
+        </div>
+        <div class="u partial">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:50%"></div>
+            <div class="u-label">PAM / SSO / MFA / Zero Trust</div><span class="u-code">Partial</span>
+          </div>
+        </div>
+        <div class="u partial">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:45%"></div>
+            <div class="u-label">SIEM &amp; EDR/XDR — platform admin</div><span class="u-code">Partial</span>
+          </div>
+        </div>
+        <div class="u partial">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:54%"></div>
+            <div class="u-label">Pentest / red team coordination</div><<span class="u-code">Partial</span>
+          </div>
+        </div>
+        <div class="u gap">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:10%"></div>
+            <div class="u-label">ISO 27001</div><span class="u-code">Gap</span>
+          </div>
+        </div>
+        <div class="u partial">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:56%"></div>
+            <div class="u-label">Firewall / VPN / DNS appliance ops</div><span class="u-code">Partial</span>
+          </div>
+        </div>
+        <div class="u partial">
+          <div class="u-holes"><span></span><span></span></div>
+          <div class="u-body">
+            <div class="u-fill" style="width:54%"></div>
+            <div class="u-label">On-prem, bare-metal &amp; HPC estate</div><span class="u-code">Partial</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rack-legend">
+        <div><span class="chip met"></span><span><b>Met</b> — real, quantified, defensible under follow-up
+            questioning</span></div>
+        <div><span class="chip partial"></span><span><b>Partial</b> — real work, missing ownership depth or a
+            metric</span></div>
+        <div><span class="chip gap"></span><span><b>Gap</b> — no evidence to point to</span></div>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main>
+      <header>
+        <div class="eyebrow">zero-day-brief / sharon-ai / control-build-out-plan</div>
+        <h1>Security control build-out plan — Security Engineer</h1>
+        <p class="subhead">Not a cover letter. A commissioning sequence for the control layer this role would
+          own across two very different estates — a cloud control plane and a colocated GPU fleet — scored
+          against evidence that would survive a second round of questioning rather than a first read.</p>
+        <div class="meta-row">
+          <span>Harsha G V</span>
+          <span>harsha.gv29@gmail.com</span>
+          <span>+61 402 697 098</span>
+          <span>au.linkedin.com/in/harshagv</span>
+        </div>
+      </header>
+
+      <!-- BASIS -->
+      <section>
+        <div class="sec-label">Basis of this document</div>
+        <h2>What it is built from, and what it assumes</h2>
+        <div class="basis">
+          <h3>Public information only</h3>
+          <p style="font-size:13.2px;">Nothing in this plan draws on non-public knowledge of Sharon AI's systems,
+            vendors, network design, or security programme. It is built from the job description and public
+            company sourcing. Four assumptions carry real weight, and are stated rather than resolved in the
+            candidate's favour:</p>
+          <ul>
+            <li><b>The on-premises estate is a colocated bare-metal GPU fleet, not corporate office IT.</b>
+              Public sourcing describes GPU capacity deployed inside third-party Tier IV facilities. This plan
+              therefore treats "on-premises" as racks, fabric, out-of-band management and tenant isolation — the
+              harder reading, and the one that produces the largest disclosed gap below.</li>
+            <li><b>The cloud estate is AWS and/or Azure.</b> The JD offers AWS, Azure or GCP. Verified depth
+              exists in the first two and none in the third; no GCP claim is made anywhere in this document.</li>
+            <li><b>This is a founding or near-founding security engineering hire.</b> Nine distinct control
+              domains sit under one headcount in the JD, which reads as build-the-function scope rather than a
+              backfill into an established team. The sequencing below assumes that.</li>
+            <li><b>Compliance here means ISO 27001, SOC 2 and Australian sovereign obligations</b> — not
+              financial-services regulation. Framework references have been narrowed accordingly.</li>
+          </ul>
+          <p style="font-size:13.2px;margin-top:10px;margin-bottom:0;"><b>One item remains genuinely open:</b>
+            Australian Government Baseline clearance eligibility, which the JD raises under future IRAP work.
+            It is citizenship-dependent and is a question for the first conversation, not something this
+            document should imply either way.</p>
+        </div>
+      </section>
+
+      <!-- ROLE DECODE -->
+      <section>
+        <div class="sec-label">Role decode</div>
+        <h2>What the job does, versus what it requires on arrival</h2>
+        <div class="split">
+          <div class="col">
+            <div class="col-head">Responsibilities — the actual work</div>
+            <ol>
+              <li><b>Build and run the control layer</b> across cloud <em>and</em> on-premises: firewalls,
+                endpoint protection, SIEM, IAM, network security tooling.</li>
+              <li><b>Lead vulnerability management</b> end to end — scanning, triage, prioritisation,
+                remediation tracking, across infrastructure and applications.</li>
+              <li><b>Own incident detection, response and post-incident review.</b></li>
+              <li><b>Run identity initiatives</b> — privileged access management, SSO, MFA, Zero Trust.</li>
+              <li><b>Embed security into the SDLC</b> — secure code review, threat modelling, CI/CD pipeline
+                security, Kubernetes and container hardening.</li>
+              <li><b>Coordinate penetration testing and red team engagements</b> and drive findings to closure.</li>
+              <li><b>Partner with GRC</b> on ISO 27001 and SOC 2 — implement technical controls, produce audit
+                evidence.</li>
+              <li><b>Evaluate and optimise security technology</b> as capacity scales.</li>
+              <li><b>Raise posture continuously</b> through automation and monitoring.</li>
+            </ol>
+          </div>
+          <div class="col">
+            <div class="col-head">Required &amp; preferred — the arrival bar</div>
+            <ol>
+              <li>5+ years in security engineering, security operations or <b>infrastructure security</b>.</li>
+              <li>Hands-on cloud platform security — AWS, Azure or GCP.</li>
+              <li><b>Networking and network security</b> — firewalls, VPNs, DNS, TLS, Zero Trust.</li>
+              <li>SIEM platforms, EDR/XDR, vulnerability management tooling, <b>security orchestration</b>.</li>
+              <li>DevSecOps across CI/CD, Docker/Kubernetes, Terraform.</li>
+              <li>Python, Bash or equivalent automation.</li>
+              <li>Analytical and incident response capability; communication across technical and
+                non-technical audiences.</li>
+              <li><em>Preferred:</em> CISSP, AWS Security Specialty, GIAC, OSCP or CEH.</li>
+              <li><em>Preferred:</em> <b>AI infrastructure, GPU clusters, HPC or large-scale data centre
+                  environments.</b></li>
+              <li><em>Preferred:</em> ISO 27001 / SOC 2 environments; security automation at scale; Baseline
+                clearance eligibility.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="thesis" style="margin-top:16px;">
+          <p><b>Role thesis.</b> If hired, the job is to build the technical security control layer across
+            two estates at once — a cloud control plane and a colocated bare-metal GPU fleet — and to convert
+            that control layer into ISO 27001 and SOC 2 audit evidence fast enough that compliance never
+            becomes the constraint on selling sovereign compute to government, research and enterprise
+            customers.</p>
+          <div class="jd-ref">Derived from three JD signals specifically: controls named across <em>cloud and
+              on-premises</em>; compliance appearing twice (technical alignment, then GRC partnership with two
+            named standards); and a clearance note that only exists where government workloads are in the
+            pipeline.</div>
+        </div>
+      </section>
+
+      <!-- DAY ONE -->
+      <section>
+        <div class="sec-label">Day one</div>
+        <h2>The first real thing, before any new control is designed</h2>
+        <div class="thesis">
+          <p>The first deliverable is a single access-path inventory spanning both estates: every route into
+            a customer's compute capacity — tenant API, operator administrative access, vendor and colocation
+            access, out-of-band and baseboard management planes, the storage and network fabric — with the
+            control gating each hop and the person who owns it named beside it.</p>
+          <p>The reason is structural rather than stylistic. This JD assigns nine control domains to one
+            headcount. Without that inventory they arrive as nine parallel workstreams competing for the same
+            engineering attention; with it, they collapse into one list ranked by consequence. The same
+            artifact does double duty as the asset-and-access-control spine that an ISO 27001 or SOC 2 auditor
+            asks for first, which means the compliance workstream starts producing evidence from week one
+            rather than from a separate effort later.</p>
+          <p>It is also the honest onboarding move for this particular candidate: roughly half of that map —
+            the bare-metal side — sits outside every environment worked in to date. Tracing it first is what
+            makes the rest of this plan credible.</p>
+          <div class="jd-ref">↳ re: "Design, implement and maintain security controls across Sharon AI's cloud
+            (AWS, Azure or GCP) and on-premises environments, including firewalls, endpoint protection, SIEM,
+            identity and access management and network security tooling."</div>
+        </div>
+      </section>
+
+      <!-- EVIDENCE MAP -->
+      <section>
+        <div class="sec-label">Requirement → evidence</div>
+        <h2>Each JD accountability against its closest verified proof</h2>
+        <p style="max-width:700px;">A two-state <span class="mono" style="font-size:12px;">MET / PLANNED</span>
+          scheme was deliberately expanded to three. Collapsing partial evidence into <em>met</em> overclaims;
+          collapsing it into <em>planned</em> discards real work. The middle state is where most honest
+          assessments actually live.</p>
+        <table>
+          <tr>
+            <th style="width:25%">JD requirement</th>
+            <th style="width:12%">Status</th>
+            <th>Evidence, or the absence of it</th>
+          </tr>
+
+          <tr>
+            <td class="req">DevSecOps across CI/CD, containers, IaC</td>
+            <td><span class="tag met">Met</span></td>
+            <td>The deepest area of the profile. SAST, SCA, secrets scanning and IaC validation embedded into
+              every Azure DevOps pipeline in the current role, backed by Azure Policy, Defender for Cloud and Key
+              Vault. Earlier: <strong>5x release frequency</strong> and <strong>40% faster remediation</strong> at
+              Modern Group. CKS and CKA held.</td>
+          </tr>
+          <tr>
+            <td class="req">Vulnerability management — scanning, triage, prioritisation, remediation tracking</td>
+            <td><span class="tag met">Met</span></td>
+            <td>Mox Bank — <strong>340</strong> high- and critical-severity vulnerabilities blocked
+              pre-production and container configuration drift reduced <strong>73%</strong> via Pod Security
+              Standards, admission policy and Trivy/Snyk image scanning. OSL Group — <strong>5</strong> critical
+              enterprise risks identified, prioritised and resolved through continuous architecture review.</td>
+          </tr>
+          <tr>
+            <td class="req">Identity and access management — PoLP, RBAC</td>
+            <td><span class="tag met">Met</span></td>
+            <td>Mox Bank — <strong>50%</strong> reduction in access-related security incidents after
+              engineering PoLP-based IAM policies, RBAC and cross-account access patterns across the cloud
+              environment.</td>
+          </tr>
+          <tr>
+            <td class="req">Partner with GRC on SOC 2 — technical controls and audit evidence</td>
+            <td><span class="tag met">Met</span></td>
+            <td>OSL Group — engineered and operationalised the complete SOC 2 Type II control set with
+              continuous compliance monitoring, sustaining <strong>zero critical or high findings across two
+                consecutive certification cycles</strong>. This is precisely the produce-the-evidence half of the
+              JD line.</td>
+          </tr>
+          <tr>
+            <td class="req">Align technical controls to compliance requirements</td>
+            <td><span class="tag met">Met</span></td>
+            <td>OSL Group — <strong>38%</strong> improvement in CIS and NIST CSF policy compliance by
+              architecting AWS-native posture management (Security Hub, Config, Lambda remediation) with
+              automated finding correlation and remediation playbooks.</td>
+          </tr>
+          <tr>
+            <td class="req">Security automation and continuous monitoring at scale</td>
+            <td><span class="tag met">Met</span></td>
+            <td>Mox Bank — Python framework integrating PagerDuty, Jira and AWS Lambda cut alert triage from
+              <strong>45 minutes to 12</strong> and auto-classified <strong>85%</strong> of security tickets.
+              OSL Group — telemetry from <strong>9 AWS accounts</strong> consolidated into one OCSF-normalised
+              Security Lake surface with <strong>4 commercial threat-intel feeds</strong> and
+              <strong>12-month</strong> searchable retention.
+            </td>
+          </tr>
+          <tr>
+            <td class="req">Secure SDLC — threat modelling and design review</td>
+            <td><span class="tag met">Met</span></td>
+            <td>OSL Group — continuous security architecture review across cloud-native workloads,
+              trust-boundary analysis surfacing <strong>5</strong> critical risks before build, and a Security
+              Champions programme embedding the practice with <strong>15+</strong> engineers.</td>
+          </tr>
+          <tr>
+            <td class="req">Cloud platform security — AWS, Azure</td>
+            <td><span class="tag met">Met</span></td>
+            <td>Both, at depth, across four employers and two regulatory regimes. AWS Certified Security –
+              Specialty held, which satisfies the preferred certification line. No GCP experience; not claimed.</td>
+          </tr>
+
+          <tr>
+            <td class="req">Incident response — detection, response, post-incident review</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>One full-lifecycle incident, and a strong one: a live confidentiality incident at OSL Group
+              where CDN edge caching exposed one authenticated user's data to another. Declared Sev-1, bridge
+              and communications roles run, fault diagnosed as edge-cached rather than an application session
+              bug through cache-header inspection, contained same day by global purge and forced
+              re-authentication, root cause eliminated, and recurrence blocked by a Terraform-enforced CI
+              guardrail plus a blameless post-incident review. <strong>Response is evidenced. Standing ownership
+                of a detection function — alert engineering, coverage mapping, an on-call rotation — is not.</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="req">PAM, SSO, MFA, Zero Trust</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>Zero Trust identity controls and mandatory approval gates enforced across Azure DevOps
+              pipelines in the current role; Teleport, Duo MFA and Entra ID in prior environments; OIDC
+              federation used to remove standing SIEM credentials. <strong>Enterprise identity-provider
+                lifecycle work — conditional access policy, SCIM provisioning, joiner-mover-leaver automation —
+                is not evidenced at ownership depth.</strong></td>
+          </tr>
+          <tr>
+            <td class="req">SIEM platforms and EDR/XDR technologies</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>Detection-engineering depth is real and holds up under questioning: custom CrowdStrike
+              indicators of attack mapped to MITRE ATT&amp;CK, tuned against false positives before promotion
+              from detect to prevent, and tiered Zscaler URL and web-content filtering policy with SSL
+              inspection. Toolchain selection and architecture-level integration are also real.
+              <strong>Day-to-day platform administration of a SIEM or EDR console — policy groups, agent fleet
+                management, content lifecycle, upgrades — is a standing gap and is named as one rather than
+                folded into the above.</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="req">Networking and network security</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>Verified at the cloud fabric layer: tiered VPC segmentation with public ingress, private
+              application and isolated data tiers; default-deny per-namespace Kubernetes NetworkPolicies;
+              FQDN-allowlisted egress; private endpoints for managed services; TLS 1.2+ and mTLS for
+              service-to-service traffic. That is genuine network security work.
+              <strong>It is not equivalent to operating physical firewalls, VPN concentrators and DNS
+                infrastructure, which is scored separately below.</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="req">Evaluate, implement and optimise security technologies</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>Tool selection and integration decisions taken on coverage overlap and operating cost rather
+              than feature lists. Sole ownership of a formal evaluation or platform replacement decision is not
+              evidenced.</td>
+          </tr>
+
+          <tr>
+            <td>On-premises environments — bare metal, HPC, data centre</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>Transgrid (current): architecting hybrid network connectivity between an on-premises
+              data centre and Azure: ExpressRoute circuits and ExpressRoute Gateway for private-first
+              connectivity, with Azure Firewall as the central inspection point for traffic crossing
+              between the two estates. This is current, real on-premises-boundary work and is why this
+              row is no longer scored as no evidence.
+            </td>
+          </tr>
+          <tr>
+            <td>Firewalls, VPNs and DNS as operated infrastructure</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>Transgrid (current): Azure Firewall operated as the centralised inspection point in a
+              private-first hybrid architecture, with ExpressRoute Gateway terminating the on-premises
+              circuit. Mox Bank: tiered VPC segmentation (public ingress / private app / isolated data),
+              default-deny per-namespace Kubernetes NetworkPolicies, NAT- and FQDN-allowlisted egress,
+              private endpoints for managed services. OSL Group: isolated custody VPC for cold-wallet
+              signing with no inbound internet route, deny-by-default security groups and PAM-gated
+              jump-host-only admin access; Cloudflare WAF/DDoS at the edge.
+            </td>
+          </tr>
+          <tr>
+            <td>Penetration testing and red team coordination</td>
+            <td><span class="tag partial">Partial</span></td>
+            <td>OSL Group coordinated third-party penetration testing engagements end to end, including
+              defining scope, and performed white-box testing in-house using Burp Suite, Tenable Nessus
+              and OWASP ZAP. Mox Bank consumed pentest output and closed a class of lateral-movement
+              findings through segmentation redesign.
+            </td>
+          </tr>
+          <tr>
+            <td class="req">ISO 27001</td>
+            <td><span class="tag gap">Gap</span></td>
+            <td>SOC 2 Type II experience is strong and is a genuinely adjacent control-maturity discipline
+              but it is a different standard with a different structure, and the JD names both. No ISO 27001
+              claim is made here.</td>
+          </tr>
+          <tr>
+            <td class="req">Security orchestration (SOAR) platforms</td>
+            <td><span class="tag gap">Gap</span></td>
+            <td>The Mox Bank automation framework is functionally orchestration and is defensible as such, but
+              it was purpose-built rather than a commercial SOAR platform. If the requirement means a named
+              product, there is no evidence.</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- BUILD SEQUENCE -->
+      <section>
+        <div class="sec-label">Build-out sequence</div>
+        <h2>Commissioned by consequence, not by calendar</h2>
+        <p style="max-width:700px;">Ordering follows the same logic as the register above: the domains with the
+          thinnest evidence get the earliest and most deliberate exposure, not the latest. Deferring them would
+          make the first month look smoother and the third month considerably worse.</p>
+
+        <div class="band b1">
+          <div class="band-head">
+            <h3>Band 1 — Highest consequence, thinnest evidence</h3><span class="band-win">Weeks 1–4</span>
+          </div>
+          <div class="band-why">Why first: this is where the plan is most likely to be wrong, so it gets corrected
+            earliest.</div>
+          <ul>
+            <li>Build the access-path inventory described above across both estates, <strong>starting with the
+                bare-metal side</strong> — tenant, operator, vendor and out-of-band management routes into compute
+              capacity, each with its gating control and named owner.</li>
+            <li>Review multi-tenant isolation between paying compute customers: what actually separates one
+              tenant from another at the node, network fabric and storage layers. <em>Noted as an inference —
+                the JD does not name tenant isolation, but a multi-tenant GPU cloud implies it as a first-order
+                control, and this plan states the inference rather than presenting it as a requirement that was
+                read.</em></li>
+            <li>Establish the ISO 27001 delta against controls already in place, using SOC 2 control
+              engineering as the working method and treating the standards difference as a real one to be
+              learned rather than assumed away.</li>
+            <li>Shadow the network and infrastructure teams on live firewall, VPN and DNS work as an observer.
+              This is the second-thinnest domain in the register and gets deliberate early exposure for the same
+              reason as the first.</li>
+          </ul>
+        </div>
+
+        <div class="band b2">
+          <div class="band-head">
+            <h3>Band 2 — Close a real gap, not a plan for one</h3><span class="band-win">Days 30–60</span>
+          </div>
+          <div class="band-why">Why second: verified capability applied to whatever Band 1 actually surfaced.</div>
+          <ul>
+            <li>Take the highest-consequence finding from the Band 1 inventory and close it end to end —
+              scope, fix, test, deploy — rather than only documenting it.</li>
+            <li>Stand up vulnerability management as a running practice across infrastructure and applications
+              with documented triage severity, prioritisation criteria and remediation tracking. This is the
+              deepest verified domain in the profile and the fastest route to a visible result.</li>
+            <li>Baseline security-gate coverage across existing CI/CD pipelines — static analysis, dependency
+              scanning, secrets detection, IaC validation, container scanning — using tooling already built and
+              published for exactly this purpose, then extend gates wherever coverage is missing.</li>
+            <li>Pair on endpoint and SIEM platform administration specifically to convert detection-engineering
+              experience into console-level ownership, which is the honest shape of that gap.</li>
+          </ul>
+        </div>
+
+        <div class="band b3">
+          <div class="band-head">
+            <h3>Band 3 — Take standing ownership</h3><span class="band-win">Days 60–90</span>
+          </div>
+          <div class="band-why">Why last: ownership claimed only where the first sixty days have produced evidence for
+            it.</div>
+          <ul>
+            <li>Own identity end to end — privileged access paths into the fleet, SSO, MFA and Zero Trust
+              enforcement — building on the PoLP design work that produced a measured incident reduction
+              elsewhere.</li>
+            <li>Produce a detection coverage map against the access-path inventory: what is monitored, what is
+              not, and what the alerting gaps mean in consequence terms. Joining an on-call rotation is part of
+              this, not adjacent to it.</li>
+            <li>Scope the next penetration test with remediation tracking attached. Given no prior ownership of
+              a testing engagement, the sensible arrangement is to run the first one alongside someone who has,
+              and to say so rather than discover it mid-engagement.</li>
+            <li>Convert the closed findings and the control inventory into engineering-facing standards and
+              secure defaults, using the reference-architecture and Security Champions patterns that worked at
+              previous employers.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- EVIDENCE CARDS -->
+      <section>
+        <div class="sec-label">Evidence</div>
+        <h2>Three results, at their exact figures</h2>
+        <div class="ev-grid">
+          <div class="ev">
+            <div class="n">340</div>
+            <div class="what">High- and critical-severity vulnerabilities blocked pre-production, alongside a
+              73% reduction in container configuration drift, by enforcing Pod Security Standards, admission
+              control policies and Trivy/Snyk image scanning across Kubernetes clusters.</div>
+            <div class="where">Mox Bank — Senior Platform Security Engineer</div>
+          </div>
+          <div class="ev">
+            <div class="n">Zero <small>critical/high</small></div>
+            <div class="what">Audit findings across two consecutive SOC 2 Type II certification cycles, by
+              engineering and operationalising the complete control set with continuous compliance monitoring —
+              the technical-controls-plus-audit-evidence half of the GRC partnership line.</div>
+            <div class="where">OSL Group — Senior Manager, Cybersecurity</div>
+          </div>
+          <div class="ev">
+            <div class="n">9 <small>accounts</small></div>
+            <div class="what">Consolidated into a single OCSF-normalised Security Lake surface, enriched with
+              4 commercial threat-intel feeds and routed through Security Hub into Splunk over OIDC, extending
+              searchable log history to 12 months without proportional SIEM licence spend growth.</div>
+            <div class="where">OSL Group — Senior Manager, Cybersecurity</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COVERAGE -->
+      <section>
+        <div class="sec-label">Domain coverage</div>
+        <h2>Where the depth is, and where it is not</h2>
+        <div class="flag">
+          <strong>Read this before the plan above.</strong> Under the stated assumption that the on-premises
+          estate is a colocated bare-metal GPU fleet, roughly half the infrastructure surface named in this
+          JD lies outside every environment worked in across eleven years. Cloud, container and pipeline
+          security transfer directly and are strong. Bare metal, HPC fabric and appliance-based network
+          operations do not transfer, and would be learned on the job while also being the only security
+          engineer. That is a real cost to the hiring team and is stated as one, not reframed.
+        </div>
+        <div class="cov-grid">
+          <div class="cov deep">
+            <h3>Deep — verified</h3>
+            <ul>
+              <li><b>CI/CD and container security</b>SAST, SCA, secrets and IaC gates in production pipelines
+                across three employers; Kubernetes hardening with CKS and CKA behind it.</li>
+              <li><b>Vulnerability management</b>340 high and critical vulnerabilities blocked pre-production;
+                73% drift reduction; 5 critical enterprise risks resolved.</li>
+              <li><b>Identity design</b>PoLP and RBAC engineering with a measured 50% reduction in
+                access-related incidents.</li>
+              <li><b>Compliance control engineering</b>Complete SOC 2 Type II control set built and
+                operationalised; zero critical or high findings across two cycles; 38% CIS and NIST compliance
+                improvement.</li>
+              <li><b>Security automation</b>45-to-12-minute triage reduction, 85% ticket auto-classification,
+                and a nine-account telemetry consolidation with 12-month retention.</li>
+              <li><b>Threat modelling and developer enablement</b>Trust-boundary review surfacing 5 critical
+                risks pre-build; Security Champions programme reaching 15+ engineers.</li>
+            </ul>
+          </div>
+          <div class="cov ramp">
+            <h3>Ramping — stated plainly</h3>
+            <ul>
+              <li><b>On-premises, bare-metal and HPC estate</b>The largest gap by a wide margin, and the one
+                closest to the company's core asset. No prior exposure of any kind.</li>
+              <li><b>Firewall, VPN and DNS operations</b>Cloud-fabric network security is verified; operating
+                physical network and security appliances is not.</li>
+              <li><b>SIEM and EDR/XDR platform administration</b>Detection engineering and policy authoring are
+                defensible; console-level platform ownership is not.</li>
+              <li><b>Incident detection as a standing function</b>One full-lifecycle Sev-1 is real and holds up
+                in detail. A running detection and on-call practice does not yet exist behind it.</li>
+              <li><b>Penetration test and red team coordination</b>Findings have been remediated; engagements
+                have never been commissioned or managed.</li>
+              <li><b>ISO 27001</b>No direct experience. SOC 2 is adjacent discipline, not equivalent standard.</li>
+              <li><b>GCP and commercial SOAR platforms</b>No evidence for either; neither is claimed anywhere
+                in this document.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUESTIONS -->
+      <section>
+        <div class="sec-label">Questions</div>
+        <h2>Three, each traceable to a specific line</h2>
+
+        <div class="q">
+          <div class="qn">1</div>
+          <div>
+            <p>Where does the boundary sit between Sharon AI's security responsibility and that of the
+              colocation and hardware partners — specifically, who owns the out-of-band and baseboard
+              management plane, and who owns the switching fabric? That answer decides whether "on-premises"
+              in this role means operating network and security appliances directly, or engineering tenancy
+              and access boundaries on top of infrastructure someone else runs. The two require very different
+              ramp-up, and calibrating now beats assuming.</p>
+            <div class="qr">— re: "Design, implement and maintain security controls across Sharon AI's cloud
+              … and on-premises environments, including firewalls, endpoint protection, SIEM, identity and
+              access management and network security tooling."</div>
+          </div>
+        </div>
+
+        <div class="q">
+          <div class="qn">2</div>
+          <div>
+            <p>Is there an existing detection pipeline and on-call rotation this role would join, or is
+              building the detection function itself part of the scope? Incident response experience here is a
+              single, well-documented full-lifecycle Sev-1 rather than a high-volume practice, so knowing which
+              of the two is being asked for changes what the first ninety days should honestly commit to.</p>
+            <div class="qr">— re: "Own security incident detection, response and post-incident reviews,
+              partnering with internal teams to rapidly contain and remediate security events."</div>
+          </div>
+        </div>
+
+        <div class="q">
+          <div class="qn">3</div>
+          <div>
+            <p>Is ISO 27001 currently pre-certification or in maintenance, and is IRAP assessment on the
+              near-term roadmap? Producing audit evidence for an existing certification and building a control
+              programme toward a first one are different pieces of work on different timelines — and the answer
+              determines whether the compliance strand of this plan starts in Band 1 or Band 3.</p>
+            <div class="qr">— re: "Partner with the GRC team to support compliance initiatives including ISO
+              27001 and SOC 2 by implementing technical controls and providing audit evidence," and
+              "Australian Government Baseline Security Clearance … if future IRAP-related work becomes a
+              requirement."</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>zero-day-brief / sharon-ai / control-build-out-plan.html</span>
+        <span>Campaign #1 — submitted with application</span>
+      </footer>
+    </main>
+  </div>
+</body>
+
+</html>
